@@ -6,15 +6,16 @@ public class Player : MonoBehaviour {
 
     public Text timeText;
     public Text damageText;
+    public Text depthText;
     public float horizontalSpeed = 1;
+    public float baseDepth = 20;
 
     private float damage;
     private float damageFactor;
-    private Light diversLight;
-    private float lightRange;
     private Rigidbody2D ridgidbody;
+    public float depth;
 
-	void Start () 
+    void Start () 
 	{
         damage = 0f;
         damageFactor = 0.01f;
@@ -28,6 +29,8 @@ public class Player : MonoBehaviour {
         float horizontalMove = Input.GetAxis("Horizontal");
         float verticalMove = Input.GetAxis("Vertical");
         ridgidbody.velocity = new Vector2(horizontalMove * horizontalSpeed, verticalMove);
+
+        depth = baseDepth - ridgidbody.position.y;
     }
 
     void OnCollisionStay2D (Collision2D collision)
@@ -47,5 +50,6 @@ public class Player : MonoBehaviour {
     {
         timeText.text = "Time: " + Time.time.ToString();
         damageText.text = "Damage: " + damage.ToString();
+        depthText.text = "Depth: " + depth.ToString();
     }
 }
