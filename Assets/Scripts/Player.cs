@@ -11,28 +11,29 @@ public class Player : MonoBehaviour {
     public float horizontalSpeed = 1;
     public float baseDepth = 20;
     public float defaultLightRange = 12;
-    //public float gravityScaleFactor = 0.01f;
+    public float buoyancyFactor = 0.01f;
 
     private float damage;
     private float damageFactor;
     private Rigidbody2D ridgidbody;
-    private float depth;
+
     private GameObject diversLight;
     private bool offTheBottom = true;
-    private float airVolume = 10;
 
-    //private float diversGravity;
-    //private float lastPositionY;
+    private float depth;
+    private float airVolume = 10;
 
     void Start () 
 	{
         damage = 0f;
         damageFactor = 0.01f;
+
         showText();
+
         ridgidbody = GetComponent<Rigidbody2D>();
+
         diversLight = GameObject.Find("DiveLamp");
         diversLight.GetComponent<Light>().range = defaultLightRange;
-        //lastPositionY = ridgidbody.transform.position.y;
     }
 
 	void Update ()
@@ -45,21 +46,18 @@ public class Player : MonoBehaviour {
 
         float horizontalMove = Input.GetAxis("Horizontal");
         float verticalMove = Input.GetAxis("Vertical");
-        ridgidbody.velocity = new Vector2(horizontalMove * horizontalSpeed, ridgidbody.velocity.y);
-        ridgidbody.AddForce(new Vector2(0, buoyancy));
 
-        //float currentPositionY = ridgidbody.transform.position.y;
-        //float directionY = currentPositionY - lastPositionY;
-        //lastPositionY = ridgidbody.transform.position.y;
+        ridgidbody.velocity = new Vector2(horizontalMove * horizontalSpeed, buoyancy);
+        //ridgidbody.AddForce(new Vector2(0, buoyancy));
 
         if (verticalMove < 0)
         {
-            airVolume -= 0.1f;
+            airVolume -= buoyancyFactor;
         }
 
         if (verticalMove > 0)
         {
-            airVolume += 0.1f;
+            airVolume += buoyancyFactor;
         }
 
         if (offTheBottom)
