@@ -11,7 +11,7 @@ public class Player : MonoBehaviour {
     public float horizontalSpeed = 1;
     public float baseDepth = 20;
     public float defaultLightRange = 12;
-    public float gravityScaleFactor = 0.01f;
+    //public float gravityScaleFactor = 0.01f;
 
     private float damage;
     private float damageFactor;
@@ -19,8 +19,10 @@ public class Player : MonoBehaviour {
     private float depth;
     private GameObject diversLight;
     private bool offTheBottom = true;
-    private float diversGravity;
-    private float lastPositionY;
+    private float airVolume = 10;
+
+    //private float diversGravity;
+    //private float lastPositionY;
 
     void Start () 
 	{
@@ -30,40 +32,34 @@ public class Player : MonoBehaviour {
         ridgidbody = GetComponent<Rigidbody2D>();
         diversLight = GameObject.Find("DiveLamp");
         diversLight.GetComponent<Light>().range = defaultLightRange;
-        lastPositionY = ridgidbody.transform.position.y;
+        //lastPositionY = ridgidbody.transform.position.y;
     }
 
 	void Update ()
 	{
-        showText();
+        depth = baseDepth - ridgidbody.position.y;
+
+        float pressure = depth / 10 + 1;
+        float volumeUnderPressure = Mathf.Round(airVolume / pressure * 100) / 100f;
+        float buoyancy = volumeUnderPressure - 3.33f;
+
         float horizontalMove = Input.GetAxis("Horizontal");
         float verticalMove = Input.GetAxis("Vertical");
         ridgidbody.velocity = new Vector2(horizontalMove * horizontalSpeed, ridgidbody.velocity.y);
+        ridgidbody.AddForce(new Vector2(0, buoyancy));
 
-        depth = baseDepth - ridgidbody.position.y;
+        //float currentPositionY = ridgidbody.transform.position.y;
+        //float directionY = currentPositionY - lastPositionY;
+        //lastPositionY = ridgidbody.transform.position.y;
 
-        float currentPositionY = ridgidbody.transform.position.y;
-        float directionY = currentPositionY - lastPositionY;
-        lastPositionY = ridgidbody.transform.position.y;
-
-        if ((verticalMove < 0) || (directionY < 0))
+        if (verticalMove < 0)
         {
-            ridgidbody.gravityScale += gravityScaleFactor;
-            
-            if (ridgidbody.gravityScale > 1)
-            {
-                ridgidbody.gravityScale = 1;
-            }
+            airVolume -= 0.1f;
         }
 
-        if ((verticalMove > 0) || (directionY > 0))
+        if (verticalMove > 0)
         {
-            ridgidbody.gravityScale -= gravityScaleFactor;
-
-            if (ridgidbody.gravityScale < -1)
-            {
-                ridgidbody.gravityScale = 1;
-            }
+            airVolume += 0.1f;
         }
 
         if (offTheBottom)
@@ -71,6 +67,8 @@ public class Player : MonoBehaviour {
             float currentLightRange = diversLight.GetComponent<Light>().range;
             diversLight.GetComponent<Light>().range = Mathf.Lerp(currentLightRange, defaultLightRange, 0.2f * Time.deltaTime);
         }
+
+        showText();
     }
 
     void OnCollisionStay2D (Collision2D collision)
