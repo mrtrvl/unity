@@ -38,10 +38,23 @@ public class Player : MonoBehaviour {
 
         depth = baseDepth - ridgidbody.position.y;
 
+        if (verticalMove < 0)
+        {
+            ridgidbody.gravityScale += 0.1f;
+        }
+
+        if (verticalMove > 0)
+        {
+            ridgidbody.gravityScale -= 0.1f;
+        }
+
         if (offTheBottom)
         {
-            diversLight.GetComponent<Light>().range = Mathf.Lerp(diversLight.GetComponent<Light>().range, defaultLightRange, 0.2f * Time.deltaTime);
+            float currentLightRange = diversLight.GetComponent<Light>().range;
+            diversLight.GetComponent<Light>().range = Mathf.Lerp(currentLightRange, defaultLightRange, 0.2f * Time.deltaTime);
         }
+
+        print("Gravity scale:" + ridgidbody.gravityScale);
     }
 
     void OnCollisionStay2D (Collision2D collision)
