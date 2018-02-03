@@ -7,6 +7,7 @@ public class Player : MonoBehaviour {
     public Text timeText;
     public Text damageText;
     public Text depthText;
+    public Text collectedItemsText;
 
     public float horizontalSpeed = 1;
     public float baseDepth = 20;
@@ -22,6 +23,8 @@ public class Player : MonoBehaviour {
 
     private float depth;
     private float airVolume = 10;
+
+    private int collectedItemsCount = 0;
 
     void Start () 
 	{
@@ -83,9 +86,18 @@ public class Player : MonoBehaviour {
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    void OnCollisionExit2D(Collision2D collision)
     {
         offTheBottom = true;
+    }
+
+    void OnTriggerEnter2D (Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            other.gameObject.SetActive(false);
+            collectedItemsCount += 1;
+        }
     }
 
     void showText ()
@@ -93,5 +105,6 @@ public class Player : MonoBehaviour {
         timeText.text = "Time: " + Time.time.ToString();
         damageText.text = "Damage: " + damage.ToString();
         depthText.text = "Depth: " + depth.ToString();
+        collectedItemsText.text = "Collected items: " + collectedItemsCount.ToString();
     }
 }
