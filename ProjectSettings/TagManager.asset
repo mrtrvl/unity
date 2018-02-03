@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Coin
+  - Jellyfish
   layers:
   - Default
   - TransparentFX

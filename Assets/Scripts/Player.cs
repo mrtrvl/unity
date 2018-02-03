@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
     public Text damageText;
     public Text depthText;
     public Text collectedItemsText;
+    public Text healthText;
 
     public float horizontalSpeed = 1;
     public float baseDepth = 20;
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour {
     private float airVolume = 10;
 
     private int collectedItemsCount = 0;
+    private int health = 100;
 
     void Start () 
 	{
@@ -98,6 +100,12 @@ public class Player : MonoBehaviour {
             other.gameObject.SetActive(false);
             collectedItemsCount += 1;
         }
+
+        if (other.gameObject.CompareTag("Jellyfish"))
+        {
+            other.gameObject.SetActive(false);
+            health -= 5;
+        }
     }
 
     void showText ()
@@ -106,5 +114,6 @@ public class Player : MonoBehaviour {
         damageText.text = "Damage: " + damage.ToString();
         depthText.text = "Depth: " + depth.ToString();
         collectedItemsText.text = "Collected items: " + collectedItemsCount.ToString();
+        healthText.text = "Health: " + health.ToString();
     }
 }
