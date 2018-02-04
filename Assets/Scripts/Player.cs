@@ -28,6 +28,11 @@ public class Player : MonoBehaviour {
     private int collectedItemsCount = 0;
     private int health = 100;
 
+    private float horizontalMove;
+    private float verticalMove;
+
+    private Vector2 touchOrigin = -Vector2.one; //Used to store location of screen touch origin for mobile controls.
+
     void Start () 
 	{
         damage = 0f;
@@ -49,8 +54,40 @@ public class Player : MonoBehaviour {
         float volumeUnderPressure = Mathf.Round(airVolume / pressure * 100) / 100f;
         float buoyancy = volumeUnderPressure - 3.33f;
 
-        float horizontalMove = Input.GetAxis("Horizontal");
-        float verticalMove = Input.GetAxis("Vertical");
+        //Check if we are running either in the Unity editor or in a standalone build.
+        #if UNITY_STANDALONE || UNITY_WEBPLAYER
+
+        horizontalMove = Input.GetAxis("Horizontal");
+        verticalMove = Input.GetAxis("Vertical");
+
+        //Check if we are running on iOS, Android, Windows Phone 8 or Unity iPhone
+        #elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+
+        if (Input.touchCount > 0)
+        {
+            Touch myTouch = Input.touches[0];
+
+            if (myTouch.phase == TouchPhase.Began)
+            {
+                touchOrigin = myTouch.position;
+            }
+            else if (myTouch.phase == TouchPhase.Ended && touchOrigin.x >= 0)
+            {
+                Vector2 touchEnd = myTouch.position;
+
+                float x = touchEnd.x - touchOrigin.x;
+                float y = touchEnd.y - touchOrigin.y;
+
+                touchOrigin.x = -1;
+
+                if (Mathf.Abs(x) > Mathf.Abs(y))
+                    horizontalMove = x > 0 ? 1 : -1;
+                else
+                    verticalMove = y > 0 ? 1 : -1;
+            }
+        }
+
+        #endif
 
         ridgidbody.velocity = new Vector2(horizontalMove * horizontalSpeed, buoyancy);
         //ridgidbody.AddForce(new Vector2(0, buoyancy));
