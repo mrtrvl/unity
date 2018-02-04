@@ -13,3 +13,6 @@ https://unity3d.com/learn/tutorials/projects/roll-ball-tutorial/creating-collect
 
 * Testing game on android:
 https://unity3d.com/learn/tutorials/topics/mobile-touch/building-your-unity-game-android-device-testing
+
+* Had problem wit building, found answer here:  
+https://issuetracker.unity3d.com/issues/android-build-fails-when-the-latest-android-sdk-tools-25-dot-3-1-version-is-used
