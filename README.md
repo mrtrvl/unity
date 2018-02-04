@@ -1,9 +1,9 @@
 # Diving game
 
-# To change build target platform:  
+## To change build target platform:  
 In Unity select File -> Build Settings -> Select platform and press Switch Platform button
 
-# Sources
+## Sources
 
 * Touch input tutorial:  
 https://unity3d.com/learn/tutorials/projects/2d-roguelike-tutorial/adding-mobile-controls
