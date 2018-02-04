@@ -35,6 +35,9 @@ public class Player : MonoBehaviour {
     private Vector3 oldPosition;
     private Vector3 newPosition;
 
+    private Vector3 oldLampDirection = new Vector3(1, 0, 0);
+    private Quaternion rotation;
+
     private Vector2 touchOrigin = -Vector2.one; //Used to store location of screen touch origin for mobile controls.
 
     void Start () 
@@ -121,7 +124,7 @@ public class Player : MonoBehaviour {
 
         showText();
 
-        // rotateLight();
+        rotateLight();
     }
 
     void OnCollisionStay2D (Collision2D collision)
@@ -160,13 +163,20 @@ public class Player : MonoBehaviour {
 
     void rotateLight()
     {
-        Vector3 velocity = (newPosition - oldPosition);
-        Vector3 direction = velocity.normalized;
+        Vector3 direction = (newPosition - oldPosition);
+        if (direction != new Vector3(0, 0, 0))
+        {
+            rotation = Quaternion.LookRotation(direction);
+            oldLampDirection = direction;
+        }
+        else
+        {
+            rotation = Quaternion.LookRotation(oldLampDirection);
+        }
 
-        Debug.Log(direction);
+        diversLight.transform.rotation = rotation;
 
-        diversLight.GetComponent<Light>().transform.LookAt(direction);
-        
+        oldPosition = ridgidbody.transform.position;
     }
 
     void showText ()
