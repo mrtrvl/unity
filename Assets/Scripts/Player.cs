@@ -32,6 +32,9 @@ public class Player : MonoBehaviour {
     private float horizontalMove;
     private float verticalMove;
 
+    private Vector3 oldPosition;
+    private Vector3 newPosition;
+
     private Vector2 touchOrigin = -Vector2.one; //Used to store location of screen touch origin for mobile controls.
 
     void Start () 
@@ -45,6 +48,8 @@ public class Player : MonoBehaviour {
 
         diversLight = GameObject.Find("DiveLamp");
         diversLight.GetComponent<Light>().range = defaultLightRange;
+
+        oldPosition = ridgidbody.transform.position;
     }
 
 	void Update ()
@@ -112,7 +117,11 @@ public class Player : MonoBehaviour {
             diversLight.GetComponent<Light>().range = Mathf.Lerp(currentLightRange, defaultLightRange, 0.2f * Time.deltaTime);
         }
 
+        newPosition = ridgidbody.transform.position;
+
         showText();
+
+        // rotateLight();
     }
 
     void OnCollisionStay2D (Collision2D collision)
@@ -147,6 +156,17 @@ public class Player : MonoBehaviour {
             other.gameObject.SetActive(false);
             health -= 5;
         }
+    }
+
+    void rotateLight()
+    {
+        Vector3 velocity = (newPosition - oldPosition);
+        Vector3 direction = velocity.normalized;
+
+        Debug.Log(direction);
+
+        diversLight.GetComponent<Light>().transform.LookAt(direction);
+        
     }
 
     void showText ()
