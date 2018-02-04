@@ -10,9 +10,10 @@ public class Player : MonoBehaviour {
     public Text collectedItemsText;
     public Text healthText;
 
-    public float horizontalSpeed = 1;
-    public float baseDepth = 20;
-    public float defaultLightRange = 12;
+    public float horizontalSpeed = 1f;
+    public float baseDepth = 20f;
+    public float defaultLightRange = 12f;
+    public float minimumLightRange = 7f;
     public float buoyancyFactor = 0.01f;
 
     private float damage;
@@ -23,7 +24,7 @@ public class Player : MonoBehaviour {
     private bool offTheBottom = true;
 
     private float depth;
-    private float airVolume = 10;
+    private float airVolume = 10f;
 
     private int collectedItemsCount = 0;
     private int health = 100;
@@ -83,14 +84,17 @@ public class Player : MonoBehaviour {
                 if (Mathf.Abs(x) > Mathf.Abs(y))
                     horizontalMove = x > 0 ? 1 : -1;
                 else
-                    verticalMove = y > 0 ? 1 : -1;
+                    verticalMove = y > 0 ? 0.5f : -0.5f;
             }
         }
 
+        horizontalMove = Mathf.MoveTowards(horizontalMove, 0, 0.01f);
+        verticalMove = Mathf.MoveTowards(verticalMove, 0, 0.01f);
+
         #endif
 
-        ridgidbody.velocity = new Vector2(horizontalMove * horizontalSpeed, buoyancy);
-        //ridgidbody.AddForce(new Vector2(0, buoyancy));
+        ridgidbody.velocity = new Vector2(ridgidbody.velocity.x, buoyancy);
+        ridgidbody.AddForce(new Vector2(horizontalMove, 0));
 
         if (verticalMove < 0)
         {
@@ -118,7 +122,7 @@ public class Player : MonoBehaviour {
             damage += damageFactor;
         }
 
-        if(collision.gameObject.name == "Bottom")
+        if(collision.gameObject.name == "Bottom" && diversLight.GetComponent<Light>().range > minimumLightRange)
         {
             diversLight.GetComponent<Light>().range -= 0.1f;
             offTheBottom = false;
