@@ -120,8 +120,6 @@ public class Player : MonoBehaviour {
             diversLight.GetComponent<Light>().range = Mathf.Lerp(currentLightRange, defaultLightRange, 0.2f * Time.deltaTime);
         }
 
-        newPosition = ridgidbody.transform.position;
-
         showText();
 
         rotateLight();
@@ -163,6 +161,8 @@ public class Player : MonoBehaviour {
 
     void rotateLight()
     {
+        newPosition = ridgidbody.transform.position;
+
         Vector3 direction = (newPosition - oldPosition);
         if (direction != new Vector3(0, 0, 0))
         {
