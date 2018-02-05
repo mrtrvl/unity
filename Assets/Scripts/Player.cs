@@ -129,7 +129,7 @@ public class Player : MonoBehaviour {
 
     void OnCollisionStay2D (Collision2D collision)
     {
-        if (collision.gameObject.name == "Roof")
+        if (collision.gameObject.name == "Ceiling")
         {
             damage += damageFactor;
         }
