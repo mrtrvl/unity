@@ -494,7 +494,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4137509638107232, guid: 2c5c738bec3407d4d80ee83244ddfb8d, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2c5c738bec3407d4d80ee83244ddfb8d, type: 2}
@@ -1561,7 +1561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ef4b1b23da74d140ad5945db4191fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1928730992}
+  player: {fileID: 1919187848}
 --- !u!1 &1919187848
 GameObject:
   m_ObjectHideFlags: 0
