@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TriggerController : MonoBehaviour {
 
-    public GameObject cube;
+    public GameObject ceilingPiece;
 
 	void Start () {
 		
@@ -17,6 +17,7 @@ public class TriggerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        cube.GetComponent<Rigidbody2D>().gravityScale = 0.2f;
+        ceilingPiece.GetComponent<Rigidbody2D>().gravityScale = 0.2f;
+        ceilingPiece.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
     }
 }
