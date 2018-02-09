@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33118011152961530}
   - component: {fileID: 23170037219739430}
   - component: {fileID: 58009817829483022}
+  - component: {fileID: 114011648333473276}
   m_Layer: 0
   m_Name: Jellyfish
   m_TagString: Jellyfish
@@ -98,3 +99,14 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &114011648333473276
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1730628552352882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e78fd1e42ce8843eb904fa61f5fdcfe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
