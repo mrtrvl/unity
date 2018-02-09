@@ -16,17 +16,31 @@ public class JellyfishController : MonoBehaviour {
 	// Use this for initialization
 	void Start() 
 	{
-		movementDirection = GetMovementDirection();
-		movementDistance = GetRandomNumber(0.5f, 3.0f);
-		SetMovementDestination();
+        SetFinalDestination();
 	}
 	
 	// Update is called once per frame
 	void Update() 
 	{
-		
-
+        MoveJellyFish();
 	}
+
+    void MoveJellyFish()
+    {
+        if (Mathf.Abs(transform.position.x - movementDestinationX) <= 2 &&
+            Mathf.Abs(transform.position.y - movementDestinationY) <= 2)
+        {
+            SetFinalDestination();
+        }
+        transform.Translate(new Vector2(movementDestinationX, movementDestinationY) * 0.001f);
+    }
+
+    void SetFinalDestination()
+    {
+        movementDirection = GetMovementDirection();
+        movementDistance = GetRandomNumber(0.5f, 3.0f);
+        SetMovementDestination();
+    }
 
 	bool GetMovementDirection()
 	{
@@ -72,28 +86,11 @@ public class JellyfishController : MonoBehaviour {
 
 	bool CheckForObstaclesInMovementDirection(float y)
 	{
-        //Vector2 direction = new Vector2(movementDestinationX, y) - (Vector2)transform.position;
-        //Physics2D.queriesStartInColliders = false;
-        //var value = Physics2D.Raycast(transform.position, direction);
-        //return value != null ? true : false;
-        ////Debug.Log(value.collider.name);
-        ////return value;
-
         Vector2 direction = new Vector2(movementDestinationX, y) - new Vector2(transform.position.x, transform.position.y);
         // Debug.Log(Physics2D.Raycast(direction, transform.position, 2).collider.name);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 2, 1 << LayerMask.NameToLayer("Foreground"));
 
         return hit.collider == null ? true : false;
-
-        //if (hit.collider == null)
-        //{
-        //    Debug.Log(hit.collider.name);
-        //    return true;
-        //}
-        //else
-        //{
-        //    return true;
-        //}
 	}
 
 
