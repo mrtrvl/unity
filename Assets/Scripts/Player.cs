@@ -129,6 +129,14 @@ public class Player : MonoBehaviour {
         rotateLight();
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Jellyfish"))
+        {
+            health -= 5;
+        }
+    }
+
     void OnCollisionStay2D (Collision2D collision)
     {
         if (collision.gameObject.name == "Ceiling")
@@ -154,12 +162,6 @@ public class Player : MonoBehaviour {
         {
             other.gameObject.SetActive(false);
             collectedItemsCount += 1;
-        }
-
-        if (other.gameObject.CompareTag("Jellyfish"))
-        {
-            other.gameObject.SetActive(false);
-            health -= 5;
         }
     }
 
