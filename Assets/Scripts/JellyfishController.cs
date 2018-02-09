@@ -8,6 +8,7 @@ public class JellyfishController : MonoBehaviour {
 	private float movementDestinationY;
 	private bool movementDirection;
 	private float movementDistance;
+    private Vector3 targetDirection;
 
 	// constants
 //	private float const 
@@ -27,12 +28,12 @@ public class JellyfishController : MonoBehaviour {
 
     void MoveJellyFish()
     {
-        if (Mathf.Abs(transform.position.x - movementDestinationX) <= 2 &&
-            Mathf.Abs(transform.position.y - movementDestinationY) <= 2)
+        if (Mathf.Abs(transform.position.x - movementDestinationX) <= 0.1 &&
+            Mathf.Abs(transform.position.y - movementDestinationY) <= 0.1)
         {
             SetFinalDestination();
         }
-        transform.Translate(new Vector2(movementDestinationX, movementDestinationY) * 0.001f);
+        transform.position += targetDirection * 0.1f * Time.deltaTime;
     }
 
     void SetFinalDestination()
@@ -40,6 +41,7 @@ public class JellyfishController : MonoBehaviour {
         movementDirection = GetMovementDirection();
         movementDistance = GetRandomNumber(0.5f, 3.0f);
         SetMovementDestination();
+        targetDirection = (new Vector3(movementDestinationX, movementDestinationY, 0) - transform.position).normalized;
     }
 
 	bool GetMovementDirection()
@@ -87,17 +89,21 @@ public class JellyfishController : MonoBehaviour {
 	bool CheckForObstaclesInMovementDirection(float y)
 	{
         Vector2 direction = new Vector2(movementDestinationX, y) - new Vector2(transform.position.x, transform.position.y);
-        // Debug.Log(Physics2D.Raycast(direction, transform.position, 2).collider.name);
+
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 2, 1 << LayerMask.NameToLayer("Foreground"));
 
         return hit.collider == null ? true : false;
 	}
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        SetFinalDestination();
+    }
 
-	float GetRandomNumber(float min, float max)
+
+    float GetRandomNumber(float min, float max)
 	{
 		return Random.Range(min, max);
 	}
-
 
 }
