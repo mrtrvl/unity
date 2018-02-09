@@ -46,7 +46,8 @@ public class JellyfishController : MonoBehaviour {
             movementDestinationX = transform.position.x - movementDistance;
 		}
         movementDestinationY = GetValidMovementDestinationY();
-        Debug.DrawLine(transform.position, new Vector3(movementDestinationX, movementDestinationY, 0), Color.red, 10000.0f);
+        Debug.DrawLine(transform.position, 
+        new Vector3(movementDestinationX, movementDestinationY, 0), Color.red, 10000.0f);
         Debug.Log("X: " + movementDestinationX.ToString() + ", Y: " + movementDestinationY.ToString());
 			
 	}
@@ -54,11 +55,13 @@ public class JellyfishController : MonoBehaviour {
 	float GetValidMovementDestinationY()
 	{
 		float tempYValue = transform.position.y + GetRandomNumber(-2.0f, 2.0f);
-		while (true) 
+        int a = 10;
+		while (a <= 10) 
 		{
 			if (!CheckForObstaclesInMovementDirection(tempYValue))
 				break;
 			tempYValue = transform.position.y + GetRandomNumber(-2.0f, 2.0f);
+            a++;
 		}
 		return tempYValue;
 	}
@@ -66,7 +69,8 @@ public class JellyfishController : MonoBehaviour {
 
 	bool CheckForObstaclesInMovementDirection(float y)
 	{
-        return Physics.Raycast(transform.position, new Vector3 (movementDestinationX, y, 100));
+        Vector2 direction = new Vector2(movementDestinationX, y) - (Vector2)transform.position;
+        return Physics2D.Raycast(transform.position, direction);
 	}
 
 
