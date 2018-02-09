@@ -55,11 +55,14 @@ public class JellyfishController : MonoBehaviour {
 	float GetValidMovementDestinationY()
 	{
 		float tempYValue = transform.position.y + GetRandomNumber(-2.0f, 2.0f);
-        int a = 10;
-		while (a <= 10) 
+        int a = 0;
+        while (a <= 100)
 		{
-			if (!CheckForObstaclesInMovementDirection(tempYValue))
-				break;
+            if (CheckForObstaclesInMovementDirection(tempYValue)) {
+                Debug.Log(a);
+                break;
+            }
+				
 			tempYValue = transform.position.y + GetRandomNumber(-2.0f, 2.0f);
             a++;
 		}
@@ -69,8 +72,28 @@ public class JellyfishController : MonoBehaviour {
 
 	bool CheckForObstaclesInMovementDirection(float y)
 	{
-        Vector2 direction = new Vector2(movementDestinationX, y) - (Vector2)transform.position;
-        return Physics2D.Raycast(transform.position, direction);
+        //Vector2 direction = new Vector2(movementDestinationX, y) - (Vector2)transform.position;
+        //Physics2D.queriesStartInColliders = false;
+        //var value = Physics2D.Raycast(transform.position, direction);
+        //return value != null ? true : false;
+        ////Debug.Log(value.collider.name);
+        ////return value;
+
+        Vector2 direction = new Vector2(movementDestinationX, y) - new Vector2(transform.position.x, transform.position.y);
+        // Debug.Log(Physics2D.Raycast(direction, transform.position, 2).collider.name);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 2, 1 << LayerMask.NameToLayer("Foreground"));
+
+        return hit.collider == null ? true : false;
+
+        //if (hit.collider == null)
+        //{
+        //    Debug.Log(hit.collider.name);
+        //    return true;
+        //}
+        //else
+        //{
+        //    return true;
+        //}
 	}
 
 
