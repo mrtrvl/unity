@@ -16,6 +16,8 @@ public class Player : MonoBehaviour {
     public float minimumLightRange = 7f;
     public float buoyancyFactor = 0.01f;
 
+    public AudioSource screamAudio;
+
     private float damage;
     private float damageFactor;
     private Rigidbody2D ridgidbody;
@@ -44,6 +46,8 @@ public class Player : MonoBehaviour {
 
     void Start () 
 	{
+        screamAudio.Stop();
+
         mainCamera = Camera.main;
 
         damage = 0f;
@@ -134,6 +138,7 @@ public class Player : MonoBehaviour {
         if (collision.gameObject.CompareTag("Jellyfish"))
         {
             health -= 5;
+            screamAudio.Play();
         }
     }
 
