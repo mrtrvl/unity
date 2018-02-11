@@ -9,16 +9,17 @@ public class JellyfishController : MonoBehaviour {
 	private bool movementDirection;
 	private float movementDistance;
     private Vector3 targetDirection;
+    private Quaternion rotation;
 
-	// constants
-//	private float const 
+    // constants
+    //	private float const 
 
 
-	// Use this for initialization
-	void Start() 
+    // Use this for initialization
+    void Start() 
 	{
         SetFinalDestination();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update() 
@@ -34,6 +35,7 @@ public class JellyfishController : MonoBehaviour {
             SetFinalDestination();
         }
         transform.position += targetDirection * 0.1f * Time.deltaTime;
+        RotateJellyFish();
     }
 
     void SetFinalDestination()
@@ -64,7 +66,7 @@ public class JellyfishController : MonoBehaviour {
         movementDestinationY = GetValidMovementDestinationY();
         Debug.DrawLine(transform.position, 
         new Vector3(movementDestinationX, movementDestinationY, 0), Color.red, 10000.0f);
-        Debug.Log("X: " + movementDestinationX.ToString() + ", Y: " + movementDestinationY.ToString());
+        //Debug.Log("X: " + movementDestinationX.ToString() + ", Y: " + movementDestinationY.ToString());
 			
 	}
 
@@ -75,7 +77,7 @@ public class JellyfishController : MonoBehaviour {
         while (a <= 100)
 		{
             if (CheckForObstaclesInMovementDirection(tempYValue)) {
-                Debug.Log(a);
+                //Debug.Log(a);
                 break;
             }
 				
@@ -106,4 +108,14 @@ public class JellyfishController : MonoBehaviour {
 		return Random.Range(min, max);
 	}
 
+    void RotateJellyFish()
+    {
+        if (targetDirection != new Vector3(0, 0, 0))
+        {
+            rotation = Quaternion.LookRotation(targetDirection);
+            rotation *= Quaternion.Euler(0, 90, 90);
+            transform.rotation = rotation;
+            Debug.Log("Rotation: " + targetDirection.ToString());
+        }
+    }
 }
