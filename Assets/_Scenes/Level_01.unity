@@ -907,6 +907,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1749040473017026, guid: 2c5c738bec3407d4d80ee83244ddfb8d, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2c5c738bec3407d4d80ee83244ddfb8d, type: 2}
   m_IsPrefabParent: 0
@@ -919,6 +923,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1043082273}
   - component: {fileID: 1043082274}
+  - component: {fileID: 1043082275}
   m_Layer: 0
   m_Name: sukelduja
   m_TagString: Untagged
@@ -983,6 +988,23 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!95 &1043082275
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1043082272}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2abee83fef87f5d4f9c3dfabebd24392, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!4 &1127544396 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4375481011535346, guid: 6deb3c3e69ad04b4e933f186a42e398a,
@@ -1029,7 +1051,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1730628552352882, guid: e3e7bd1f0aad5c64891d47ffe0766c66, type: 2}
       propertyPath: m_Name
-      value: Jellyfish (1)
+      value: Jellyfish
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e3e7bd1f0aad5c64891d47ffe0766c66, type: 2}
@@ -1475,7 +1497,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1730628552352882, guid: e3e7bd1f0aad5c64891d47ffe0766c66, type: 2}
       propertyPath: m_Name
-      value: Jellyfish (2)
+      value: Jellyfish
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e3e7bd1f0aad5c64891d47ffe0766c66, type: 2}
