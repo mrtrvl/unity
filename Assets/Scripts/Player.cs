@@ -42,13 +42,9 @@ public class Player : MonoBehaviour {
 
     private Vector2 touchOrigin = -Vector2.one; //Used to store location of screen touch origin for mobile controls.
 
-    private Camera mainCamera;
-
     void Start () 
 	{
         screamAudio.Stop();
-
-        mainCamera = Camera.main;
 
         damage = 0f;
         damageFactor = 0.01f;
