@@ -7,6 +7,12 @@ TagManager:
   - Coin
   - Jellyfish
   - Ceiling
+  - Tank
+  - TNT
+  - Key
+  - Emerald
+  - Diamond
+  - Medkit
   layers:
   - Default
   - TransparentFX
