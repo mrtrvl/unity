@@ -2,8 +2,8 @@ version: 2
 importPivots: 1
 tpsheetFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
-- Assets/Images/Jellyfish.tpsheet
 - Assets/Images/jellyfish.tpsheet
+- Assets/Images/Jellyfish.tpsheet
 textureFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.png
 - Assets/Images/Jellyfish.png

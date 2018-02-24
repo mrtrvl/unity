@@ -34,6 +34,10 @@ public class Player : MonoBehaviour {
     private float horizontalMove;
     private float verticalMove;
 
+    private bool hasKey = false;
+    private float breathingGasAmount = 300;
+    private bool hasExplosive = false;
+
     private Vector3 oldPosition;
     private Vector3 newPosition;
 
@@ -159,10 +163,30 @@ public class Player : MonoBehaviour {
 
     void OnTriggerEnter2D (Collider2D other)
     {
-        if (other.gameObject.CompareTag("Coin"))
+        if (other.gameObject.CompareTag("Coin") || other.gameObject.CompareTag("Emerald") || other.gameObject.CompareTag("Diamond"))
         {
-            other.gameObject.SetActive(false);
             collectedItemsCount += 1;
+            other.gameObject.SetActive(false);
+        }
+        else if (other.gameObject.CompareTag("Key"))
+        {
+            hasKey = true;
+            other.gameObject.SetActive(false);
+        }
+        else if (other.gameObject.CompareTag("Medkit"))
+        {
+            health += 15;
+            other.gameObject.SetActive(false);
+        }
+        else if (other.gameObject.CompareTag("Tank"))
+        {
+            breathingGasAmount += 200;
+            other.gameObject.SetActive(false);
+        }
+        else if (other.gameObject.CompareTag("TNT"))
+        {
+            hasExplosive = true;
+            other.gameObject.SetActive(false);
         }
     }
 
