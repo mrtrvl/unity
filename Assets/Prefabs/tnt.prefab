@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23412123350097366}
   - component: {fileID: 95025019622304528}
   - component: {fileID: 114584832999024516}
+  - component: {fileID: 61085621418145264}
   m_Layer: 0
   m_Name: tnt
   m_TagString: Tank
@@ -86,6 +87,31 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1156095585493220}
   m_Mesh: {fileID: 4300000, guid: 4442e5b91e5322140bf5bcc02f095c71, type: 3}
+--- !u!61 &61085621418145264
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1156095585493220}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2.0000005}
+  m_EdgeRadius: 0
 --- !u!95 &95025019622304528
 Animator:
   serializedVersion: 3
