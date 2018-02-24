@@ -98,7 +98,7 @@ public class Player : MonoBehaviour {
                 touchOrigin.x = -1;
 
                 if (Mathf.Abs(x) > Mathf.Abs(y))
-                    horizontalMove = x > 0 ? 1.5 : -1.5;
+                    horizontalMove = x > 0 ? 1.5f : -1.5f;
                 else
                     verticalMove = y > 0 ? 0.5f : -0.5f;
             }
