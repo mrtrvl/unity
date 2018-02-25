@@ -12,5 +12,9 @@ public class PopUpController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         transform.position += new Vector3(0, Time.deltaTime, 0);
+        if (transform.position.y >= 6)
+        {
+            Destroy(gameObject);
+        }
 	}
 }
