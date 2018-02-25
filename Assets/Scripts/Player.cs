@@ -20,6 +20,8 @@ public class Player : MonoBehaviour {
 
     public GameObject pickUpsPanel;
 
+    public bool hasKey = false;
+
     private float damage;
     private float damageFactor;
     private Rigidbody2D ridgidbody;
@@ -36,7 +38,6 @@ public class Player : MonoBehaviour {
     private float horizontalMove;
     private float verticalMove;
 
-    private bool hasKey = false;
     private float breathingGasAmount = 300;
     private bool hasExplosive = false;
 
@@ -47,6 +48,10 @@ public class Player : MonoBehaviour {
     private Quaternion rotation;
 
     private Vector2 touchOrigin = -Vector2.one; //Used to store location of screen touch origin for mobile controls.
+
+    private int healthIncreaseStep = 15;
+    private int healthDecreaseStep = 5;
+    private int breathingGasIncreaseStep = 200;
 
     void Start () 
 	{
@@ -139,8 +144,9 @@ public class Player : MonoBehaviour {
     {
         if (collision.gameObject.CompareTag("Jellyfish"))
         {
-            health -= 5;
+            health -= healthDecreaseStep;
             screamAudio.Play();
+            Debug.Log("Health -" + healthDecreaseStep.ToString());
         }
     }
 
@@ -168,6 +174,7 @@ public class Player : MonoBehaviour {
         if (other.gameObject.CompareTag("Coin") || other.gameObject.CompareTag("Emerald") || other.gameObject.CompareTag("Diamond"))
         {
             collectedItemsCount += 1;
+            Debug.Log("You got something valuable!");
             other.gameObject.SetActive(false);
         }
         else if (other.gameObject.CompareTag("Key"))
@@ -175,16 +182,19 @@ public class Player : MonoBehaviour {
             hasKey = true;
             other.transform.SetParent(pickUpsPanel.transform);
             other.transform.localPosition = new Vector3(0, 0, 0);
+            Debug.Log("You got a key!");
             //other.gameObject.SetActive(false);
         }
         else if (other.gameObject.CompareTag("Medkit"))
         {
-            health += 15;
+            health += healthIncreaseStep;
             other.gameObject.SetActive(false);
+            Debug.Log("Health +" + healthIncreaseStep.ToString());
         }
         else if (other.gameObject.CompareTag("Tank"))
         {
-            breathingGasAmount += 200;
+            breathingGasAmount += breathingGasIncreaseStep;
+            Debug.Log("Breathing gas +" + breathingGasIncreaseStep.ToString());
             other.gameObject.SetActive(false);
         }
         else if (other.gameObject.CompareTag("TNT"))
@@ -192,6 +202,7 @@ public class Player : MonoBehaviour {
             hasExplosive = true;
             other.transform.SetParent(pickUpsPanel.transform);
             other.transform.localPosition = new Vector3(-1, 0, 0);
+            Debug.Log("You got a TNT!");
             //other.gameObject.SetActive(false);
         }
     }
