@@ -7,9 +7,9 @@ public class GateTriggerController : MonoBehaviour {
     public GameObject gate;
     public GameObject player;
 
-    private bool hasKey;
+    public TextMesh popUp;
 
-    //private Control controlscript = player.GetComponent<Control>();
+    private bool hasKey;
 
     void Start()
     {
@@ -34,8 +34,14 @@ public class GateTriggerController : MonoBehaviour {
             }
             else
             {
-                Debug.Log("You need a key to open the gate!");
+                string message = "You need a key to open the gate!";
+                showPopUp(message);
             }
         }
+    }
+    void showPopUp(string message)
+    {
+        popUp.text = message;
+        Instantiate(popUp, transform.position, transform.rotation);
     }
 }
