@@ -18,6 +18,8 @@ public class Player : MonoBehaviour {
 
     public AudioSource screamAudio;
 
+    public GameObject pickUpsPanel;
+
     private float damage;
     private float damageFactor;
     private Rigidbody2D ridgidbody;
@@ -171,7 +173,9 @@ public class Player : MonoBehaviour {
         else if (other.gameObject.CompareTag("Key"))
         {
             hasKey = true;
-            other.gameObject.SetActive(false);
+            other.transform.SetParent(pickUpsPanel.transform);
+            other.transform.localPosition = new Vector3(0, 0, 0);
+            //other.gameObject.SetActive(false);
         }
         else if (other.gameObject.CompareTag("Medkit"))
         {
@@ -186,7 +190,9 @@ public class Player : MonoBehaviour {
         else if (other.gameObject.CompareTag("TNT"))
         {
             hasExplosive = true;
-            other.gameObject.SetActive(false);
+            other.transform.SetParent(pickUpsPanel.transform);
+            other.transform.localPosition = new Vector3(-1, 0, 0);
+            //other.gameObject.SetActive(false);
         }
     }
 
