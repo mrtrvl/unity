@@ -3009,11 +3009,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4806603363400420, guid: 77c74b276813ea54880d30adb17bcb65, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4.742595
+      value: 12.91
       objectReference: {fileID: 0}
     - target: {fileID: 4806603363400420, guid: 77c74b276813ea54880d30adb17bcb65, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.48129797
+      value: 1.04
       objectReference: {fileID: 0}
     - target: {fileID: 4806603363400420, guid: 77c74b276813ea54880d30adb17bcb65, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3523,11 +3523,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4734116859064612, guid: 4410ace94a473cd4e906440834ef9f66, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: 17.67
       objectReference: {fileID: 0}
     - target: {fileID: 4734116859064612, guid: 4410ace94a473cd4e906440834ef9f66, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.38
+      value: -1.11
       objectReference: {fileID: 0}
     - target: {fileID: 4734116859064612, guid: 4410ace94a473cd4e906440834ef9f66, type: 2}
       propertyPath: m_LocalPosition.z
@@ -4127,7 +4127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gate: {fileID: 654972361}
   player: {fileID: 1919187848}
-  popUp: {fileID: 0}
+  popUp: {fileID: 102075135682177224, guid: 22c2dd9a8ad8b0147bc5601e18f7d82e, type: 2}
 --- !u!61 &1379834452
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4787,6 +4787,21 @@ Prefab:
         type: 2}
       propertyPath: m_LocalScale.y
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114978146318275228, guid: e3a72635100186e4ea544f45ffbf4e18,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114978146318275228, guid: e3a72635100186e4ea544f45ffbf4e18,
+        type: 2}
+      propertyPath: m_FontData.m_MinSize
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224013762731126626, guid: e3a72635100186e4ea544f45ffbf4e18,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -14.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e3a72635100186e4ea544f45ffbf4e18, type: 2}
