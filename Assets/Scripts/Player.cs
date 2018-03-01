@@ -46,7 +46,7 @@ public class Player : MonoBehaviour {
     private Vector3 oldPosition;
     private Vector3 newPosition;
 
-    private Vector3 oldLampDirection = new Vector3(1, 0, 0);
+    private Vector3 oldLampDirection = new Vector3(90, 0, 0);
     private Quaternion rotation;
 
     private Vector2 touchOrigin = -Vector2.one; //Used to store location of screen touch origin for mobile controls.
