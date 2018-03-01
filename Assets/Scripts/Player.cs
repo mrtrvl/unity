@@ -74,11 +74,7 @@ public class Player : MonoBehaviour {
 
 	void Update ()
 	{
-        depth = baseDepth - ridgidbody.position.y;
-
-        float pressure = depth / 10 + 1;
-        float volumeUnderPressure = Mathf.Round(airVolume / pressure * 100) / 100f;
-        float buoyancy = volumeUnderPressure - 3.33f;
+        
 
         //Check if we are running either in the Unity editor or in a standalone build.
         #if UNITY_STANDALONE || UNITY_WEBPLAYER
@@ -87,7 +83,7 @@ public class Player : MonoBehaviour {
         verticalMove = Input.GetAxis("Vertical");
 
         //Check if we are running on iOS, Android, Windows Phone 8 or Unity iPhone
-        #elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
 
         if (Input.touchCount > 0)
         {
@@ -116,7 +112,9 @@ public class Player : MonoBehaviour {
         horizontalMove = Mathf.MoveTowards(horizontalMove, 0, 0.01f);
         verticalMove = Mathf.MoveTowards(verticalMove, 0, 0.01f);
 
-        #endif
+#endif
+
+        float buoyancy = calculateBuoyancy();
 
         ridgidbody.velocity = new Vector2(ridgidbody.velocity.x, buoyancy);
         ridgidbody.AddForce(new Vector2(horizontalMove, 0));
@@ -131,15 +129,35 @@ public class Player : MonoBehaviour {
             airVolume += buoyancyFactor;
         }
 
-        if (offTheBottom)
-        {
-            float currentLightRange = diversLight.GetComponent<Light>().range;
-            diversLight.GetComponent<Light>().range = Mathf.Lerp(currentLightRange, defaultLightRange, 0.2f * Time.deltaTime);
-        }
+        flipToMoveDirection();
 
         showText();
 
-        rotateLight();
+        controlLight();
+    }
+
+    void flipToMoveDirection()
+    {
+        if (ridgidbody.velocity.x > 0.1f)
+        {
+            transform.localScale = new Vector2(-0.5f, transform.localScale.y);
+        }
+
+        else if (ridgidbody.velocity.x < -0.1f)
+        {
+            transform.localScale = new Vector2(0.5f, transform.localScale.y);
+        }
+    }
+
+    float calculateBuoyancy()
+    {
+        depth = baseDepth - ridgidbody.position.y;
+
+        float pressure = depth / 10 + 1;
+        float volumeUnderPressure = Mathf.Round(airVolume / pressure * 100) / 100f;
+        float buoyancy = volumeUnderPressure - 3.33f;
+
+        return buoyancy;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -214,8 +232,14 @@ public class Player : MonoBehaviour {
         }
     }
 
-    void rotateLight()
+    void controlLight()
     {
+        if (offTheBottom)
+        {
+            float currentLightRange = diversLight.GetComponent<Light>().range;
+            diversLight.GetComponent<Light>().range = Mathf.Lerp(currentLightRange, defaultLightRange, 0.2f * Time.deltaTime);
+        }
+
         newPosition = ridgidbody.transform.position;
 
         Vector3 direction = (newPosition - oldPosition);
