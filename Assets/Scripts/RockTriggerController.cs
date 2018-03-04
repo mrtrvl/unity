@@ -37,6 +37,7 @@ public class RockTriggerController : MonoBehaviour {
             {
                Explode();
                 explosionOccured = true;
+                messageBroadcasted = true;
             }
             else if(!messageBroadcasted)
             {
@@ -49,6 +50,7 @@ public class RockTriggerController : MonoBehaviour {
 
     void showPopUp(string message)
     {
+        Handheld.Vibrate();
         popUp.text = message;
         Instantiate(popUp, transform.position, transform.rotation);
     }
