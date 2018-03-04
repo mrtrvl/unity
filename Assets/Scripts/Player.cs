@@ -21,6 +21,8 @@ public class Player : MonoBehaviour {
     public GameObject pickUpsPanel;
 
     public bool hasKey = false;
+    public bool hasMap = false;
+    public bool hasExplosive = false;
 
     public TextMesh popUp;
 
@@ -41,7 +43,6 @@ public class Player : MonoBehaviour {
     private float verticalMove;
 
     private float breathingGasAmount = 300;
-    private bool hasExplosive = false;
 
     private Vector3 oldPosition;
     private Vector3 newPosition;
@@ -228,6 +229,14 @@ public class Player : MonoBehaviour {
             other.transform.SetParent(pickUpsPanel.transform);
             other.transform.localPosition = new Vector3(-1, 0, 0);
             string message = "You got a TNT!";
+            showPopUp(message);
+        }
+        else if (other.gameObject.CompareTag("Map"))
+        {
+            hasMap = true;
+            other.transform.SetParent(pickUpsPanel.transform);
+            other.transform.localPosition = new Vector3(-2, 0, 0);
+            string message = "You got a Map!";
             showPopUp(message);
         }
     }
