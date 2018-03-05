@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 33220351619100114}
   - component: {fileID: 23207362187674696}
   - component: {fileID: 114776087907292584}
+  - component: {fileID: 114283214397135520}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -204,6 +205,19 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114283214397135520
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1524701344287884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e81f3b719054c4ba49d6776e799088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MapImage: {fileID: 0}
+  player: {fileID: 0}
 --- !u!114 &114776087907292584
 MonoBehaviour:
   m_ObjectHideFlags: 1

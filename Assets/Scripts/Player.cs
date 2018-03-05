@@ -197,7 +197,6 @@ public class Player : MonoBehaviour {
         {
             collectedItemsCount += 1;
             string message = "You got something valuable!";
-            Debug.Log(message);
             other.gameObject.SetActive(false);
             showPopUp(message);
         }

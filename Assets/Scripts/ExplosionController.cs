@@ -6,12 +6,10 @@ public class ExplosionController : MonoBehaviour {
 
     public GameObject shatteredVersion;
 
-    private GameObject shatteredRock;
     private Rigidbody2D rb;
 
 	void Start () {
-        shatteredRock = shatteredVersion.gameObject;
-        rb = GetComponent<Rigidbody2D>();
+        //rb = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
