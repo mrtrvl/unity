@@ -8,11 +8,15 @@ public class RockTriggerController : MonoBehaviour {
     public GameObject player;
     public GameObject shatteredRock;
     public GameObject wholeVersion;
+    public GameObject TNT;
 
     //private GameObject shatteredRock;
     private Rigidbody2D rb;
     private bool explosionOccured = false;
     private bool messageBroadcasted = false;
+    private float explosionTimer = 5f;
+    private bool explosivePlanted = false;
+    private int lastTimer = 0;
 
     public TextMesh popUp;
 
@@ -27,6 +31,25 @@ public class RockTriggerController : MonoBehaviour {
     void Update()
     {
         hasExplosive = player.GetComponent<Player>().hasExplosive;
+
+        if (explosivePlanted)
+        {
+            if (explosionTimer > 0)
+            {
+                explosionTimer -= Time.deltaTime;
+                Debug.Log(Mathf.RoundToInt(explosionTimer));
+                if (lastTimer != Mathf.RoundToInt(explosionTimer))
+                {
+                    showPopUp(Mathf.RoundToInt(explosionTimer).ToString());
+                    lastTimer = Mathf.RoundToInt(explosionTimer);
+                }
+            }
+            else if (explosionTimer <= 0)
+            {
+                explosivePlanted = false;
+                Explode();
+            }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -35,9 +58,12 @@ public class RockTriggerController : MonoBehaviour {
         {
             if (hasExplosive && !explosionOccured)
             {
-               Explode();
+                //Explode();
+                explosivePlanted = true;
                 explosionOccured = true;
                 messageBroadcasted = true;
+                Instantiate(TNT, transform.position, transform.rotation);
+                //showPopUp("Explosion in " + explosionTimer.ToString() + " seconds...");
             }
             else if(!messageBroadcasted)
             {
@@ -60,5 +86,6 @@ public class RockTriggerController : MonoBehaviour {
         Instantiate(shatteredRock, transform.position, transform.rotation);
         //rb.AddForce(transform.up * 2000); // Ei tööta hetkel... Peab ehk igale childile eraldi jõudu avaldama?
         Destroy(wholeVersion.gameObject);
+        Destroy(TNT.gameObject);
     }
 }
