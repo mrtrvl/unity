@@ -17,6 +17,7 @@ public class RockTriggerController : MonoBehaviour {
     private float explosionTimer = 5f;
     private bool explosivePlanted = false;
     private int lastTimer = 0;
+    private GameObject instantiatedTNT;
 
     public TextMesh popUp;
 
@@ -37,7 +38,7 @@ public class RockTriggerController : MonoBehaviour {
             if (explosionTimer > 0)
             {
                 explosionTimer -= Time.deltaTime;
-                Debug.Log(Mathf.RoundToInt(explosionTimer));
+
                 if (lastTimer != Mathf.RoundToInt(explosionTimer))
                 {
                     showPopUp(Mathf.RoundToInt(explosionTimer).ToString());
@@ -62,7 +63,7 @@ public class RockTriggerController : MonoBehaviour {
                 explosivePlanted = true;
                 explosionOccured = true;
                 messageBroadcasted = true;
-                Instantiate(TNT, transform.position, transform.rotation);
+                instantiatedTNT = (GameObject)Instantiate(TNT, transform.position, transform.rotation);
                 //showPopUp("Explosion in " + explosionTimer.ToString() + " seconds...");
             }
             else if(!messageBroadcasted)
@@ -86,6 +87,6 @@ public class RockTriggerController : MonoBehaviour {
         Instantiate(shatteredRock, transform.position, transform.rotation);
         //rb.AddForce(transform.up * 2000); // Ei tööta hetkel... Peab ehk igale childile eraldi jõudu avaldama?
         Destroy(wholeVersion.gameObject);
-        Destroy(TNT.gameObject);
+        Destroy(instantiatedTNT);
     }
 }
