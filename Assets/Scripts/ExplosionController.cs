@@ -22,7 +22,7 @@ public class ExplosionController : MonoBehaviour {
     void Explode()
     {
         Instantiate(shatteredVersion, transform.position, transform.rotation);
-        rb.AddForce(transform.up * 2000); // Ei tööta hetkel... Peab ehk igale childile eraldi jõudu avaldama?
+        //rb.AddForce(transform.up * 2000); // Ei tööta hetkel... Peab ehk igale childile eraldi jõudu avaldama?
         Destroy(gameObject);
     }
 }
