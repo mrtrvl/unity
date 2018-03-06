@@ -9,6 +9,7 @@ public class Player : MonoBehaviour {
     public Text depthText;
     public Text collectedItemsText;
     public Text healthText;
+    public Text breathingGastext;
 
     public float horizontalSpeed = 1f;
     public float baseDepth = 20f;
@@ -82,6 +83,8 @@ public class Player : MonoBehaviour {
 
         horizontalMove = Input.GetAxis("Horizontal");
         verticalMove = Input.GetAxis("Vertical");
+
+        manageBreathingGas();
 
         //Check if we are running on iOS, Android, Windows Phone 8 or Unity iPhone
 #elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
@@ -273,11 +276,22 @@ public class Player : MonoBehaviour {
         depthText.text = "Depth: " + depth.ToString();
         collectedItemsText.text = "Collected items: " + collectedItemsCount.ToString();
         healthText.text = "Health: " + health.ToString();
+        breathingGastext.text = "Gas: " + Mathf.RoundToInt(breathingGasAmount).ToString();
     }
 
     void showPopUp(string message)
     {
+    #if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+
+                Handheld.Vibrate();
+    #endif
+
         popUp.text = message;
         Instantiate(popUp, transform.position, transform.rotation);
+    }
+
+    void manageBreathingGas()
+    {
+        breathingGasAmount -= Time.deltaTime;
     }
 }
