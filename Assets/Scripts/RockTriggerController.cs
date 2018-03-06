@@ -77,7 +77,10 @@ public class RockTriggerController : MonoBehaviour {
 
     void showPopUp(string message)
     {
-        Handheld.Vibrate();
+        #if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+
+            Handheld.Vibrate();
+        #endif
         popUp.text = message;
         Instantiate(popUp, transform.position, transform.rotation);
     }
