@@ -1077,7 +1077,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 605889621}
+    m_TransformParent: {fileID: 1648111507}
     m_Modifications:
     - target: {fileID: 4738297184538312, guid: a212c4de29c36a54abb55da1ffad851b, type: 2}
       propertyPath: m_LocalPosition.x
@@ -1109,13 +1109,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4738297184538312, guid: a212c4de29c36a54abb55da1ffad851b, type: 2}
       propertyPath: m_RootOrder
-      value: 25
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 114281591219243974, guid: a212c4de29c36a54abb55da1ffad851b,
         type: 2}
       propertyPath: player
       value: 
       objectReference: {fileID: 1919187848}
+    - target: {fileID: 114281591219243974, guid: a212c4de29c36a54abb55da1ffad851b,
+        type: 2}
+      propertyPath: TNT
+      value: 
+      objectReference: {fileID: 1436020255237878, guid: 39a425437c325b94b87d30f521335683,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a212c4de29c36a54abb55da1ffad851b, type: 2}
   m_IsPrefabParent: 0
@@ -2472,7 +2478,6 @@ Transform:
   - {fileID: 1996987606}
   - {fileID: 1275497175}
   - {fileID: 1731316976}
-  - {fileID: 1422272874}
   - {fileID: 816446321}
   - {fileID: 1488354828}
   - {fileID: 368847085}
@@ -4447,7 +4452,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4667826017851086, guid: 6d314a23a1c933440bd9b8c7890509f3, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.5572903
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: 4667826017851086, guid: 6d314a23a1c933440bd9b8c7890509f3, type: 2}
       propertyPath: m_LocalPosition.z
@@ -4504,7 +4509,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1043082272}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: -0, y: -0, z: -0}
+  m_LocalPosition: {x: 0.36, y: -0, z: -0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1919187849}
@@ -4841,7 +4846,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4879281432774016, guid: bf8ca199bef09c445ba0dff46f703da6, type: 2}
       propertyPath: m_RootOrder
-      value: 27
+      value: 26
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf8ca199bef09c445ba0dff46f703da6, type: 2}
@@ -4925,7 +4930,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4371150669658028, guid: 39a425437c325b94b87d30f521335683, type: 2}
       propertyPath: m_RootOrder
-      value: 26
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1436020255237878, guid: 39a425437c325b94b87d30f521335683, type: 2}
       propertyPath: m_Name
@@ -6669,7 +6674,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4091988323146926, guid: 6deb3c3e69ad04b4e933f186a42e398a, type: 2}
       propertyPath: m_RootOrder
-      value: 28
+      value: 27
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6deb3c3e69ad04b4e933f186a42e398a, type: 2}
@@ -6773,6 +6778,7 @@ Transform:
   - {fileID: 529836992}
   - {fileID: 16975176}
   - {fileID: 294647246}
+  - {fileID: 1422272874}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7542,7 +7548,7 @@ GameObject:
   - component: {fileID: 1919187852}
   - component: {fileID: 1919187851}
   - component: {fileID: 1919187850}
-  - component: {fileID: 1919187855}
+  - component: {fileID: 1919187854}
   m_Layer: 0
   m_Name: Diver
   m_TagString: Player
@@ -7662,8 +7668,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1919187848}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!60 &1919187855
-PolygonCollider2D:
+--- !u!70 &1919187854
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -7674,61 +7680,9 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.83549255, y: 0.44293422}
-      - {x: 0.662232, y: 0.41754952}
-      - {x: 0.493629, y: 0.33836627}
-      - {x: 0.110903606, y: 0.26419628}
-      - {x: -0.29777032, y: 0.24500322}
-      - {x: -0.7336177, y: 0.3062483}
-      - {x: -1.0437127, y: 0.29506525}
-      - {x: -1.1649038, y: 0.2267239}
-      - {x: -1.1796598, y: 0.19875835}
-      - {x: -1.196478, y: 0.1566066}
-      - {x: -1.263138, y: 0.1374658}
-      - {x: -1.320894, y: 0.07041669}
-      - {x: -1.343572, y: -0.032120407}
-      - {x: -1.284343, y: -0.119971395}
-      - {x: -1.1321054, y: -0.13434297}
-      - {x: -1.0811129, y: 0.060295627}
-      - {x: -1.0118918, y: 0.028314147}
-      - {x: -1.0203185, y: -0.11766349}
-      - {x: -0.33655348, y: -0.20542434}
-      - {x: -0.32221907, y: -0.04519076}
-      - {x: -0.15715496, y: -0.027812406}
-      - {x: -0.011151709, y: -0.09435655}
-      - {x: 0.114525355, y: -0.24956375}
-      - {x: 0.29456696, y: -0.32051674}
-      - {x: 0.43479568, y: -0.4453831}
-      - {x: 0.55062777, y: -0.38823885}
-      - {x: 0.73690337, y: -0.38085306}
-      - {x: 0.89146733, y: -0.34368485}
-      - {x: 0.86976194, y: -0.23664545}
-      - {x: 0.6537943, y: -0.31146437}
-      - {x: 0.4321723, y: -0.3146221}
-      - {x: 0.22880803, y: -0.14617878}
-      - {x: -0.008064643, y: 0.10546589}
-      - {x: 0.053246584, y: 0.12477665}
-      - {x: 0.23632513, y: 0.14054029}
-      - {x: 0.43194437, y: 0.2499886}
-      - {x: 0.51837534, y: 0.20470996}
-      - {x: 0.63324726, y: 0.28189987}
-      - {x: 0.7319698, y: 0.31739753}
-      - {x: 0.8480068, y: 0.31796378}
-      - {x: 0.9475042, y: 0.3018251}
-      - {x: 1.0828824, y: 0.22472517}
-      - {x: 1.028728, y: 0.39579782}
+  m_Offset: {x: -0.3, y: 0.053168535}
+  m_Size: {x: 1.3326477, y: 0.3701578}
+  m_Direction: 1
 --- !u!1001 &1925464691
 Prefab:
   m_ObjectHideFlags: 0
