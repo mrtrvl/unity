@@ -7540,7 +7540,7 @@ MonoBehaviour:
   depthText: {fileID: 428340794}
   collectedItemsText: {fileID: 530622324}
   healthText: {fileID: 796448579}
-  breathingGastext: {fileID: 292311016}
+  breathingGasText: {fileID: 292311016}
   horizontalSpeed: 1
   baseDepth: 20
   defaultLightRange: 12

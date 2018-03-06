@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
     public Text depthText;
     public Text collectedItemsText;
     public Text healthText;
-    public Text breathingGastext;
+    public Text breathingGasText;
 
     public float horizontalSpeed = 1f;
     public float baseDepth = 20f;
@@ -27,8 +27,8 @@ public class Player : MonoBehaviour {
 
     public TextMesh popUp;
 
-    private float damage;
-    private float damageFactor;
+    private float damage = 0f;
+    private float damageFactor = 0.01f;
     private Rigidbody2D ridgidbody;
 
     private GameObject diversLight;
@@ -61,9 +61,6 @@ public class Player : MonoBehaviour {
 	{
         screamAudio.Stop();
 
-        damage = 0f;
-        damageFactor = 0.01f;
-
         showText();
 
         ridgidbody = GetComponent<Rigidbody2D>();
@@ -83,8 +80,6 @@ public class Player : MonoBehaviour {
 
         horizontalMove = Input.GetAxis("Horizontal");
         verticalMove = Input.GetAxis("Vertical");
-
-        manageBreathingGas();
 
         //Check if we are running on iOS, Android, Windows Phone 8 or Unity iPhone
 #elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
@@ -133,6 +128,8 @@ public class Player : MonoBehaviour {
             airVolume += buoyancyFactor;
         }
 
+        manageBreathingGas();
+
         flipToMoveDirection();
 
         showText();
@@ -157,7 +154,7 @@ public class Player : MonoBehaviour {
     {
         depth = baseDepth - ridgidbody.position.y;
 
-        float pressure = depth / 10 + 1;
+        float pressure = depth / 10 + 1; // 1 atm per 10 m + 1 atm on surface
         float volumeUnderPressure = Mathf.Round(airVolume / pressure * 100) / 100f;
         float buoyancy = volumeUnderPressure - 3.33f;
 
@@ -275,8 +272,27 @@ public class Player : MonoBehaviour {
         damageText.text = "Damage: " + damage.ToString();
         depthText.text = "Depth: " + depth.ToString();
         collectedItemsText.text = "Collected items: " + collectedItemsCount.ToString();
+
+        if (health > 50)
+        {
+            healthText.color = Color.green;
+        }
+        else
+        {
+            healthText.color = Color.red;
+        }
+
         healthText.text = "Health: " + health.ToString();
-        breathingGastext.text = "Gas: " + Mathf.RoundToInt(breathingGasAmount).ToString();
+
+        if (breathingGasAmount > 100)
+        {
+            breathingGasText.color = Color.green;
+        }
+        else
+        {
+            breathingGasText.color = Color.red;
+        }
+        breathingGasText.text = "Gas: " + Mathf.RoundToInt(breathingGasAmount).ToString();
     }
 
     void showPopUp(string message)
