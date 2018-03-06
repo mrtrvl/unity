@@ -238,6 +238,12 @@ public class Player : MonoBehaviour {
             string message = "You got a Map!";
             showPopUp(message);
         }
+        else if (other.gameObject.CompareTag("Banana"))
+        {
+            string message = "You got a Holy Banana!!!";
+            other.gameObject.SetActive(false);
+            showPopUp(message);
+        }
     }
 
     void controlLight()

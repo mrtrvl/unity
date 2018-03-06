@@ -14,6 +14,7 @@ TagManager:
   - Diamond
   - Medkit
   - Map
+  - Banana
   layers:
   - Default
   - TransparentFX
