@@ -205,6 +205,10 @@ public class Player : MonoBehaviour {
             hasKey = true;
             other.transform.SetParent(pickUpsPanel.transform);
             other.transform.localPosition = new Vector3(0, 0, 0);
+
+            var pointLight = other.transform.Find("Point light");
+            pointLight.gameObject.SetActive(false);
+
             string message = ("You got a key!");
             showPopUp(message);
         }
@@ -226,6 +230,10 @@ public class Player : MonoBehaviour {
         {
             hasExplosive = true;
             other.transform.SetParent(pickUpsPanel.transform);
+
+            var pointLight = other.transform.Find("Point light");
+            pointLight.gameObject.SetActive(false);
+
             other.transform.localPosition = new Vector3(-1, 0, 0);
             string message = "You got a TNT!";
             showPopUp(message);
@@ -235,6 +243,10 @@ public class Player : MonoBehaviour {
             hasMap = true;
             other.transform.SetParent(pickUpsPanel.transform);
             other.transform.localPosition = new Vector3(-2, 0, 0);
+
+            var pointLight = other.transform.Find("Point light");
+            pointLight.gameObject.SetActive(false); 
+
             string message = "You got a Map!";
             showPopUp(message);
         }
