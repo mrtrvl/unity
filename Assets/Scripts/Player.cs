@@ -20,6 +20,7 @@ public class Player : MonoBehaviour {
     public AudioSource screamAudio;
 
     public GameObject pickUpsPanel;
+    public GameObject bubbles;
 
     public bool hasKey = false;
     public bool hasMap = false;
@@ -57,6 +58,11 @@ public class Player : MonoBehaviour {
     private int healthDecreaseStep = 5;
     private int breathingGasIncreaseStep = 200;
 
+    private float timeToNextBreath = 0;
+    private GameObject bubblesObject;
+
+    private const float breathInterval = 10;
+
     void Start () 
 	{
         screamAudio.Stop();
@@ -69,6 +75,7 @@ public class Player : MonoBehaviour {
         diversLight.GetComponent<Light>().range = defaultLightRange;
 
         oldPosition = ridgidbody.transform.position;
+        manageBubbles();
     }
 
 	void Update ()
@@ -135,6 +142,25 @@ public class Player : MonoBehaviour {
         showText();
 
         controlLight();
+
+        manageBubbles();
+    }
+
+    void manageBubbles ()
+    {
+        if (Time.time >= timeToNextBreath)
+        {
+
+    
+            if (bubblesObject != null)
+            {
+                Destroy(bubblesObject);
+            }
+            timeToNextBreath = Time.time + breathInterval;
+            bubblesObject =  Instantiate(bubbles, new Vector2(0.4f, 0.2f), transform.rotation);
+            bubblesObject.transform.parent = gameObject.transform;
+        }
+        
     }
 
     void flipToMoveDirection()
