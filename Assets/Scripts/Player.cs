@@ -61,7 +61,7 @@ public class Player : MonoBehaviour {
     private float timeToNextBreath = 0;
     private GameObject bubblesObject;
 
-    private const float breathInterval = 10;
+    private const float breathInterval = 10.0f;
 
     void Start () 
 	{
@@ -75,7 +75,7 @@ public class Player : MonoBehaviour {
         diversLight.GetComponent<Light>().range = defaultLightRange;
 
         oldPosition = ridgidbody.transform.position;
-        manageBubbles();
+        ManageBubbles();
     }
 
 	void Update ()
@@ -143,22 +143,19 @@ public class Player : MonoBehaviour {
 
         controlLight();
 
-        manageBubbles();
+        ManageBubbles();
     }
 
-    void manageBubbles ()
+    void ManageBubbles()
     {
         if (Time.time >= timeToNextBreath)
         {
-
-    
             if (bubblesObject != null)
             {
                 Destroy(bubblesObject);
             }
             timeToNextBreath = Time.time + breathInterval;
-            bubblesObject =  Instantiate(bubbles, new Vector2(0.4f, 0.2f), transform.rotation);
-            bubblesObject.transform.parent = gameObject.transform;
+            bubblesObject = Instantiate(bubbles, gameObject.transform);
         }
         
     }
