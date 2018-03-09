@@ -35,6 +35,9 @@ public class Player : MonoBehaviour {
     private GameObject diversLight;
     private bool offTheBottom = true;
 
+    private GameObject diverSprite;
+    private Animator diversAnimation;
+
     private float depth;
     private float airVolume = 10f;
 
@@ -73,6 +76,9 @@ public class Player : MonoBehaviour {
 
         diversLight = GameObject.Find("DiveLamp");
         diversLight.GetComponent<Light>().range = defaultLightRange;
+
+        diverSprite = GameObject.Find("sukelduja");
+        diversAnimation = diverSprite.GetComponent<Animator>();
 
         oldPosition = ridgidbody.transform.position;
         ManageBubbles();
@@ -144,6 +150,8 @@ public class Player : MonoBehaviour {
         controlLight();
 
         ManageBubbles();
+
+        manageAnimation();
     }
 
     void ManageBubbles()
@@ -158,6 +166,18 @@ public class Player : MonoBehaviour {
             bubblesObject = Instantiate(bubbles, gameObject.transform);
         }
         
+    }
+
+    void manageAnimation()
+    {
+        if (horizontalMove > 0.1 || horizontalMove < -0.1)
+        {
+            diversAnimation.SetBool("move", true);
+        }
+        else
+        {
+            diversAnimation.SetBool("move", false);
+        }
     }
 
     void flipToMoveDirection()
