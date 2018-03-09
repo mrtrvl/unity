@@ -3,13 +3,16 @@ importPivots: 1
 tpsheetFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
 - Assets/Images/jellyfish.tpsheet
-- Assets/Images/Jellyfish.tpsheet
+- Assets/Images/Jellyfish/Jellyfish.tpsheet
+- Assets/Images/Jellyfish/jellyfish.tpsheet
 textureFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.png
 - Assets/Images/Jellyfish.png
-- Assets/Images/Jellyfish.png
+- Assets/Images/Jellyfish/Jellyfish.png
+- Assets/Images/Jellyfish/Jellyfish.png
 normalmapFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png
+- 
 - 
 - 
 enableDebugOutput: 0

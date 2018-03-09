@@ -27,6 +27,7 @@ public class MapController : MonoBehaviour {
             {
                 isAppearing = false;
                 shown = true;
+                gameObject.SetActive(false);
             }
         }
 	}
