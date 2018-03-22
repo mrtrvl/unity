@@ -56,7 +56,9 @@ public class Player : MonoBehaviour {
     private Vector3 oldLampDirection = new Vector3(90, 0, 0);
     private Quaternion rotation;
 
+#if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
     private Vector2 touchOrigin = -Vector2.one; //Used to store location of screen touch origin for mobile controls.
+#endif
 
     private int healthIncreaseStep = 15;
     private int healthDecreaseStep = 5;
@@ -90,7 +92,7 @@ public class Player : MonoBehaviour {
         
 
         //Check if we are running either in the Unity editor or in a standalone build.
-        #if UNITY_STANDALONE || UNITY_WEBPLAYER
+#if UNITY_STANDALONE || UNITY_WEBPLAYER
 
         horizontalMove = Input.GetAxis("Horizontal");
         verticalMove = Input.GetAxis("Vertical");
@@ -374,10 +376,10 @@ public class Player : MonoBehaviour {
 
     void showPopUp(string message)
     {
-    #if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+#if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
 
                 Handheld.Vibrate();
-    #endif
+#endif
 
         popUp.text = message;
         Instantiate(popUp, transform.position, transform.rotation);
