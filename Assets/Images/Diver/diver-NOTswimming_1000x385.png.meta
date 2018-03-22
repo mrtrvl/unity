@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: 90377ec3e5dba9f42b83c784b66d3d93
-timeCreated: 1520606532
+guid: 9f655cb904879354793c642f330d3b1c
+timeCreated: 1521741390
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: diver-sprite-small_0
-    21300002: diver-sprite-small_1
-    21300004: diver-sprite-small_2
-    21300006: diver-sprite-small_3
-    21300008: diver-sprite-small_4
-    21300010: diver-sprite-small_5
-    21300012: diver-sprite-small_6
+    21300000: diver-NOTswimming_1000x385_0
+    21300002: diver-NOTswimming_1000x385_1
+    21300004: diver-NOTswimming_1000x385_2
+    21300006: diver-NOTswimming_1000x385_3
+    21300008: diver-NOTswimming_1000x385_4
+    21300010: diver-NOTswimming_1000x385_5
+    21300012: diver-NOTswimming_1000x385_6
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: diver-sprite-small_0
+      name: diver-NOTswimming_1000x385_0
       rect:
         serializedVersion: 2
-        x: 24
+        x: 0
         y: 0
-        width: 1236
-        height: 519
+        width: 953
+        height: 385
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,13 +131,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: diver-sprite-small_1
+      name: diver-NOTswimming_1000x385_1
       rect:
         serializedVersion: 2
-        x: 1346
+        x: 985
         y: 0
-        width: 1200
-        height: 519
+        width: 970
+        height: 385
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,13 +145,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: diver-sprite-small_2
+      name: diver-NOTswimming_1000x385_2
       rect:
         serializedVersion: 2
-        x: 2632
+        x: 1984
         y: 0
-        width: 1196
-        height: 519
+        width: 970
+        height: 385
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,13 +159,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: diver-sprite-small_3
+      name: diver-NOTswimming_1000x385_3
       rect:
         serializedVersion: 2
-        x: 3874
+        x: 2989
         y: 0
-        width: 1240
-        height: 519
+        width: 970
+        height: 385
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,13 +173,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: diver-sprite-small_4
+      name: diver-NOTswimming_1000x385_4
       rect:
         serializedVersion: 2
-        x: 5139
+        x: 3985
         y: 0
-        width: 1262
-        height: 519
+        width: 970
+        height: 385
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,13 +187,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: diver-sprite-small_5
+      name: diver-NOTswimming_1000x385_5
       rect:
         serializedVersion: 2
-        x: 6443
+        x: 4985
         y: 0
-        width: 1239
-        height: 519
+        width: 970
+        height: 385
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,13 +201,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: diver-sprite-small_6
+      name: diver-NOTswimming_1000x385_6
       rect:
         serializedVersion: 2
-        x: 7703
+        x: 6029
         y: 0
-        width: 1266
-        height: 519
+        width: 924
+        height: 385
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
