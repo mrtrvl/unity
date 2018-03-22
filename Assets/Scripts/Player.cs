@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
@@ -28,6 +29,8 @@ public class Player : MonoBehaviour {
     public bool hasBanana = false;
 
     public TextMesh popUp;
+
+    public string nextLevel;
 
     private float damage = 0f;
     private float damageFactor = 0.01f;
@@ -310,6 +313,7 @@ public class Player : MonoBehaviour {
             {
                 message = "Mission accomplished!";
                 // TODO Level completed...
+                LoadScene(nextLevel);
             }
             else
             {
@@ -388,5 +392,10 @@ public class Player : MonoBehaviour {
     void manageBreathingGas()
     {
         breathingGasAmount -= Time.deltaTime;
+    }
+
+    public void LoadScene(string level)
+    {
+        SceneManager.LoadScene(level);
     }
 }
