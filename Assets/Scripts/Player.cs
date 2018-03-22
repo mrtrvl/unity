@@ -25,6 +25,7 @@ public class Player : MonoBehaviour {
     public bool hasKey = false;
     public bool hasMap = false;
     public bool hasExplosive = false;
+    public bool hasBanana = false;
 
     public TextMesh popUp;
 
@@ -295,8 +296,23 @@ public class Player : MonoBehaviour {
         }
         else if (other.gameObject.CompareTag("Banana"))
         {
+            hasBanana = true;
             string message = "You got a Holy Banana!!!";
             other.gameObject.SetActive(false);
+            showPopUp(message);
+        }
+        else if (other.gameObject.CompareTag("End"))
+        {
+            string message;
+            if (hasBanana)
+            {
+                message = "Mission accomplished!";
+                // TODO Level completed...
+            }
+            else
+            {
+                message = "You need to find a Holy Banana to complete the mission!!!";
+            }
             showPopUp(message);
         }
     }

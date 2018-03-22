@@ -15,6 +15,7 @@ TagManager:
   - Medkit
   - Map
   - Banana
+  - End
   layers:
   - Default
   - TransparentFX
