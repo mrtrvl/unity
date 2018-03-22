@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: d20b0b7bf1954aa4a8902cb3c8480ed7
-timeCreated: 1520539393
+guid: 0ecc14cbb67633244a45baaee9012527
+timeCreated: 1521741842
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: diver-sprite-2569x1038_vertical_0
-    21300002: diver-sprite-2569x1038_vertical_1
-    21300004: diver-sprite-2569x1038_vertical_2
-    21300006: diver-sprite-2569x1038_vertical_3
-    21300008: diver-sprite-2569x1038_vertical_4
-    21300010: diver-sprite-2569x1038_vertical_5
-    21300012: diver-sprite-2569x1038_vertical_6
+    21300000: diver-swimming_1000x385_0
+    21300002: diver-swimming_1000x385_1
+    21300004: diver-swimming_1000x385_2
+    21300006: diver-swimming_1000x385_3
+    21300008: diver-swimming_1000x385_4
+    21300010: diver-swimming_1000x385_5
+    21300012: diver-swimming_1000x385_6
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: diver-sprite-2569x1038_vertical_0
+      name: diver-swimming_1000x385_0
       rect:
         serializedVersion: 2
-        x: 52
-        y: 6470
-        width: 2471
-        height: 696
+        x: 1
+        y: 0
+        width: 953
+        height: 385
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,13 +131,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: diver-sprite-2569x1038_vertical_1
+      name: diver-swimming_1000x385_1
       rect:
         serializedVersion: 2
-        x: 128
-        y: 5412
-        width: 2395
-        height: 628
+        x: 999
+        y: 0
+        width: 953
+        height: 385
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,13 +145,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: diver-sprite-2569x1038_vertical_2
+      name: diver-swimming_1000x385_2
       rect:
         serializedVersion: 2
-        x: 133
-        y: 4273
-        width: 2390
-        height: 760
+        x: 1999
+        y: 0
+        width: 953
+        height: 385
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,13 +159,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: diver-sprite-2569x1038_vertical_3
+      name: diver-swimming_1000x385_3
       rect:
         serializedVersion: 2
-        x: 51
-        y: 3117
-        width: 2472
-        height: 1014
+        x: 3002
+        y: 0
+        width: 953
+        height: 385
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,13 +173,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: diver-sprite-2569x1038_vertical_4
+      name: diver-swimming_1000x385_4
       rect:
         serializedVersion: 2
-        x: 9
-        y: 2127
-        width: 2514
-        height: 908
+        x: 3998
+        y: 0
+        width: 953
+        height: 385
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,13 +187,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: diver-sprite-2569x1038_vertical_5
+      name: diver-swimming_1000x385_5
       rect:
         serializedVersion: 2
-        x: 43
-        y: 1116
-        width: 2480
-        height: 913
+        x: 5003
+        y: 0
+        width: 953
+        height: 385
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,20 +201,100 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: diver-sprite-2569x1038_vertical_6
+      name: diver-swimming_1000x385_6
       rect:
         serializedVersion: 2
-        x: 2
-        y: 85
-        width: 2521
-        height: 952
+        x: 6017
+        y: 0
+        width: 935
+        height: 385
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-    outline: []
+    outline:
+    - - {x: 10.253906, y: 192.5}
+      - {x: -389.64844, y: 192.5}
+      - {x: -440.91797, y: -141.3938}
+      - {x: -440.91797, y: -192.5}
+      - {x: 75.19531, y: -192.5}
+      - {x: 488.76953, y: -83.47345}
+      - {x: 488.76953, y: 117.54424}
+      - {x: 447.7539, y: 151.61504}
+    - - {x: -868.16406, y: 107.323006}
+      - {x: -881.83594, y: 83.47345}
+      - {x: -1203.125, y: 172.05751}
+      - {x: -1363.7695, y: 172.05751}
+      - {x: -1456.0547, y: 144.80087}
+      - {x: -1459.4727, y: 124.358406}
+      - {x: -1459.4727, y: -182.27875}
+      - {x: -509.27734, y: -182.27875}
+      - {x: -509.27734, y: 56.216812}
+      - {x: -546.875, y: 86.88053}
+    - - {x: -1520.9961, y: 83.47345}
+      - {x: -1558.5938, y: 86.88053}
+      - {x: -1869.6289, y: 103.915924}
+      - {x: -1883.3008, y: 73.25221}
+      - {x: -2037.1094, y: 182.27875}
+      - {x: -2317.3828, y: 182.27875}
+      - {x: -2443.8477, y: 97.10177}
+      - {x: -2443.8477, y: 69.84513}
+      - {x: -2413.086, y: 52.809734}
+      - {x: -2443.8477, y: 15.331858}
+      - {x: -2443.8477, y: -86.88053}
+      - {x: -2392.5781, y: -172.05751}
+      - {x: -1890.1367, y: -172.05751}
+      - {x: -1664.5508, y: -127.76548}
+      - {x: -1520.9961, y: -35.774334}
+      - {x: -1510.7422, y: -25.553097}
+      - {x: -1510.7422, y: 52.809734}
+    - - {x: -3028.3203, y: 192.5}
+      - {x: -3206.0547, y: 192.5}
+      - {x: -3298.3398, y: 172.05751}
+      - {x: -3458.9844, y: 42.588493}
+      - {x: -3458.9844, y: 18.738937}
+      - {x: -3452.1484, y: 8.517699}
+      - {x: -3435.0586, y: 11.924778}
+      - {x: -3424.8047, y: 15.331858}
+      - {x: -3373.5352, y: 63.03097}
+      - {x: -3397.461, y: 42.588493}
+      - {x: -3414.5508, y: 18.738937}
+      - {x: -3421.3867, y: -8.517699}
+      - {x: -3400.879, y: -127.76548}
+      - {x: -3284.668, y: -168.65044}
+      - {x: -2949.707, y: -168.65044}
+      - {x: -2512.207, y: -83.47345}
+      - {x: -2508.789, y: -76.65929}
+      - {x: -2508.789, y: 90.287605}
+    - - {x: 1459.4727, y: 141.3938}
+      - {x: 642.5781, y: 141.3938}
+      - {x: 601.5625, y: 25.553097}
+      - {x: 587.8906, y: -63.03097}
+      - {x: 587.8906, y: -155.02213}
+      - {x: 1021.97266, y: -155.02213}
+      - {x: 1305.6641, y: -103.915924}
+      - {x: 1490.2344, y: -45.995575}
+      - {x: 1490.2344, y: 59.623894}
+    - - {x: 2286.621, y: 131.17256}
+      - {x: 1589.3555, y: 131.17256}
+      - {x: 1589.3555, y: -117.54424}
+      - {x: 2071.289, y: -117.54424}
+      - {x: 2440.4297, y: -86.88053}
+      - {x: 2488.2812, y: -39.181416}
+      - {x: 2488.2812, y: 59.623894}
+      - {x: 2440.4297, y: 90.287605}
+    - - {x: 3192.3828, y: 110.73009}
+      - {x: 2854.004, y: 155.02213}
+      - {x: 2799.3164, y: 161.83627}
+      - {x: 2655.7617, y: 161.83627}
+      - {x: 2560.0586, y: 15.331858}
+      - {x: 2560.0586, y: -110.73009}
+      - {x: 3411.1328, y: -110.73009}
+      - {x: 3489.746, y: -56.216812}
+      - {x: 3489.746, y: 59.623894}
+      - {x: 3476.0742, y: 86.88053}
     physicsShape: []
   spritePackingTag: 
   userData: 

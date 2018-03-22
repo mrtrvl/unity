@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 9f655cb904879354793c642f330d3b1c
-timeCreated: 1520767806
+timeCreated: 1521741390
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -120,12 +120,12 @@ TextureImporter:
       name: diver-NOTswimming_1000x385_0
       rect:
         serializedVersion: 2
-        x: 70
+        x: 0
         y: 0
-        width: 914
+        width: 953
         height: 385
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -134,12 +134,12 @@ TextureImporter:
       name: diver-NOTswimming_1000x385_1
       rect:
         serializedVersion: 2
-        x: 1054
+        x: 985
         y: 0
-        width: 928
+        width: 970
         height: 385
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -148,12 +148,12 @@ TextureImporter:
       name: diver-NOTswimming_1000x385_2
       rect:
         serializedVersion: 2
-        x: 2022
+        x: 1984
         y: 0
-        width: 962
+        width: 970
         height: 385
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -162,12 +162,12 @@ TextureImporter:
       name: diver-NOTswimming_1000x385_3
       rect:
         serializedVersion: 2
-        x: 3023
+        x: 2989
         y: 0
-        width: 959
+        width: 970
         height: 385
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -176,12 +176,12 @@ TextureImporter:
       name: diver-NOTswimming_1000x385_4
       rect:
         serializedVersion: 2
-        x: 4018
+        x: 3985
         y: 0
-        width: 965
+        width: 970
         height: 385
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -190,12 +190,12 @@ TextureImporter:
       name: diver-NOTswimming_1000x385_5
       rect:
         serializedVersion: 2
-        x: 5002
+        x: 4985
         y: 0
-        width: 979
+        width: 970
         height: 385
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -204,12 +204,12 @@ TextureImporter:
       name: diver-NOTswimming_1000x385_6
       rect:
         serializedVersion: 2
-        x: 6076
+        x: 6029
         y: 0
-        width: 907
+        width: 924
         height: 385
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
