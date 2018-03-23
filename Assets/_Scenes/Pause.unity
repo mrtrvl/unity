@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 18763053}
   - component: {fileID: 18763052}
   m_Layer: 5
-  m_Name: Level_03Button
+  m_Name: OptionsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302,7 +302,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Level 02
+  m_Text: 'Help
 
 '
 --- !u!222 &95783159
@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 209938707}
   - component: {fileID: 209938706}
   m_Layer: 5
-  m_Name: Level_02Button
+  m_Name: HelpButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -395,7 +395,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
           m_FloatArgument: 0
-          m_StringArgument: Level_02
+          m_StringArgument: Help
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -590,7 +590,7 @@ GameObject:
   - component: {fileID: 604851818}
   - component: {fileID: 604851817}
   m_Layer: 5
-  m_Name: Level_01Button
+  m_Name: ContinueButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -767,7 +767,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Back
+  m_Text: 'Quit
 
 '
 --- !u!222 &976629597
@@ -788,7 +788,7 @@ GameObject:
   - component: {fileID: 1220516550}
   - component: {fileID: 1220516549}
   m_Layer: 5
-  m_Name: BackButton
+  m_Name: QuitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1046,7 +1046,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Level 03
+  m_Text: 'Options
 
 '
 --- !u!222 &1679718156
@@ -1228,7 +1228,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Level 01
+  m_Text: 'Continue
 
 '
 --- !u!222 &1920545136
