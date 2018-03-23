@@ -12,6 +12,7 @@ public class Player : MonoBehaviour {
     public Text collectedItemsText;
     public Text healthText;
     public Text breathingGasText;
+    public Text buoyancyText;
 
     public float horizontalSpeed = 1f;
     public float baseDepth = 20f;
@@ -60,10 +61,6 @@ public class Player : MonoBehaviour {
     private Vector3 oldLampDirection = new Vector3(90, 0, 0);
     private Quaternion rotation;
 
-//#if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
-//    private Vector2 touchOrigin = -Vector2.one; //Used to store location of screen touch origin for mobile controls.
-//#endif
-
     private int healthIncreaseStep = 15;
     private int healthDecreaseStep = 5;
     private int breathingGasIncreaseStep = 200;
@@ -77,8 +74,6 @@ public class Player : MonoBehaviour {
 	{
         screamAudio.Stop();
 
-        showText();
-
         ridgidbody = GetComponent<Rigidbody2D>();
 
         diversLight = GameObject.Find("DiveLamp");
@@ -88,7 +83,10 @@ public class Player : MonoBehaviour {
         diversAnimation = diverSprite.GetComponent<Animator>();
 
         oldPosition = ridgidbody.transform.position;
+
         ManageBubbles();
+
+        showText();
     }
 
 	void Update ()
@@ -104,34 +102,6 @@ public class Player : MonoBehaviour {
         //Check if we are running on iOS, Android, Windows Phone 8 or Unity iPhone
 #elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
 
-
-
-        //if (Input.touchCount > 0)
-        //{
-        //    Touch myTouch = Input.touches[0];
-
-        //    if (myTouch.phase == TouchPhase.Began)
-        //    {
-        //        touchOrigin = myTouch.position;
-        //    }
-        //    else if (myTouch.phase == TouchPhase.Ended && touchOrigin.x >= 0)
-        //    {
-        //        Vector2 touchEnd = myTouch.position;
-
-        //        float x = touchEnd.x - touchOrigin.x;
-        //        float y = touchEnd.y - touchOrigin.y;
-
-        //        touchOrigin.x = -1;
-
-        //        if (Mathf.Abs(x) > Mathf.Abs(y))
-        //            horizontalMove = x > 0 ? 1.5f : -1.5f;
-        //        else
-        //            verticalMove = y > 0 ? 0.5f : -0.5f;
-        //    }
-        //}
-
-        //horizontalMove = Mathf.MoveTowards(horizontalMove, 0, 0.01f);
-        //verticalMove = Mathf.MoveTowards(verticalMove, 0, 0.01f);
         horizontalMove = CrossPlatformInputManager.GetAxis("Horizontal");
         verticalMove = CrossPlatformInputManager.GetAxis("Vertical");
 #endif
@@ -380,6 +350,9 @@ public class Player : MonoBehaviour {
             breathingGasText.color = Color.red;
         }
         breathingGasText.text = "Gas: " + Mathf.RoundToInt(breathingGasAmount).ToString();
+
+        float buoyancy = calculateBuoyancy();
+        buoyancyText.text = "B: " + buoyancy.ToString();
     }
 
     void showPopUp(string message)
