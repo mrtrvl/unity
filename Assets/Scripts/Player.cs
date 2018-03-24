@@ -70,6 +70,8 @@ public class Player : MonoBehaviour {
 
     private const float breathInterval = 10.0f;
 
+    private bool adjustedAirVolume = false;
+
     void Start () 
 	{
         screamAudio.Stop();
@@ -180,7 +182,7 @@ public class Player : MonoBehaviour {
         float pressure = depth / 10 + 1; // 1 atm per 10 m + 1 atm on surface
         float volumeUnderPressure = Mathf.Round(airVolume / pressure * 100) / 100f;
         float buoyancy = volumeUnderPressure - 3.33f;
-
+        Debug.Log(airVolume);
         return buoyancy;
     }
 
@@ -207,11 +209,17 @@ public class Player : MonoBehaviour {
             diversLight.GetComponent<Light>().range -= 0.1f;
             offTheBottom = false;
         }
+        if (!adjustedAirVolume)
+        {
+            //airVolume = (depth / 10 + 1) * 10;
+            adjustedAirVolume = true;
+        }
     }
 
     void OnCollisionExit2D(Collision2D collision)
     {
         offTheBottom = true;
+        adjustedAirVolume = false;
     }
 
     void OnTriggerEnter2D (Collider2D other)
@@ -352,7 +360,7 @@ public class Player : MonoBehaviour {
         breathingGasText.text = "Gas: " + Mathf.RoundToInt(breathingGasAmount).ToString();
 
         float buoyancy = calculateBuoyancy();
-        buoyancyText.text = "B: " + buoyancy.ToString();
+        buoyancyText.text = "B: " + airVolume.ToString();
     }
 
     void showPopUp(string message)
