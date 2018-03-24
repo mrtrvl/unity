@@ -28,9 +28,10 @@ public class GateTriggerController : MonoBehaviour {
             if (hasKey)
             {
                 //gate.GetComponent<Rigidbody2D>().constraints = Rigidbody2DConstraints.None;
-                gate.transform.position += new Vector3(0, 0, -2);
-                gate.transform.localScale -= new Vector3(0.5F, 0, 0);
-                gate.transform.Rotate(0, 0, 90);
+                //gate.transform.position += new Vector3(0, 0, -2);
+                //gate.transform.localScale -= new Vector3(0.5F, 0, 0);
+                //gate.transform.Rotate(0, 0, 90);
+                gate.SetActive(false);
             }
             else
             {
