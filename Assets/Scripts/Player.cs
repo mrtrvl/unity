@@ -45,7 +45,7 @@ public class Player : MonoBehaviour {
     private Animator diversAnimation;
 
     private float depth;
-    private float airVolume = 10f;
+    private float airVolume = 0f;
 
     private int collectedItemsCount = 0;
     private int health = 100;
@@ -181,8 +181,8 @@ public class Player : MonoBehaviour {
 
         float pressure = depth / 10 + 1; // 1 atm per 10 m + 1 atm on surface
         float volumeUnderPressure = Mathf.Round(airVolume / pressure * 100) / 100f;
-        float buoyancy = volumeUnderPressure - 3.33f;
-        Debug.Log(airVolume);
+        float buoyancy = volumeUnderPressure;
+
         return buoyancy;
     }
 
@@ -195,25 +195,27 @@ public class Player : MonoBehaviour {
             string message = "Health -" + healthDecreaseStep.ToString();
             showPopUp(message);
         }
+        if (collision.gameObject.name == "Ceiling" || collision.gameObject.name == "Bottom")
+        {
+            if (!adjustedAirVolume)
+            {
+                airVolume = (depth / 10 + 1) / 10;
+                adjustedAirVolume = true;
+            }
+
+        }
     }
 
     void OnCollisionStay2D (Collision2D collision)
     {
-        if (collision.gameObject.name == "Ceiling")
-        {
-            damage += damageFactor;
-        }
+        
 
         if(collision.gameObject.name == "Bottom" && diversLight.GetComponent<Light>().range > minimumLightRange)
         {
             diversLight.GetComponent<Light>().range -= 0.1f;
             offTheBottom = false;
         }
-        if (!adjustedAirVolume)
-        {
-            //airVolume = (depth / 10 + 1) * 10;
-            adjustedAirVolume = true;
-        }
+        
     }
 
     void OnCollisionExit2D(Collision2D collision)
@@ -360,7 +362,7 @@ public class Player : MonoBehaviour {
         breathingGasText.text = "Gas: " + Mathf.RoundToInt(breathingGasAmount).ToString();
 
         float buoyancy = calculateBuoyancy();
-        buoyancyText.text = "B: " + airVolume.ToString();
+        buoyancyText.text = "B: " + (Mathf.Round(buoyancy * 100) / 100).ToString();
     }
 
     void showPopUp(string message)
