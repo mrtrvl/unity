@@ -338,7 +338,7 @@ public class Player : MonoBehaviour {
         timeText.text = "Time: " + Time.time.ToString();
         damageText.text = "Damage: " + damage.ToString();
         depthText.text = "Depth: " + depth.ToString();
-        collectedItemsText.text = "Collected items: " + collectedItemsCount.ToString();
+        collectedItemsText.text = collectedItemsCount.ToString();
 
         if (health > 50)
         {
