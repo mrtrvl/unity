@@ -338,31 +338,31 @@ public class Player : MonoBehaviour {
         timeText.text = "Time: " + Time.time.ToString();
         damageText.text = "Damage: " + damage.ToString();
         depthText.text = "Depth: " + depth.ToString();
-        collectedItemsText.text = "Collected items: " + collectedItemsCount.ToString();
+        collectedItemsText.text = collectedItemsCount.ToString();
 
         if (health > 50)
         {
-            healthText.color = Color.green;
+            //healthText.color = Color.green;
         }
         else
         {
-            healthText.color = Color.red;
+            //healthText.color = Color.red;
         }
 
-        healthText.text = "Health: " + health.ToString();
+        healthText.text = health.ToString();
 
         if (breathingGasAmount > 100)
         {
-            breathingGasText.color = Color.green;
+            //breathingGasText.color = Color.green;
         }
         else
         {
-            breathingGasText.color = Color.red;
+            //breathingGasText.color = Color.red;
         }
-        breathingGasText.text = "Gas: " + Mathf.RoundToInt(breathingGasAmount).ToString();
+        breathingGasText.text = Mathf.RoundToInt(breathingGasAmount).ToString();
 
         float buoyancy = calculateBuoyancy();
-        buoyancyText.text = "B: " + (Mathf.Round(buoyancy * 100) / 100).ToString();
+        buoyancyText.text = (Mathf.Round(buoyancy * 100) / 100).ToString();
     }
 
     void showPopUp(string message)
