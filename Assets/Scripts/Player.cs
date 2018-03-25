@@ -362,7 +362,7 @@ public class Player : MonoBehaviour {
         breathingGasText.text = Mathf.RoundToInt(breathingGasAmount).ToString();
 
         float buoyancy = calculateBuoyancy();
-        buoyancyText.text = "B: " + (Mathf.Round(buoyancy * 100) / 100).ToString();
+        buoyancyText.text = (Mathf.Round(buoyancy * 100) / 100).ToString();
     }
 
     void showPopUp(string message)
