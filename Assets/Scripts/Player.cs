@@ -96,17 +96,17 @@ public class Player : MonoBehaviour {
 
 
         //Check if we are running either in the Unity editor or in a standalone build.
-#if UNITY_STANDALONE || UNITY_WEBPLAYER
+//#if UNITY_STANDALONE || UNITY_WEBPLAYER
 
-        horizontalMove = Input.GetAxis("Horizontal");
-        verticalMove = Input.GetAxis("Vertical");
+        //horizontalMove = Input.GetAxis("Horizontal");
+        //verticalMove = Input.GetAxis("Vertical");
 
         //Check if we are running on iOS, Android, Windows Phone 8 or Unity iPhone
-#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+//#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
 
         horizontalMove = CrossPlatformInputManager.GetAxis("Horizontal");
         verticalMove = CrossPlatformInputManager.GetAxis("Vertical");
-#endif
+//#endif
 
         float buoyancy = calculateBuoyancy();
 
