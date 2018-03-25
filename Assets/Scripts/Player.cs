@@ -342,24 +342,24 @@ public class Player : MonoBehaviour {
 
         if (health > 50)
         {
-            healthText.color = Color.green;
+            //healthText.color = Color.green;
         }
         else
         {
-            healthText.color = Color.red;
+            //healthText.color = Color.red;
         }
 
-        healthText.text = "Health: " + health.ToString();
+        healthText.text = health.ToString();
 
         if (breathingGasAmount > 100)
         {
-            breathingGasText.color = Color.green;
+            //breathingGasText.color = Color.green;
         }
         else
         {
-            breathingGasText.color = Color.red;
+            //breathingGasText.color = Color.red;
         }
-        breathingGasText.text = "Gas: " + Mathf.RoundToInt(breathingGasAmount).ToString();
+        breathingGasText.text = Mathf.RoundToInt(breathingGasAmount).ToString();
 
         float buoyancy = calculateBuoyancy();
         buoyancyText.text = "B: " + (Mathf.Round(buoyancy * 100) / 100).ToString();
