@@ -2823,7 +2823,7 @@ Transform:
   - {fileID: 368847085}
   - {fileID: 394639349}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &610708723
 Prefab:
@@ -5888,6 +5888,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 680261352}
+  - component: {fileID: 680261353}
   m_Layer: 5
   m_Name: BreathingGas
   m_TagString: Untagged
@@ -5915,6 +5916,17 @@ RectTransform:
   m_AnchoredPosition: {x: -720.729, y: 262.99066}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &680261353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 680261351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db9e0d8c34685c543827edf4242c0ff9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &682550911
 Prefab:
   m_ObjectHideFlags: 0
@@ -5975,7 +5987,7 @@ RectTransform:
   - {fileID: 2143870025}
   - {fileID: 824050049}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6068,7 +6080,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22400000, guid: 9529ecc3d479da5499993355e6c2cb4f, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22400000, guid: 9529ecc3d479da5499993355e6c2cb4f, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -6446,7 +6458,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &786079063
 GameObject:
@@ -8183,7 +8195,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1241115763
 MonoBehaviour:
@@ -9842,6 +9854,48 @@ Transform:
   m_PrefabParentObject: {fileID: 4375481011535346, guid: e3e7bd1f0aad5c64891d47ffe0766c66,
     type: 2}
   m_PrefabInternal: {fileID: 1222629397}
+--- !u!1001 &1602387506
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4879281432774016, guid: bf8ca199bef09c445ba0dff46f703da6, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 5.402277
+      objectReference: {fileID: 0}
+    - target: {fileID: 4879281432774016, guid: bf8ca199bef09c445ba0dff46f703da6, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.47186112
+      objectReference: {fileID: 0}
+    - target: {fileID: 4879281432774016, guid: bf8ca199bef09c445ba0dff46f703da6, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4879281432774016, guid: bf8ca199bef09c445ba0dff46f703da6, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4879281432774016, guid: bf8ca199bef09c445ba0dff46f703da6, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4879281432774016, guid: bf8ca199bef09c445ba0dff46f703da6, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4879281432774016, guid: bf8ca199bef09c445ba0dff46f703da6, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4879281432774016, guid: bf8ca199bef09c445ba0dff46f703da6, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: bf8ca199bef09c445ba0dff46f703da6, type: 2}
+  m_IsPrefabParent: 0
 --- !u!4 &1614054970 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4978548105204808, guid: d0d84dd8cc0acab42b8348ac0fce7d73,
@@ -9968,7 +10022,7 @@ Transform:
   - {fileID: 95584372}
   - {fileID: 1044308852}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1650699334 stripped
 Transform:
@@ -10469,7 +10523,7 @@ Transform:
   - {fileID: 1139393426}
   - {fileID: 1663704018}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1813867650
 MonoBehaviour:
@@ -10699,7 +10753,7 @@ GameObject:
   - component: {fileID: 1868443043}
   - component: {fileID: 1868443042}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BreathingGasImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10938,7 +10992,7 @@ Transform:
   m_Children:
   - {fileID: 1919187849}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1928957566
 Prefab:
@@ -13465,7 +13519,7 @@ Transform:
   - {fileID: 1305426161}
   - {fileID: 328647300}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2134115336 stripped
 Transform:

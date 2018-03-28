@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput;
+using bananaDiver.gasImageController;
 
 public class Player : MonoBehaviour {
 
@@ -53,7 +54,7 @@ public class Player : MonoBehaviour {
     private float horizontalMove;
     private float verticalMove;
 
-    private float breathingGasAmount = 300;
+    private float breathingGasAmount = 110;
 
     private Vector3 oldPosition;
     private Vector3 newPosition;
@@ -93,7 +94,7 @@ public class Player : MonoBehaviour {
 
 	void Update ()
 	{
-
+        GasIconController.amountOfGas = breathingGasAmount;
 
         //Check if we are running either in the Unity editor or in a standalone build.
 //#if UNITY_STANDALONE || UNITY_WEBPLAYER
@@ -258,6 +259,7 @@ public class Player : MonoBehaviour {
             string message = "Breathing gas +" + breathingGasIncreaseStep.ToString();
             showPopUp(message);
             other.gameObject.SetActive(false);
+            GasIconController.gotTank = true;
         }
         else if (other.gameObject.CompareTag("TNT"))
         {
