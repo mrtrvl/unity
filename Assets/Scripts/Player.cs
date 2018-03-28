@@ -4,6 +4,8 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput;
 using bananaDiver.gasImageController;
+using bananaDiver.optionsController;
+using bananaDiver.vibrationController;
 
 public class Player : MonoBehaviour {
 
@@ -73,9 +75,13 @@ public class Player : MonoBehaviour {
 
     private bool adjustedAirVolume = false;
 
+    private bool vibration;
+
     void Start () 
 	{
         screamAudio.Stop();
+
+        vibration = vibrationController.vibrationOn;
 
         ridgidbody = GetComponent<Rigidbody2D>();
 
@@ -371,7 +377,10 @@ public class Player : MonoBehaviour {
     {
 #if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
 
-                Handheld.Vibrate();
+                if (vibration)
+                {
+                    Handheld.Vibrate();
+                }
 #endif
 
         popUp.text = message;
