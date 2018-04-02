@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput;
 using bananaDiver.gasImageController;
+using bananaDiver.healthImageController;
 using bananaDiver.optionsController;
 using bananaDiver.vibrationController;
 
@@ -64,7 +65,7 @@ public class Player : MonoBehaviour {
     private Vector3 oldLampDirection = new Vector3(90, 0, 0);
     private Quaternion rotation;
 
-    private int healthIncreaseStep = 15;
+    private int healthIncreaseStep = 20;
     private int healthDecreaseStep = 5;
     private int breathingGasIncreaseStep = 200;
 
@@ -101,6 +102,7 @@ public class Player : MonoBehaviour {
 	void Update ()
 	{
         GasIconController.amountOfGas = breathingGasAmount;
+        HealthIconController.amountOfHealth = health;
 
         //Check if we are running either in the Unity editor or in a standalone build.
 //#if UNITY_STANDALONE || UNITY_WEBPLAYER
@@ -258,6 +260,7 @@ public class Player : MonoBehaviour {
             other.gameObject.SetActive(false);
             string message = "Health +" + healthIncreaseStep.ToString();
             showPopUp(message);
+            HealthIconController.gotHealth = true;
         }
         else if (other.gameObject.CompareTag("Tank"))
         {
