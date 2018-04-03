@@ -204,7 +204,6 @@ public class Player : MonoBehaviour {
             screamAudio.Play();
             string message = "Health -" + healthDecreaseStep.ToString();
             showPopUp(message);
-            Debug.Log(collision.gameObject.GetInstanceID());
         }
         if (collision.gameObject.name == "Ceiling" || collision.gameObject.name == "Bottom")
         {
@@ -276,15 +275,16 @@ public class Player : MonoBehaviour {
         else if (other.gameObject.CompareTag("TNT"))
         {
             hasExplosive = true;
-            other.transform.SetParent(pickUpsPanel.transform);
+            // other.transform.SetParent(pickUpsPanel.transform);
 
-            var pointLight = other.transform.Find("Point light");
-            pointLight.gameObject.SetActive(false);
+            // var pointLight = other.transform.Find("Point light");
+            // pointLight.gameObject.SetActive(false);
 
-            other.transform.localPosition = new Vector3(-1, 0, 0);
+            // other.transform.localPosition = new Vector3(-1, 0, 0);
             string message = "You got a TNT!";
             showPopUp(message);
             ChestController.AddToItems(other.gameObject);
+            other.gameObject.SetActive(false);
         }
         else if (other.gameObject.CompareTag("Map"))
         {
