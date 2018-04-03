@@ -7,6 +7,7 @@ using bananaDiver.gasImageController;
 using bananaDiver.healthImageController;
 using bananaDiver.optionsController;
 using bananaDiver.vibrationController;
+using bananaDiver.chestController;
 
 public class Player : MonoBehaviour {
 
@@ -203,6 +204,7 @@ public class Player : MonoBehaviour {
             screamAudio.Play();
             string message = "Health -" + healthDecreaseStep.ToString();
             showPopUp(message);
+            Debug.Log(collision.gameObject.GetInstanceID());
         }
         if (collision.gameObject.name == "Ceiling" || collision.gameObject.name == "Bottom")
         {
@@ -241,6 +243,7 @@ public class Player : MonoBehaviour {
             string message = "You got something valuable!";
             other.gameObject.SetActive(false);
             showPopUp(message);
+            ChestController.AddToItems(other.gameObject);
         }
         else if (other.gameObject.CompareTag("Key"))
         {
@@ -281,6 +284,7 @@ public class Player : MonoBehaviour {
             other.transform.localPosition = new Vector3(-1, 0, 0);
             string message = "You got a TNT!";
             showPopUp(message);
+            ChestController.AddToItems(other.gameObject);
         }
         else if (other.gameObject.CompareTag("Map"))
         {
@@ -293,6 +297,7 @@ public class Player : MonoBehaviour {
 
             string message = "You got a Map!";
             showPopUp(message);
+            ChestController.AddToItems(other.gameObject);
         }
         else if (other.gameObject.CompareTag("Banana"))
         {
