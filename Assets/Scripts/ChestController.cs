@@ -8,16 +8,14 @@ namespace bananaDiver.chestController
 {
     public class ChestController : MonoBehaviour
     {
-        // public GameObject item;
         public Sprite emptyChestImage;
         public Sprite fullChestImage;
         public Sprite circleImage;
+        public GameObject itemPrefab;
 
         private Button chestButton;
         private static Dictionary<GameObject, int> items = new Dictionary<GameObject, int>();
-        private CanvasRenderer imageCanvas;
         private GameObject itemsDisplay;
-        //private GameObject itemOnDisplay;
         private bool showItems = false;
 
         void Start()
@@ -42,21 +40,27 @@ namespace bananaDiver.chestController
                 int index = 0;
                 foreach (var item in items)
                 {
-                    if (GameObject.Find(item.Key.name) == null)
-                    {
-                        Debug.Log(item.Key.name);
-                        GameObject itemOnDisplay = Instantiate(new GameObject(item.Key.name));
-                        itemOnDisplay.transform.SetParent(itemsDisplay.transform);
-                        itemOnDisplay.transform.position = new Vector2(itemsDisplay.transform.position.x - (index * 110), itemsDisplay.transform.position.y);
-                        Image itemCircle = itemOnDisplay.AddComponent<Image>();
-                        itemCircle.sprite = circleImage;
-                    }
-                    //Debug.Log(item.Key);
-                    //Debug.Log(item.Value);
+                    createItemForDisplay (item.Key, item.Value, index);
                     index ++;
-
                 }
             }
+            else
+            {
+                foreach (Transform child in itemsDisplay.transform)
+                {
+                    GameObject.Destroy(child.gameObject);
+                }
+            }
+        }
+
+        GameObject createItemForDisplay (GameObject key, int value,  int index)
+        {
+            GameObject GO = Instantiate(itemPrefab);
+            GO.transform.parent = itemsDisplay.transform;
+            GO.transform.position = new Vector2(itemsDisplay.transform.position.x - (index * 110), itemsDisplay.transform.position.y);
+            Text itemText = GO.GetComponentInChildren<Text>();
+            itemText.text = key.name + "\n" + value.ToString();
+            return GO;
         }
 
         void updateChestImage ()
