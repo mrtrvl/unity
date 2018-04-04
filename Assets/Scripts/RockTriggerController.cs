@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using bananaDiver.chestController;
 
 public class RockTriggerController : MonoBehaviour {
 
@@ -65,6 +66,8 @@ public class RockTriggerController : MonoBehaviour {
                 messageBroadcasted = true;
                 instantiatedTNT = (GameObject)Instantiate(TNT, transform.position, transform.rotation);
                 //showPopUp("Explosion in " + explosionTimer.ToString() + " seconds...");
+                ChestController.RemoveItem("tnt");
+                player.GetComponent<Player>().hasExplosive = false;
             }
             else if(!messageBroadcasted)
             {

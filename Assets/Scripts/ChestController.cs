@@ -67,7 +67,15 @@ namespace bananaDiver.chestController
 
         void clickOnItem (string name)
         {
-            Debug.Log(name);
+            if (name == "tnt")
+            {
+                Debug.Log("Plant tnt");
+            }
+            else if (name == "map")
+            {
+                Debug.Log("Show map");
+            }
+            
         }
 
         void updateChestImage ()
@@ -93,6 +101,17 @@ namespace bananaDiver.chestController
                 }
             }
             items.Add(newItem, 1);
+        }
+
+        public static void RemoveItem (string itemToRemove)
+        {
+            foreach (var item in items.Keys.ToList())
+            {
+                if (item.name == itemToRemove)
+                {
+                    items.Remove(item);
+                }
+            }
         }
     }
 }
