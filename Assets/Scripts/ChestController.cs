@@ -60,7 +60,14 @@ namespace bananaDiver.chestController
             GO.transform.position = new Vector2(itemsDisplay.transform.position.x - (index * 110), itemsDisplay.transform.position.y);
             Text itemText = GO.GetComponentInChildren<Text>();
             itemText.text = key.name + "\n" + value.ToString();
+            Button itemButton = GO.GetComponent<Button>();
+            itemButton.onClick.AddListener(() => clickOnItem(key.name));
             return GO;
+        }
+
+        void clickOnItem (string name)
+        {
+            Debug.Log(name);
         }
 
         void updateChestImage ()
