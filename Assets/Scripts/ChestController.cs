@@ -17,6 +17,7 @@ namespace bananaDiver.chestController
         private static Dictionary<GameObject, int> items = new Dictionary<GameObject, int>();
         private GameObject itemsDisplay;
         private bool showItems = false;
+        private static bool listIsChanged = false;
 
         void Start()
         {
@@ -29,19 +30,22 @@ namespace bananaDiver.chestController
         void Update()
         {
             updateChestImage ();
+            if (listIsChanged)
+            {
+                refreshListOfItems ();
+                listIsChanged = false;
+            }
         }
 
-        void ShowHideItemsList ()
+        void refreshListOfItems ()
         {
-            showItems = !showItems;
-            itemsDisplay.SetActive(showItems);
             if (showItems)
             {
                 int index = 0;
                 foreach (var item in items)
                 {
-                    createItemForDisplay (item.Key, item.Value, index);
-                    index ++;
+                    createItemForDisplay(item.Key, item.Value, index);
+                    index++;
                 }
             }
             else
@@ -53,15 +57,26 @@ namespace bananaDiver.chestController
             }
         }
 
+        void ShowHideItemsList ()
+        {
+            showItems = !showItems;
+            itemsDisplay.SetActive(showItems);
+            refreshListOfItems();
+        }
+
         GameObject createItemForDisplay (GameObject key, int value,  int index)
         {
             GameObject GO = Instantiate(itemPrefab);
+
             GO.transform.parent = itemsDisplay.transform;
             GO.transform.position = new Vector2(itemsDisplay.transform.position.x - (index * 110), itemsDisplay.transform.position.y);
+
             Text itemText = GO.GetComponentInChildren<Text>();
             itemText.text = key.name + "\n" + value.ToString();
+
             Button itemButton = GO.GetComponent<Button>();
             itemButton.onClick.AddListener(() => clickOnItem(key.name));
+
             return GO;
         }
 
@@ -92,6 +107,7 @@ namespace bananaDiver.chestController
 
         public static void AddToItems (GameObject newItem)
         {
+            listIsChanged = true;
             foreach (var item in items.Keys.ToList())
             {
                 if (item.name == newItem.name)
@@ -105,11 +121,13 @@ namespace bananaDiver.chestController
 
         public static void RemoveItem (string itemToRemove)
         {
+            listIsChanged = true;
             foreach (var item in items.Keys.ToList())
             {
                 if (item.name == itemToRemove)
                 {
                     items.Remove(item);
+                    return;
                 }
             }
         }
