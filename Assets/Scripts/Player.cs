@@ -7,6 +7,7 @@ using bananaDiver.gasImageController;
 using bananaDiver.healthImageController;
 using bananaDiver.optionsController;
 using bananaDiver.vibrationController;
+using bananaDiver.chestController;
 
 public class Player : MonoBehaviour {
 
@@ -241,18 +242,16 @@ public class Player : MonoBehaviour {
             string message = "You got something valuable!";
             other.gameObject.SetActive(false);
             showPopUp(message);
+            ChestController.AddToItems(other.gameObject);
         }
         else if (other.gameObject.CompareTag("Key"))
         {
             hasKey = true;
-            other.transform.SetParent(pickUpsPanel.transform);
-            other.transform.localPosition = new Vector3(0, 0, 0);
-
-            var pointLight = other.transform.Find("Point light");
-            pointLight.gameObject.SetActive(false);
 
             string message = ("You got a key!");
             showPopUp(message);
+            ChestController.AddToItems(other.gameObject);
+            other.gameObject.SetActive(false);
         }
         else if (other.gameObject.CompareTag("Medkit"))
         {
@@ -273,26 +272,20 @@ public class Player : MonoBehaviour {
         else if (other.gameObject.CompareTag("TNT"))
         {
             hasExplosive = true;
-            other.transform.SetParent(pickUpsPanel.transform);
 
-            var pointLight = other.transform.Find("Point light");
-            pointLight.gameObject.SetActive(false);
-
-            other.transform.localPosition = new Vector3(-1, 0, 0);
             string message = "You got a TNT!";
             showPopUp(message);
+            ChestController.AddToItems(other.gameObject);
+            other.gameObject.SetActive(false);
         }
         else if (other.gameObject.CompareTag("Map"))
         {
             hasMap = true;
-            other.transform.SetParent(pickUpsPanel.transform);
-            other.transform.localPosition = new Vector3(-2, 0, 0);
-
-            var pointLight = other.transform.Find("Point light");
-            pointLight.gameObject.SetActive(false); 
 
             string message = "You got a Map!";
             showPopUp(message);
+            ChestController.AddToItems(other.gameObject);
+            other.gameObject.SetActive(false);
         }
         else if (other.gameObject.CompareTag("Banana"))
         {
