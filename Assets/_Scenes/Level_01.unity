@@ -2137,6 +2137,7 @@ MonoBehaviour:
   emptyChestImage: {fileID: 21300000, guid: 774e4f97e61c5644097e122125221899, type: 3}
   fullChestImage: {fileID: 21300000, guid: 7b521a78c87bd214598e1d7cd4e8dd89, type: 3}
   circleImage: {fileID: 21300000, guid: dee890de8abedd640996cab3d13f828b, type: 3}
+  yellowChestImage: {fileID: 0}
   itemPrefab: {fileID: 1213536659770212, guid: c8cd415a7599bda439f8700597a91342, type: 2}
 --- !u!114 &462075410
 MonoBehaviour:

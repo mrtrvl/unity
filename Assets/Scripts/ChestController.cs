@@ -11,6 +11,7 @@ namespace bananaDiver.chestController
         public Sprite emptyChestImage;
         public Sprite fullChestImage;
         public Sprite circleImage;
+        public Sprite yellowChestImage;
         public GameObject itemPrefab;
 
         private Button chestButton;
@@ -18,6 +19,11 @@ namespace bananaDiver.chestController
         private GameObject itemsDisplay;
         private bool showItems = false;
         private static bool listIsChanged = false;
+        private bool changeColor = false;
+        private bool colorChanged = true;
+
+        private Color yellow = new Color(1, 1, 0);
+        private Color white = new Color(1, 1, 1);
 
         void Start()
         {
@@ -30,30 +36,60 @@ namespace bananaDiver.chestController
         void Update()
         {
             updateChestImage ();
+            chestColor ();
             if (listIsChanged)
             {
+                changeColor = true;
                 refreshListOfItems ();
                 listIsChanged = false;
             }
+        }
+
+        void chestColor ()
+        {
+            if (changeColor)
+            {
+                chestButton.image.color = yellow;
+                changeColor = false;
+            }
+
+            if (chestButton.image.color != white)
+            {
+                chestButton.image.color = chestButton.image.color + new Color(0, 0, 0.01f);
+            }
+
+
+
         }
 
         void refreshListOfItems ()
         {
             if (showItems)
             {
-                int index = 0;
-                foreach (var item in items)
-                {
-                    createItemForDisplay(item.Key, item.Value, index);
-                    index++;
-                }
+                removeAllItemsFromItemsDisplay();
+                createItemsDisplay ();
             }
             else
             {
-                foreach (Transform child in itemsDisplay.transform)
-                {
-                    GameObject.Destroy(child.gameObject);
-                }
+                removeAllItemsFromItemsDisplay();
+            }
+        }
+
+        void createItemsDisplay ()
+        {
+            int index = 0;
+            foreach (var item in items)
+            {
+                createItemForDisplay(item.Key, item.Value, index);
+                index++;
+            }
+        }
+
+        void removeAllItemsFromItemsDisplay ()
+        {
+            foreach (Transform child in itemsDisplay.transform)
+            {
+                GameObject.Destroy(child.gameObject);
             }
         }
 
@@ -107,26 +143,31 @@ namespace bananaDiver.chestController
 
         public static void AddToItems (GameObject newItem)
         {
-            listIsChanged = true;
             foreach (var item in items.Keys.ToList())
             {
                 if (item.name == newItem.name)
                 {
                     items[item] += 1;
+                    listIsChanged = true;
                     return;
                 }
             }
             items.Add(newItem, 1);
+            listIsChanged = true;
         }
 
         public static void RemoveItem (string itemToRemove)
         {
-            listIsChanged = true;
             foreach (var item in items.Keys.ToList())
             {
                 if (item.name == itemToRemove)
                 {
-                    items.Remove(item);
+                    items[item] -= 1;
+                    if (items[item] <= 0)
+                    {
+                        items.Remove(item);
+                    }
+                    listIsChanged = true;
                     return;
                 }
             }
