@@ -64,7 +64,7 @@ namespace bananaDiver.chestController
 
         void refreshListOfItems ()
         {
-            if (showItems)
+            if (showItems && items.Count > 0)
             {
                 removeAllItemsFromItemsDisplay();
                 createItemsDisplay ();
@@ -143,13 +143,16 @@ namespace bananaDiver.chestController
 
         public static void AddToItems (GameObject newItem)
         {
-            foreach (var item in items.Keys.ToList())
+            if (items.Count > 0)
             {
-                if (item.name == newItem.name)
+                foreach (var item in items.Keys.ToList())
                 {
-                    items[item] += 1;
-                    listIsChanged = true;
-                    return;
+                    if (item.name == newItem.name)
+                    {
+                        items[item] += 1;
+                        listIsChanged = true;
+                        return;
+                    }
                 }
             }
             items.Add(newItem, 1);

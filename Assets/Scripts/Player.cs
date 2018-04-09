@@ -47,6 +47,7 @@ public class Player : MonoBehaviour {
     private bool offTheBottom = true;
 
     private GameObject diverSprite;
+    private GameObject death;
     private Animator diversAnimation;
 
     private float depth;
@@ -58,7 +59,7 @@ public class Player : MonoBehaviour {
     private float horizontalMove;
     private float verticalMove;
 
-    private float breathingGasAmount = 110;
+    private float breathingGasAmount = 20;
 
     private Vector3 oldPosition;
     private Vector3 newPosition;
@@ -81,11 +82,17 @@ public class Player : MonoBehaviour {
 
     void Start () 
 	{
+        Time.timeScale = 1;
+
         screamAudio.Stop();
 
         vibration = vibrationController.vibrationOn;
 
         ridgidbody = GetComponent<Rigidbody2D>();
+
+        death = GameObject.Find("Death");
+
+        death.SetActive(false);
 
         diversLight = GameObject.Find("DiveLamp");
         diversLight.GetComponent<Light>().range = defaultLightRange;
@@ -144,6 +151,22 @@ public class Player : MonoBehaviour {
         ManageBubbles();
 
         manageAnimation();
+
+        checkIfStillAlive();
+    }
+
+    void checkIfStillAlive ()
+    {
+        if (breathingGasAmount <= 0 || health <= 0)
+        {
+            dead();
+        }
+    }
+
+    void dead ()
+    {
+        death.SetActive(true);
+        Time.timeScale = 0;
     }
 
     void ManageBubbles()
