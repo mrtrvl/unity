@@ -65,6 +65,7 @@ public class RockTriggerController : MonoBehaviour {
                 explosionOccured = true;
                 messageBroadcasted = true;
                 instantiatedTNT = (GameObject)Instantiate(TNT, transform.position, transform.rotation);
+                instantiatedTNT.tag = "Untagged";
                 //showPopUp("Explosion in " + explosionTimer.ToString() + " seconds...");
                 ChestController.RemoveItem("tnt");
                 player.GetComponent<Player>().hasExplosive = false;
@@ -91,7 +92,6 @@ public class RockTriggerController : MonoBehaviour {
     void Explode()
     {
         Instantiate(shatteredRock, transform.position, transform.rotation);
-        //rb.AddForce(transform.up * 2000); // Ei tööta hetkel... Peab ehk igale childile eraldi jõudu avaldama?
         Destroy(wholeVersion.gameObject);
         Destroy(instantiatedTNT);
     }
