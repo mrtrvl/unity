@@ -8,6 +8,7 @@ using bananaDiver.healthImageController;
 using bananaDiver.optionsController;
 using bananaDiver.vibrationController;
 using bananaDiver.chestController;
+using bananaDiver.JellyfishController;
 
 public class Player : MonoBehaviour {
 
@@ -73,6 +74,8 @@ public class Player : MonoBehaviour {
 
     private float timeToNextBreath = 0;
     private GameObject bubblesObject;
+
+    private GameObject jelly;
 
     private const float breathInterval = 10.0f;
 
@@ -223,10 +226,17 @@ public class Player : MonoBehaviour {
     {
         if (collision.gameObject.CompareTag("Jellyfish"))
         {
-            health -= healthDecreaseStep;
-            screamAudio.Play();
-            string message = "Health -" + healthDecreaseStep.ToString();
-            showPopUp(message);
+            jelly = collision.gameObject;
+            if (jelly.GetComponent<JellyfishController>().isDangerous)
+            {
+                health -= healthDecreaseStep;
+                screamAudio.Play();
+                string message = "Health -" + healthDecreaseStep.ToString();
+                showPopUp(message);
+
+                jelly.GetComponent<JellyfishController>().cannotHurtForAWhile();
+            }
+            
         }
         if (collision.gameObject.name == "Ceiling" || collision.gameObject.name == "Bottom")
         {
