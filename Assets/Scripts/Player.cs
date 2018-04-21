@@ -13,7 +13,7 @@ using bananaDiver.JellyfishController;
 public class Player : MonoBehaviour {
 
     public Text timeText;
-    public Text damageText;
+    // public Text damageText;
     public Text depthText;
     public Text collectedItemsText;
     public Text healthText;
@@ -40,8 +40,8 @@ public class Player : MonoBehaviour {
 
     public string nextLevel;
 
-    private float damage = 0f;
-    private float damageFactor = 0.01f;
+    //private float damage = 0f;
+    //private float damageFactor = 0.01f;
     private Rigidbody2D ridgidbody;
 
     private GameObject diversLight;
@@ -116,17 +116,18 @@ public class Player : MonoBehaviour {
         HealthIconController.amountOfHealth = health;
 
         //Check if we are running either in the Unity editor or in a standalone build.
-//#if UNITY_STANDALONE || UNITY_WEBPLAYER
+#if UNITY_STANDALONE || UNITY_WEBPLAYER
 
-        //horizontalMove = Input.GetAxis("Horizontal");
-        //verticalMove = Input.GetAxis("Vertical");
+        horizontalMove = Input.GetAxis("Horizontal");
+        verticalMove = Input.GetAxis("Vertical");
 
         //Check if we are running on iOS, Android, Windows Phone 8 or Unity iPhone
-//#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
 
         horizontalMove = CrossPlatformInputManager.GetAxis("Horizontal");
         verticalMove = CrossPlatformInputManager.GetAxis("Vertical");
-//#endif
+        //Debug.Log(horizontalMove);
+#endif
 
         float buoyancy = calculateBuoyancy();
 
@@ -373,7 +374,7 @@ public class Player : MonoBehaviour {
     void showText ()
     {
         timeText.text = "Time: " + Time.time.ToString();
-        damageText.text = "Damage: " + damage.ToString();
+        //damageText.text = "Damage: " + damage.ToString();
         depthText.text = "Depth: " + depth.ToString();
         collectedItemsText.text = collectedItemsCount.ToString();
 

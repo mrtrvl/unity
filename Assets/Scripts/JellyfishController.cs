@@ -18,6 +18,8 @@ namespace bananaDiver.JellyfishController
         private Vector3 oldPosition;
         private Vector3 newPosition;
         private Vector3 oldJellyfishDirection = new Vector3(0, 0, 0);
+        private Color jellyDefaultColor;
+        private SpriteRenderer jellySpriteRenderer;
         public bool isDangerous = true;
 
         void Start()
@@ -25,6 +27,8 @@ namespace bananaDiver.JellyfishController
             oldPosition = transform.position;
             SetFinalDestination();
             timeToNotHurt = timeToNotHurtdefault;
+            jellySpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+            jellyDefaultColor = jellySpriteRenderer.color;
         }
 
         void Update()
@@ -141,12 +145,14 @@ namespace bananaDiver.JellyfishController
             {
                 isDangerous = true;
                 timeToNotHurt = timeToNotHurtdefault;
+                jellySpriteRenderer.color = jellyDefaultColor;
             }
         }
         
         public void cannotHurtForAWhile ()
         {
             isDangerous = false;
+            jellySpriteRenderer.color = new Color(1, .6f, .2f);
         }
     }
 }

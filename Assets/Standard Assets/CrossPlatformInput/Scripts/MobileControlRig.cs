@@ -9,7 +9,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 {
     [ExecuteInEditMode]
     public class MobileControlRig : MonoBehaviour
-#if UNITY_EDITOR
+#if UNITY_STANDALONE || UNITY_WEBPLAYER
         , UnityEditor.Build.IActiveBuildTargetChanged
 #endif
     {
@@ -20,8 +20,8 @@ namespace UnityStandardAssets.CrossPlatformInput
         // the Cross Platform Input package.
 
 
-#if !UNITY_EDITOR
-	void OnEnable()
+#if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+        void OnEnable()
 	{
 		CheckEnableControlRig();
 	}
@@ -37,7 +37,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 
         private void Start()
         {
-#if UNITY_EDITOR
+#if UNITY_STANDALONE || UNITY_WEBPLAYER
             if (Application.isPlaying) //if in the editor, need to check if we are playing, as start is also called just after exiting play
 #endif
             {
@@ -53,7 +53,7 @@ namespace UnityStandardAssets.CrossPlatformInput
             }
         }
 
-#if UNITY_EDITOR
+#if UNITY_STANDALONE || UNITY_WEBPLAYER
 
         private void OnEnable()
         {
@@ -76,8 +76,8 @@ namespace UnityStandardAssets.CrossPlatformInput
 
         private void CheckEnableControlRig()
         {
-#if MOBILE_INPUT
-		EnableControlRig(true);
+#if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+            EnableControlRig(true);
 #else
             EnableControlRig(false);
 #endif
@@ -92,7 +92,7 @@ namespace UnityStandardAssets.CrossPlatformInput
             }
         }
 
-#if UNITY_EDITOR
+#if UNITY_STANDALONE || UNITY_WEBPLAYER
         public void OnActiveBuildTargetChanged(BuildTarget previousTarget, BuildTarget newTarget)
         {
             CheckEnableControlRig();

@@ -28,7 +28,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 		void OnEnable()
 		{
 			CreateVirtualAxes();
-		}
+        }
 
         void Start()
         {
@@ -37,7 +37,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 
 		void UpdateVirtualAxes(Vector3 value)
 		{
-			var delta = m_StartPos - value;
+            var delta = m_StartPos - value;
 			delta.y = -delta.y;
 			delta /= MovementRange;
 			if (m_UseX)
@@ -49,7 +49,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 			{
 				m_VerticalVirtualAxis.Update(delta.y);
 			}
-		}
+        }
 
 		void CreateVirtualAxes()
 		{
@@ -104,8 +104,8 @@ namespace UnityStandardAssets.CrossPlatformInput
 
 		void OnDisable()
 		{
-			// remove the joysticks from the cross platform input
-			if (m_UseX)
+            // remove the joysticks from the cross platform input
+            if (m_UseX)
 			{
 				m_HorizontalVirtualAxis.Remove();
 			}
