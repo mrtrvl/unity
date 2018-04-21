@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using bananaDiver.mapController;
 
 namespace bananaDiver.chestController
 {
@@ -11,7 +12,7 @@ namespace bananaDiver.chestController
         public Sprite emptyChestImage;
         public Sprite fullChestImage;
         public Sprite circleImage;
-        public Sprite yellowChestImage;
+        //public Sprite yellowChestImage;
         public GameObject itemPrefab;
 
         private Button chestButton;
@@ -20,7 +21,6 @@ namespace bananaDiver.chestController
         private bool showItems = false;
         private static bool listIsChanged = false;
         private bool changeColor = false;
-        private bool colorChanged = true;
 
         private Color yellow = new Color(1, 1, 0);
         private Color white = new Color(1, 1, 1);
@@ -124,7 +124,9 @@ namespace bananaDiver.chestController
             }
             else if (name == "map")
             {
+                MapController.showMap();
                 Debug.Log("Show map");
+                RemoveItem("map");
             }
             
         }
@@ -187,6 +189,18 @@ namespace bananaDiver.chestController
             }
 
             return false;
+        }
+
+        public static int itemCount (string itemToCount)
+        {
+            foreach (var item in items)
+            {
+                if (item.Key.name == itemToCount)
+                {
+                    return item.Value;
+                }
+            }
+            return 0;
         }
     }
 }

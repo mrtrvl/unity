@@ -16,6 +16,7 @@ TagManager:
   - Map
   - Banana
   - End
+  - PickUp
   layers:
   - Default
   - TransparentFX

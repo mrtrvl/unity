@@ -20,6 +20,8 @@ public class Player : MonoBehaviour {
     public Text breathingGasText;
     public Text buoyancyText;
 
+    public int score;
+
     public float horizontalSpeed = 1f;
     public float baseDepth = 20f;
     public float defaultLightRange = 12f;
@@ -39,6 +41,8 @@ public class Player : MonoBehaviour {
     public TextMesh popUp;
 
     public string nextLevel;
+
+    public int pickUpsCount;
 
     //private float damage = 0f;
     //private float damageFactor = 0.01f;
@@ -108,6 +112,8 @@ public class Player : MonoBehaviour {
         ManageBubbles();
 
         showText();
+
+        pickUpsCount = calculatePickUpCount();
     }
 
 	void Update ()
@@ -157,6 +163,8 @@ public class Player : MonoBehaviour {
         manageAnimation();
 
         checkIfStillAlive();
+
+        calulateScore();
     }
 
     void checkIfStillAlive ()
@@ -319,7 +327,8 @@ public class Player : MonoBehaviour {
             string message = "You got a Map!";
             showPopUp(message);
             ChestController.AddToItems(other.gameObject);
-            other.gameObject.SetActive(false);
+            //other.gameObject.SetActive(false);
+            other.gameObject.transform.position = new Vector3(100, 100, 100);
         }
         else if (other.gameObject.CompareTag("Banana"))
         {
@@ -425,5 +434,22 @@ public class Player : MonoBehaviour {
     public void LoadScene(string level)
     {
         SceneManager.LoadScene(level);
+    }
+
+    private void calulateScore ()
+    {
+        int coins = ChestController.itemCount("Coin");
+        int diamonds = ChestController.itemCount("diamond");
+        int percentOfPickedPickUps = (int)((coins + diamonds) * 100 / pickUpsCount);
+
+        score = (int)(breathingGasAmount + health) + percentOfPickedPickUps;
+    }
+
+    private int calculatePickUpCount()
+    {
+        int coinsCount = GameObject.FindGameObjectsWithTag("Coin").Length;
+        int diamondsCount = GameObject.FindGameObjectsWithTag("Diamond").Length;
+
+        return coinsCount + diamondsCount;
     }
 }
