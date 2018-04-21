@@ -535,8 +535,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 578.8, y: -9}
-  m_SizeDelta: {x: 431.8, y: 35.8}
+  m_AnchoredPosition: {x: 641.8, y: -9}
+  m_SizeDelta: {x: 494.8, y: 35.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &378557987
 MonoBehaviour:
@@ -570,7 +570,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Find a hidden tresure and survive
+  m_Text: Find Jack Sparrow's compass and survive
 --- !u!222 &378557988
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -916,7 +916,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Find a holy banana and GTFO
+  m_Text: Trainig level
 --- !u!222 &1629117575
 CanvasRenderer:
   m_ObjectHideFlags: 0

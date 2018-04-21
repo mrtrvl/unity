@@ -6,18 +6,18 @@ using bananaDiver.chestController;
 public class RockTriggerController : MonoBehaviour {
 
     public GameObject rock;
-    public GameObject player;
+    //public GameObject player;
     public GameObject shatteredRock;
     public GameObject wholeVersion;
     public GameObject TNT;
 
     //private GameObject shatteredRock;
     private Rigidbody2D rb;
-    private bool explosionOccured = false;
-    private bool messageBroadcasted = false;
-    private float explosionTimer = 5f;
-    private bool explosivePlanted = false;
-    private int lastTimer = 0;
+    private bool explosionOccured;
+    private bool messageBroadcasted;
+    private float explosionTimer;
+    private bool explosivePlanted;
+    private int lastTimer;
     private GameObject instantiatedTNT;
 
     public TextMesh popUp;
@@ -28,47 +28,61 @@ public class RockTriggerController : MonoBehaviour {
     {
         //shatteredRock = shatteredVersion.gameObject;
         //rb = GetComponent<Rigidbody2D>();
+        setParameters();
     }
 
     void Update()
     {
-        hasExplosive = player.GetComponent<Player>().hasExplosive;
+        //hasExplosive = player.GetComponent<Player>().hasExplosive;
 
         if (explosivePlanted)
         {
             if (explosionTimer > 0)
             {
                 explosionTimer -= Time.deltaTime;
+                int seconds = System.Convert.ToInt32(explosionTimer % 60);
 
-                if (lastTimer != Mathf.RoundToInt(explosionTimer))
+                if (lastTimer != seconds)
                 {
                     showPopUp(Mathf.RoundToInt(explosionTimer).ToString());
-                    lastTimer = Mathf.RoundToInt(explosionTimer);
+                    lastTimer = seconds;
                 }
             }
             else if (explosionTimer <= 0)
             {
-                explosivePlanted = false;
+                setParameters();
                 Explode();
             }
         }
+
+        
     }
+
+    void setParameters ()
+    {
+        explosionOccured = false;
+        messageBroadcasted = false;
+        explosionTimer = 7f;
+        explosivePlanted = false;
+        lastTimer = (int)explosionTimer;
+}
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            hasExplosive = ChestController.DoesHaveItem("tnt");
+
             if (hasExplosive && !explosionOccured)
             {
                 //Explode();
                 explosivePlanted = true;
                 explosionOccured = true;
                 messageBroadcasted = true;
-                instantiatedTNT = (GameObject)Instantiate(TNT, transform.position, transform.rotation);
+                instantiatedTNT = (GameObject)Instantiate(TNT, new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z), transform.rotation);
                 instantiatedTNT.tag = "Untagged";
                 //showPopUp("Explosion in " + explosionTimer.ToString() + " seconds...");
                 ChestController.RemoveItem("tnt");
-                player.GetComponent<Player>().hasExplosive = false;
             }
             else if(!messageBroadcasted)
             {
@@ -86,7 +100,7 @@ public class RockTriggerController : MonoBehaviour {
             Handheld.Vibrate();
         #endif
         popUp.text = message;
-        Instantiate(popUp, transform.position, transform.rotation);
+        Instantiate(popUp, new Vector3(transform.position.x + 1.5f, transform.position.y, -1), transform.rotation);
     }
 
     void Explode()

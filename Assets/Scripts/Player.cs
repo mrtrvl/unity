@@ -32,7 +32,7 @@ public class Player : MonoBehaviour {
 
     public bool hasKey = false;
     public bool hasMap = false;
-    public bool hasExplosive = false;
+    //public bool hasExplosive = false;
     public bool hasBanana = false;
 
     public TextMesh popUp;
@@ -294,7 +294,7 @@ public class Player : MonoBehaviour {
         }
         else if (other.gameObject.CompareTag("TNT"))
         {
-            hasExplosive = true;
+            //hasExplosive = true;
 
             string message = "You got a TNT!";
             showPopUp(message);

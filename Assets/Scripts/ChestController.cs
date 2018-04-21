@@ -175,5 +175,18 @@ namespace bananaDiver.chestController
                 }
             }
         }
+
+        public static bool DoesHaveItem (string itemToCheck)
+        {
+            foreach (var item in items.Keys.ToList())
+            {
+                if (item.name == itemToCheck)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
