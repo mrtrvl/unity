@@ -8,12 +8,10 @@ namespace bananaDiver.mapController
     {
 
         public Texture2D MapImage;
-        public GameObject player;
 
         private static bool shown = false;
         private static bool isAppearing = false;
         private float timer = 2f;
-        private static bool hasMap;
 
         void Start()
         {
@@ -21,8 +19,6 @@ namespace bananaDiver.mapController
 
         void Update()
         {
-            hasMap = player.GetComponent<Player>().hasMap;
-
             if (isAppearing)
             {
                 timer -= Time.deltaTime;
