@@ -59,7 +59,7 @@ public class Player : MonoBehaviour {
     private float airVolume = 0f;
 
     private int collectedItemsCount = 0;
-    private int health = 100;
+    public int health = 100;
 
     private float horizontalMove;
     private float verticalMove;
