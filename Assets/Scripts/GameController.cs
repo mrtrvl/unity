@@ -10,7 +10,6 @@ public class GameController : MonoBehaviour
     public float health;
     public float breathingGas;
     private const string playerDataFileName = "/playerData.dat";
-    private Player player;
 
     void Awake()
     {
@@ -23,16 +22,6 @@ public class GameController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    private void Start()
-    {
-        player = FindObjectOfType(typeof(Player));
-    }
-
-    private void Update()
-    {
-        Debug.Log(player.health);
     }
 
     public void Save()
