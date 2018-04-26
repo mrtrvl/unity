@@ -20,6 +20,7 @@ public class Player : MonoBehaviour {
     public Text breathingGasText;
     public Text buoyancyText;
 
+    private AudioManager audioManager;
     public int score;
 
     public float horizontalSpeed = 1f;
@@ -27,8 +28,6 @@ public class Player : MonoBehaviour {
     public float defaultLightRange = 12f;
     public float minimumLightRange = 7f;
     public float buoyancyFactor = 0.01f;
-
-    public AudioSource screamAudio;
 
     public GameObject pickUpsPanel;
     public GameObject bubbles;
@@ -64,7 +63,7 @@ public class Player : MonoBehaviour {
     private float horizontalMove;
     private float verticalMove;
 
-    private float breathingGasAmount = 20;
+    public float breathingGasAmount = 20;
 
     private Vector3 oldPosition;
     private Vector3 newPosition;
@@ -87,11 +86,14 @@ public class Player : MonoBehaviour {
 
     private bool vibration;
 
+    private void Awake()
+    {
+        audioManager = AudioManager.audioManager;
+    }
+
     void Start () 
 	{
         Time.timeScale = 1;
-
-        screamAudio.Stop();
 
         vibration = vibrationController.vibrationOn;
 
@@ -171,6 +173,7 @@ public class Player : MonoBehaviour {
     {
         if (breathingGasAmount <= 0 || health <= 0)
         {
+            audioManager.StopSound("Game Theme");
             dead();
         }
     }
@@ -189,6 +192,7 @@ public class Player : MonoBehaviour {
             {
                 Destroy(bubblesObject);
             }
+            audioManager.PlaySound("BreathingWithBubbles");
             timeToNextBreath = Time.time + breathInterval;
             bubblesObject = Instantiate(bubbles, gameObject.transform);
         }
@@ -239,7 +243,7 @@ public class Player : MonoBehaviour {
             if (jelly.GetComponent<JellyfishController>().isDangerous)
             {
                 health -= healthDecreaseStep;
-                screamAudio.Play();
+                audioManager.PlaySound("Scream");
                 string message = "Health -" + healthDecreaseStep.ToString();
                 showPopUp(message);
 
@@ -280,6 +284,7 @@ public class Player : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Coin") || other.gameObject.CompareTag("Emerald") || other.gameObject.CompareTag("Diamond"))
         {
+            audioManager.PlaySound("Other");
             collectedItemsCount += 1;
             string message = "You got something valuable!";
             other.gameObject.SetActive(false);
@@ -289,7 +294,7 @@ public class Player : MonoBehaviour {
         else if (other.gameObject.CompareTag("Key"))
         {
             hasKey = true;
-
+            audioManager.PlaySound("Key");
             string message = ("You got a key!");
             showPopUp(message);
             ChestController.AddToItems(other.gameObject);
@@ -297,6 +302,7 @@ public class Player : MonoBehaviour {
         }
         else if (other.gameObject.CompareTag("Medkit"))
         {
+            audioManager.PlaySound("Other");
             health += healthIncreaseStep;
             other.gameObject.SetActive(false);
             string message = "Health +" + healthIncreaseStep.ToString();
@@ -305,6 +311,7 @@ public class Player : MonoBehaviour {
         }
         else if (other.gameObject.CompareTag("Tank"))
         {
+            audioManager.PlaySound("Gas");
             breathingGasAmount += breathingGasIncreaseStep;
             string message = "Breathing gas +" + breathingGasIncreaseStep.ToString();
             showPopUp(message);
@@ -314,7 +321,7 @@ public class Player : MonoBehaviour {
         else if (other.gameObject.CompareTag("TNT"))
         {
             //hasExplosive = true;
-
+            audioManager.PlaySound("Other");
             string message = "You got a TNT!";
             showPopUp(message);
             ChestController.AddToItems(other.gameObject);
@@ -323,11 +330,11 @@ public class Player : MonoBehaviour {
         else if (other.gameObject.CompareTag("Map"))
         {
             hasMap = true;
-
+            audioManager.PlaySound("Map");
             string message = "You got a Map!";
             showPopUp(message);
             ChestController.AddToItems(other.gameObject);
-            //other.gameObject.SetActive(false);
+            other.gameObject.SetActive(false);
             other.gameObject.transform.position = new Vector3(100, 100, 100);
         }
         else if (other.gameObject.CompareTag("Banana"))

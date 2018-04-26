@@ -5,8 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class LoadOnClick : MonoBehaviour {
 
-	public void LoadScene(string level)
+    private AudioManager audioManager;
+
+    private void Awake()
     {
+        audioManager = AudioManager.audioManager;
+    }
+
+    public void LoadScene(string level)
+    {
+        if (audioManager == null)
+            audioManager = AudioManager.audioManager;
+        audioManager.PlaySound("Button Click");
         SceneManager.LoadScene(level);
     }
 }
