@@ -191,6 +191,7 @@ namespace bananaDiver.chestController
             return false;
         }
 
+        // TODO - Causes bug as in scene loading reference is destroyed
         public static int itemCount (string itemToCount)
         {
             foreach (var item in items)
