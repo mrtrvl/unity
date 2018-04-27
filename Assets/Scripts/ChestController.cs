@@ -133,11 +133,11 @@ namespace bananaDiver.chestController
 
         void updateChestImage ()
         {
-            if (items.Count > 0)
+            if (items.Count > 0 && !showItems)
             {
                 chestButton.image.sprite = fullChestImage;
             }
-            else
+            else if (items.Count < 1 || showItems)
             {
                 chestButton.image.sprite = emptyChestImage;
             }
