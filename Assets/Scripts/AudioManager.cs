@@ -75,16 +75,6 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    //private void Start()
-    //{
-    //    foreach (var sound in sounds)
-    //    {
-    //        GameObject gameObj = new GameObject("Sound: " + sound.clipName);
-    //        gameObj.transform.SetParent(this.transform);
-    //        sound.SetSource(gameObj.AddComponent<AudioSource>());
-    //    }
-    //}
-
     private void CreateSoundObjects()
     {
         foreach (var sound in sounds)
@@ -135,6 +125,12 @@ public class AudioManager : MonoBehaviour
         soundClips.TryGetValue(clipName, out continueableSound);
         if (continueableSound != null)
             continueableSound.UnPause();
+    }
+
+    public void StopAllAudio()
+    {
+        foreach (var sound in sounds)
+            sound.Stop();
     }
 }
 

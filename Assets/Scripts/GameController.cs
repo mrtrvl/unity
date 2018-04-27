@@ -30,7 +30,6 @@ public class GameController : MonoBehaviour
     /// <param name="pausedGameStatus">Paused game status.</param>
     public void SavePausedLevelGameStatus(PausedGamedStatus pausedGameStatus)
     {
-        print(pausedGameStatus.BreathingGas);
         var binaryFormatter = new BinaryFormatter();
         var file = File.Create(Application.persistentDataPath + playerDataFileName);
 
@@ -68,20 +67,3 @@ public class GameController : MonoBehaviour
         return null;
     }
 }
-
-#region Serializable classes
-
-[Serializable]
-class PlayerData
-{
-    public int Health { get; set; }
-    public float BreathingGas { get; set; }
-    public float PositionX { get; set; }
-    public float PositionY { get; set; }
-    public float PositionZ { get; set; }
-    public float ScaleX { get; set; }
-    public float ScaleY { get; set; }
-    public float ScaleZ { get; set; }
-}
-
-#endregion

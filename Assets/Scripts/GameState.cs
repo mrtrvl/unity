@@ -1,7 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Collections.Generic;
 using System;
+using bananaDiver.JellyfishController;
 
 public class GameState : MonoBehaviour
 {
@@ -66,6 +68,7 @@ public class GameState : MonoBehaviour
     /// <param name="mode">Load scene object.</param>
     private void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
     {
+        print(string.Format("Scene loaded {0}", scene.name));
         if (audioManager == null)
             audioManager = AudioManager.audioManager;
         switch (scene.name)
@@ -74,18 +77,18 @@ public class GameState : MonoBehaviour
                 if (previousScene == pause)
                     SetGameStateAfterPause();
                 audioManager.PlaySoundLoop("Game Theme");
-                previousScene = SceneManager.GetActiveScene().name;
+                previousScene = scene.name;
                 if (previousScene != mainMenu)
                     audioManager.StopSound(mainMenu);
                 break;
             case pause:
+                audioManager.StopAllAudio();
                 audioManager.PlaySoundLoop(mainMenu);
-                audioManager.StopSound("Game Theme");
-                previousScene = SceneManager.GetActiveScene().name;
+                previousScene = scene.name;
                 break;
             case mainMenu:
                 audioManager.PlaySoundLoop(mainMenu);
-                previousScene = SceneManager.GetActiveScene().name;
+                previousScene = scene.name;
                 break;
             default:
                 break;
@@ -104,12 +107,12 @@ public class GameState : MonoBehaviour
             var diveLampGameObject = GetGameObject("DiveLamp");
             if (playerGameObject != null && lastGameStatus != null && diveLampGameObject != null)
             {
-                playerGameObject.transform.position = new Vector3(lastGameStatus.PositionX, lastGameStatus.PositionY, 
+                playerGameObject.transform.position = new Vector3(lastGameStatus.PositionX, lastGameStatus.PositionY,
                                                                   lastGameStatus.PositionZ);
                 var playerComponent = playerGameObject.GetComponent<Player>();
                 playerComponent.health = lastGameStatus.Health;
                 playerComponent.breathingGasAmount = lastGameStatus.BreathingGas;
-                playerComponent.transform.localScale = new Vector3(lastGameStatus.ScaleX, lastGameStatus.ScaleY, 
+                playerComponent.transform.localScale = new Vector3(lastGameStatus.ScaleX, lastGameStatus.ScaleY,
                                                                    lastGameStatus.ScaleZ);
                 //var diveLampTemp = diveLampGameObject.transform.eulerAngles;
                 //diveLampTemp.x = lastGameStatus.Accessories.DiveLamp.RotationX;
@@ -118,10 +121,9 @@ public class GameState : MonoBehaviour
                 diveLampGameObject.transform.rotation = new Quaternion(lastGameStatus.Accessories.DiveLamp.RotationX,
                                                                        lastGameStatus.Accessories.DiveLamp.RotationY,
                                                                        lastGameStatus.Accessories.DiveLamp.RotationZ, 0.0f);
-                var a = "tere";
                 //diveLampGameObject.transform.eulerAngles = new Vector3(lastGameStatus.Accessories.DiveLamp.RotationX,
-                                                                       //lastGameStatus.Accessories.DiveLamp.RotationY,
-                                                                       //lastGameStatus.Accessories.DiveLamp.RotationZ);
+                //lastGameStatus.Accessories.DiveLamp.RotationY,
+                //lastGameStatus.Accessories.DiveLamp.RotationZ);
             }
         }
     }
@@ -131,9 +133,14 @@ public class GameState : MonoBehaviour
         SceneManager.LoadScene(levelOne);
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     private void SetGameStateDefaultProperties()
     {
-        
+
     }
 
     /// <summary>
@@ -144,6 +151,7 @@ public class GameState : MonoBehaviour
     {
         var playerGameObject = GetGameObject("Diver");
         var diveLampGameObject = GetGameObject("DiveLamp");
+        //var jellyFishGameObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Jellyfish"));
         if (playerGameObject != null && diveLampGameObject != null)
         {
             var gameStatus = CreateCurrentGameStatus(playerGameObject, diveLampGameObject);
@@ -191,6 +199,8 @@ public class GameState : MonoBehaviour
     }
 }
 
+#region Serializable classes
+
 [Serializable]
 public class PausedGamedStatus
 {
@@ -203,17 +213,40 @@ public class PausedGamedStatus
     public float ScaleY { get; set; }
     public float ScaleZ { get; set; }
     public Accessories Accessories { get; set; }
+    public Hazards Hazards { get; set; }
 }
 
 [Serializable]
-public class Accessories {
+public class Accessories
+{
     public DiveLamp DiveLamp { get; set; }
     public bool HasMap { get; set; }
 }
 
 [Serializable]
-public class DiveLamp {
+public class Hazards
+{
+    public List<GameObject> JellyFishGameObjects { get; set; }
+}
+
+[Serializable]
+public class DiveLamp
+{
     public float RotationX { get; set; }
     public float RotationY { get; set; }
     public float RotationZ { get; set; }
 }
+
+[Serializable]
+public class GameSettings 
+{
+        
+}
+
+[Serializable]
+public class LevelStatus
+{
+    
+}
+
+#endregion
