@@ -113,9 +113,9 @@ public class Player : MonoBehaviour {
 
         ManageBubbles();
 
-        showText();
+        ShowText();
 
-        pickUpsCount = calculatePickUpCount();
+        pickUpsCount = CalculatePickUpCount();
     }
 
 	void Update ()
@@ -137,7 +137,7 @@ public class Player : MonoBehaviour {
         //Debug.Log(horizontalMove);
 #endif
 
-        float buoyancy = calculateBuoyancy();
+        float buoyancy = CalculateBuoyancy();
 
         ridgidbody.velocity = new Vector2(ridgidbody.velocity.x, buoyancy);
         ridgidbody.AddForce(new Vector2(horizontalMove, 0));
@@ -152,13 +152,13 @@ public class Player : MonoBehaviour {
             airVolume += buoyancyFactor;
         }
 
-        manageBreathingGas();
+        ManageBreathingGas();
 
-        flipToMoveDirection();
+        FlipToMoveDirection();
 
-        showText();
+        ShowText();
 
-        controlLight();
+        ControlLight();
 
         ManageBubbles();
 
@@ -166,7 +166,7 @@ public class Player : MonoBehaviour {
 
         checkIfStillAlive();
 
-        calulateScore();
+        CalulateScore();
     }
 
     void checkIfStillAlive ()
@@ -211,7 +211,7 @@ public class Player : MonoBehaviour {
         }
     }
 
-    void flipToMoveDirection()
+    void FlipToMoveDirection()
     {
         if (ridgidbody.velocity.x > 0.1f)
         {
@@ -224,7 +224,7 @@ public class Player : MonoBehaviour {
         }
     }
 
-    float calculateBuoyancy()
+    float CalculateBuoyancy()
     {
         depth = baseDepth - ridgidbody.position.y;
 
@@ -245,7 +245,7 @@ public class Player : MonoBehaviour {
                 health -= healthDecreaseStep;
                 audioManager.PlaySound("Scream");
                 string message = "Health -" + healthDecreaseStep.ToString();
-                showPopUp(message);
+                ShowPopUp(message);
 
                 jelly.GetComponent<JellyfishController>().cannotHurtForAWhile();
             }
@@ -264,14 +264,11 @@ public class Player : MonoBehaviour {
 
     void OnCollisionStay2D (Collision2D collision)
     {
-        
-
-        if(collision.gameObject.name == "Bottom" && diversLight.GetComponent<Light>().range > minimumLightRange)
+        if (collision.gameObject.name == "Bottom" && diversLight.GetComponent<Light>().range > minimumLightRange)
         {
             diversLight.GetComponent<Light>().range -= 0.1f;
             offTheBottom = false;
         }
-        
     }
 
     void OnCollisionExit2D(Collision2D collision)
@@ -282,86 +279,76 @@ public class Player : MonoBehaviour {
 
     void OnTriggerEnter2D (Collider2D other)
     {
-        if (other.gameObject.CompareTag("Coin") || other.gameObject.CompareTag("Emerald") || other.gameObject.CompareTag("Diamond"))
+        var objectTag = other.gameObject.tag;
+        switch (objectTag)
         {
-            audioManager.PlaySound("Other");
-            collectedItemsCount += 1;
-            string message = "You got something valuable!";
-            other.gameObject.SetActive(false);
-            showPopUp(message);
-            ChestController.AddToItems(other.gameObject);
-        }
-        else if (other.gameObject.CompareTag("Key"))
-        {
-            hasKey = true;
-            audioManager.PlaySound("Key");
-            string message = ("You got a key!");
-            showPopUp(message);
-            ChestController.AddToItems(other.gameObject);
-            other.gameObject.SetActive(false);
-        }
-        else if (other.gameObject.CompareTag("Medkit"))
-        {
-            audioManager.PlaySound("Other");
-            health += healthIncreaseStep;
-            other.gameObject.SetActive(false);
-            string message = "Health +" + healthIncreaseStep.ToString();
-            showPopUp(message);
-            HealthIconController.gotHealth = true;
-        }
-        else if (other.gameObject.CompareTag("Tank"))
-        {
-            audioManager.PlaySound("Gas");
-            breathingGasAmount += breathingGasIncreaseStep;
-            string message = "Breathing gas +" + breathingGasIncreaseStep.ToString();
-            showPopUp(message);
-            other.gameObject.SetActive(false);
-            GasIconController.gotTank = true;
-        }
-        else if (other.gameObject.CompareTag("TNT"))
-        {
-            //hasExplosive = true;
-            audioManager.PlaySound("Other");
-            string message = "You got a TNT!";
-            showPopUp(message);
-            ChestController.AddToItems(other.gameObject);
-            other.gameObject.SetActive(false);
-        }
-        else if (other.gameObject.CompareTag("Map"))
-        {
-            hasMap = true;
-            audioManager.PlaySound("Map");
-            string message = "You got a Map!";
-            showPopUp(message);
-            ChestController.AddToItems(other.gameObject);
-            other.gameObject.SetActive(false);
-            other.gameObject.transform.position = new Vector3(100, 100, 100);
-        }
-        else if (other.gameObject.CompareTag("Banana"))
-        {
-            hasBanana = true;
-            string message = "You got a Holy Banana!!!";
-            other.gameObject.SetActive(false);
-            showPopUp(message);
-        }
-        else if (other.gameObject.CompareTag("End"))
-        {
-            string message;
-            if (hasBanana)
-            {
-                message = "Mission accomplished!";
-                // TODO Level completed...
-                LoadScene(nextLevel);
-            }
-            else
-            {
-                message = "You need to find a Holy Banana to complete the mission!!!";
-            }
-            showPopUp(message);
+            case ItemTag.Coin:
+            case ItemTag.Emerald:
+            case ItemTag.Diamond:
+                audioManager.PlaySound(ItemTag.Other);
+                collectedItemsCount += 1;
+                other.gameObject.SetActive(false);
+                ShowPopUp("You got something valuable!");
+                ChestController.AddToItems(objectTag);
+                break;
+            case ItemTag.Key:
+                hasKey = true;
+                audioManager.PlaySound(ItemTag.Key);
+                ShowPopUp("You got a key!");
+                ChestController.AddToItems(objectTag);
+                other.gameObject.SetActive(false);
+                break;
+            case ItemTag.Medkit:
+                audioManager.PlaySound(ItemTag.Other);
+                health += healthIncreaseStep;
+                other.gameObject.SetActive(false);
+                ShowPopUp(string.Format("Health {0}", healthIncreaseStep.ToString()));
+                HealthIconController.gotHealth = true;
+                break;
+            case ItemTag.Tank:
+                audioManager.PlaySound(ItemTag.Gas);
+                breathingGasAmount += breathingGasIncreaseStep;
+                ShowPopUp(string.Format("Breathing gas {0}", breathingGasIncreaseStep.ToString()));
+                other.gameObject.SetActive(false);
+                GasIconController.gotTank = true;
+                break;
+            case ItemTag.Tnt:
+                audioManager.PlaySound(ItemTag.Other);
+                ShowPopUp("You got a TNT!");
+                ChestController.AddToItems(objectTag);
+                other.gameObject.SetActive(false);
+                break;
+            case ItemTag.Map:
+                hasMap = true;
+                audioManager.PlaySound(ItemTag.Map);
+                ShowPopUp("You got a Map!");
+                ChestController.AddToItems(objectTag);
+                other.gameObject.SetActive(false);
+                other.gameObject.transform.position = new Vector3(100, 100, 100);
+                break;
+            case ItemTag.Banana:
+                hasBanana = true;
+                other.gameObject.SetActive(false);
+                ShowPopUp("You got a Holy Banana!!!");
+                break;
+            case ItemTag.End:
+                string infoMessage = string.Empty;
+                if (hasBanana)
+                {
+                    infoMessage = "Mission accomplished!";
+                    // TODO Level completed...
+                    LoadScene(nextLevel);
+                }
+                else
+                    infoMessage = "You need to find a Holy Banana to complete the mission!!!";
+                ShowPopUp(infoMessage);
+                break;
+            default:
+                break;
         }
     }
 
-    void controlLight()
+    void ControlLight()
     {
         if (offTheBottom)
         {
@@ -383,11 +370,10 @@ public class Player : MonoBehaviour {
         }
 
         diversLight.transform.rotation = rotation;
-
         oldPosition = ridgidbody.transform.position;
     }
 
-    void showText ()
+    void ShowText ()
     {
         timeText.text = "Time: " + Time.time.ToString();
         //damageText.text = "Damage: " + damage.ToString();
@@ -415,11 +401,11 @@ public class Player : MonoBehaviour {
         }
         breathingGasText.text = Mathf.RoundToInt(breathingGasAmount).ToString();
 
-        float buoyancy = calculateBuoyancy();
+        float buoyancy = CalculateBuoyancy();
         buoyancyText.text = (Mathf.Round(buoyancy * 100) / 100).ToString();
     }
 
-    void showPopUp(string message)
+    void ShowPopUp(string message)
     {
 #if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
 
@@ -433,7 +419,7 @@ public class Player : MonoBehaviour {
         Instantiate(popUp, transform.position, transform.rotation);
     }
 
-    void manageBreathingGas()
+    void ManageBreathingGas()
     {
         breathingGasAmount -= Time.deltaTime;
     }
@@ -443,20 +429,37 @@ public class Player : MonoBehaviour {
         SceneManager.LoadScene(level);
     }
 
-    private void calulateScore ()
+    private void CalulateScore ()
     {
-        int coins = ChestController.itemCount("Coin");
-        int diamonds = ChestController.itemCount("diamond");
+        int coins = ChestController.ItemCount(ItemTag.Coin);
+        int diamonds = ChestController.ItemCount(ItemTag.Diamond);
         int percentOfPickedPickUps = (int)((coins + diamonds) * 100 / pickUpsCount);
 
         score = (int)(breathingGasAmount + health) + percentOfPickedPickUps;
     }
 
-    private int calculatePickUpCount()
+    private int CalculatePickUpCount()
     {
-        int coinsCount = GameObject.FindGameObjectsWithTag("Coin").Length;
-        int diamondsCount = GameObject.FindGameObjectsWithTag("Diamond").Length;
+        int coinsCount = GameObject.FindGameObjectsWithTag(ItemTag.Coin).Length;
+        int diamondsCount = GameObject.FindGameObjectsWithTag(ItemTag.Diamond).Length;
 
         return coinsCount + diamondsCount;
     }
+}
+
+public static class ItemTag
+{
+    public const string Coin = "Coin";
+    public const string Player = "Player";
+    public const string Emerald = "Emerald";
+    public const string Diamond = "Diamond";
+    public const string Medkit = "Medkit";
+    public const string Tank = "Tank";
+    public const string Gas = "Gas";
+    public const string Map = "Map";
+    public const string Tnt = "TNT";
+    public const string Banana = "Banana";
+    public const string Key = "Key";
+    public const string Other = "Other";
+    public const string End = "End";
 }
