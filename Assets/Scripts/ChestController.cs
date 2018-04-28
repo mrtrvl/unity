@@ -122,10 +122,14 @@ namespace bananaDiver.chestController
 
         void UpdateChestImage()
         {
-            if (items.Count > 0)
-                chestButton.image.sprite = fullChestImage;
-            else
-                chestButton.image.sprite = emptyChestImage;
+          if (items.Count > 0 && !showItems)
+          {
+              chestButton.image.sprite = fullChestImage;
+          }
+          else if (items.Count < 1 || showItems)
+          {
+              chestButton.image.sprite = emptyChestImage;
+          }
         }
 
         public static void AddToItems(string newItem)
