@@ -28,7 +28,7 @@ public class RockTriggerController : MonoBehaviour {
     {
         //shatteredRock = shatteredVersion.gameObject;
         //rb = GetComponent<Rigidbody2D>();
-        setParameters();
+        SetParameters();
     }
 
     void Update()
@@ -44,13 +44,13 @@ public class RockTriggerController : MonoBehaviour {
 
                 if (lastTimer != seconds)
                 {
-                    showPopUp(Mathf.RoundToInt(explosionTimer).ToString());
+                    ShowPopUp(Mathf.RoundToInt(explosionTimer).ToString());
                     lastTimer = seconds;
                 }
             }
             else if (explosionTimer <= 0)
             {
-                setParameters();
+                SetParameters();
                 Explode();
             }
         }
@@ -58,7 +58,7 @@ public class RockTriggerController : MonoBehaviour {
         
     }
 
-    void setParameters ()
+    void SetParameters()
     {
         explosionOccured = false;
         messageBroadcasted = false;
@@ -69,9 +69,9 @@ public class RockTriggerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag(ItemTag.Player))
         {
-            hasExplosive = ChestController.DoesHaveItem("tnt");
+            hasExplosive = ChestController.DoesHaveItem(ItemTag.Tnt);
 
             if (hasExplosive && !explosionOccured)
             {
@@ -82,18 +82,18 @@ public class RockTriggerController : MonoBehaviour {
                 instantiatedTNT = (GameObject)Instantiate(TNT, new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z), transform.rotation);
                 instantiatedTNT.tag = "Untagged";
                 //showPopUp("Explosion in " + explosionTimer.ToString() + " seconds...");
-                ChestController.RemoveItem("tnt");
+                ChestController.RemoveItem(ItemTag.Tnt);
             }
             else if(!messageBroadcasted)
             {
                 string message = "You need a TNT to destroy this rock!";
                 messageBroadcasted = true;
-                showPopUp(message);
+                ShowPopUp(message);
             }
         }
     }
 
-    void showPopUp(string message)
+    void ShowPopUp(string message)
     {
         #if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
 
