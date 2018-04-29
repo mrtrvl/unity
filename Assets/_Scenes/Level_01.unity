@@ -572,7 +572,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4022965513866368, guid: 4ecf6a5fbe872472387ccaad265777c6, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ecf6a5fbe872472387ccaad265777c6, type: 2}
@@ -3018,7 +3018,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4299551281438836, guid: dee2b6c9156a88144a745d200670cbdc, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dee2b6c9156a88144a745d200670cbdc, type: 2}
@@ -10794,7 +10794,7 @@ Transform:
   - {fileID: 1139393426}
   - {fileID: 1663704018}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1813867650
 MonoBehaviour:
@@ -10887,7 +10887,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &1843114476
 AudioListener:
@@ -13832,7 +13832,7 @@ Transform:
   - {fileID: 1305426161}
   - {fileID: 328647300}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2134115336 stripped
 Transform:

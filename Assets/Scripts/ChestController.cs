@@ -16,7 +16,7 @@ namespace bananaDiver.chestController
         public GameObject itemPrefab;
 
         private Button chestButton;
-        private static Dictionary<GameObject, int> items = new Dictionary<GameObject, int>();
+        private static Dictionary<string, int> items = new Dictionary<string, int>();
         private GameObject itemsDisplay;
         private bool showItems = false;
         private static bool listIsChanged = false;
@@ -35,17 +35,17 @@ namespace bananaDiver.chestController
 
         void Update()
         {
-            updateChestImage ();
-            chestColor ();
+            UpdateChestImage ();
+            ChestColor ();
             if (listIsChanged)
             {
                 changeColor = true;
-                refreshListOfItems ();
+                RefreshListOfItems ();
                 listIsChanged = false;
             }
         }
 
-        void chestColor ()
+        void ChestColor()
         {
             if (changeColor)
             {
@@ -54,154 +54,121 @@ namespace bananaDiver.chestController
             }
 
             if (chestButton.image.color != white)
-            {
                 chestButton.image.color = chestButton.image.color + new Color(0, 0, 0.01f);
-            }
-
-
-
         }
 
-        void refreshListOfItems ()
+        void RefreshListOfItems()
         {
             if (showItems && items.Count > 0)
             {
-                removeAllItemsFromItemsDisplay();
-                createItemsDisplay ();
+                RemoveAllItemsFromItemsDisplay();
+                CreateItemsDisplay ();
             }
             else
-            {
-                removeAllItemsFromItemsDisplay();
-            }
+                RemoveAllItemsFromItemsDisplay();
         }
 
-        void createItemsDisplay ()
+        void CreateItemsDisplay()
         {
             int index = 0;
             foreach (var item in items)
             {
-                createItemForDisplay(item.Key, item.Value, index);
+                CreateItemForDisplay(item.Key, item.Value, index);
                 index++;
             }
         }
 
-        void removeAllItemsFromItemsDisplay ()
+        void RemoveAllItemsFromItemsDisplay ()
         {
             foreach (Transform child in itemsDisplay.transform)
-            {
-                GameObject.Destroy(child.gameObject);
-            }
+                Destroy(child.gameObject);
         }
 
         void ShowHideItemsList ()
         {
             showItems = !showItems;
             itemsDisplay.SetActive(showItems);
-            refreshListOfItems();
+            RefreshListOfItems();
         }
 
-        GameObject createItemForDisplay (GameObject key, int value,  int index)
+        GameObject CreateItemForDisplay(string key, int value,  int index)
         {
             GameObject GO = Instantiate(itemPrefab);
-
-            GO.transform.parent = itemsDisplay.transform;
+            GO.transform.SetParent(itemsDisplay.transform);
             GO.transform.position = new Vector2(itemsDisplay.transform.position.x - (index * 110), itemsDisplay.transform.position.y);
 
             Text itemText = GO.GetComponentInChildren<Text>();
-            itemText.text = key.name + "\n" + value.ToString();
+            itemText.text = key + "\n" + value.ToString();
 
             Button itemButton = GO.GetComponent<Button>();
-            itemButton.onClick.AddListener(() => clickOnItem(key.name));
+            itemButton.onClick.AddListener(() => ClickOnItem(key));
 
             return GO;
         }
 
-        void clickOnItem (string name)
+        void ClickOnItem(string name)
         {
-            if (name == "tnt")
+            if (name == ItemTag.Tnt)
             {
                 Debug.Log("Plant tnt");
             }
-            else if (name == "map")
+            else if (name == ItemTag.Map)
             {
                 MapController.showMap();
                 Debug.Log("Show map");
-                RemoveItem("map");
-            }
-            
-        }
-
-        void updateChestImage ()
-        {
-            if (items.Count > 0 && !showItems)
-            {
-                chestButton.image.sprite = fullChestImage;
-            }
-            else if (items.Count < 1 || showItems)
-            {
-                chestButton.image.sprite = emptyChestImage;
+                RemoveItem(ItemTag.Map);
             }
         }
 
-        public static void AddToItems (GameObject newItem)
+        void UpdateChestImage()
         {
-            if (items.Count > 0)
-            {
-                foreach (var item in items.Keys.ToList())
-                {
-                    if (item.name == newItem.name)
-                    {
-                        items[item] += 1;
-                        listIsChanged = true;
-                        return;
-                    }
-                }
-            }
-            items.Add(newItem, 1);
+          if (items.Count > 0 && !showItems)
+          {
+              chestButton.image.sprite = fullChestImage;
+          }
+          else if (items.Count < 1 || showItems)
+          {
+              chestButton.image.sprite = emptyChestImage;
+          }
+        }
+
+        public static void AddToItems(string newItem)
+        {
+            int itemCount;
+            items.TryGetValue(newItem, out itemCount);
+            if (itemCount < 1)
+                items[newItem] = 1;
+            else
+                items[newItem] = items[newItem] + 1;
             listIsChanged = true;
         }
 
-        public static void RemoveItem (string itemToRemove)
+        public static void RemoveItem(string itemToRemove)
         {
-            foreach (var item in items.Keys.ToList())
-            {
-                if (item.name == itemToRemove)
-                {
-                    items[item] -= 1;
-                    if (items[item] <= 0)
-                    {
-                        items.Remove(item);
-                    }
-                    listIsChanged = true;
-                    return;
-                }
-            }
+            int itemCount;
+            items.TryGetValue(itemToRemove, out itemCount);
+            if (itemCount <= 0)
+                items.Remove(itemToRemove);
+            else
+                items[itemToRemove] = items[itemToRemove] - 1;
+            listIsChanged = true;
         }
 
-        public static bool DoesHaveItem (string itemToCheck)
+        public static bool DoesHaveItem(string itemToCheck)
         {
-            foreach (var item in items.Keys.ToList())
-            {
-                if (item.name == itemToCheck)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            int itemCountInChest;
+            items.TryGetValue(itemToCheck, out itemCountInChest);
+            return itemCountInChest > 0;
         }
 
-        // TODO - Causes bug as in scene loading reference is destroyed
-        public static int itemCount (string itemToCount)
+        public static int ItemCount(string itemToCount)
         {
-            foreach (var item in items)
-            {
-                if (item.Key.name == itemToCount)
-                {
-                    return item.Value;
-                }
-            }
-            return 0;
+            int itemCountInChest;
+            items.TryGetValue(itemToCount, out itemCountInChest);
+            if (itemCountInChest > 0)
+                return items[itemToCount];
+            else
+                return 0;
         }
     }
 }
