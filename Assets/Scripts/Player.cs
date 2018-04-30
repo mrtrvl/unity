@@ -9,6 +9,7 @@ using bananaDiver.optionsController;
 using bananaDiver.vibrationController;
 using bananaDiver.chestController;
 using bananaDiver.JellyfishController;
+using bananaDiver.buoyancyController;
 
 public class Player : MonoBehaviour {
 
@@ -138,6 +139,8 @@ public class Player : MonoBehaviour {
 #endif
 
         float buoyancy = CalculateBuoyancy();
+
+        bananaDiver.buoyancyController.BuoyancySliderScript.yPosition = buoyancy;
 
         ridgidbody.velocity = new Vector2(ridgidbody.velocity.x, buoyancy);
         ridgidbody.AddForce(new Vector2(horizontalMove, 0));
@@ -380,25 +383,8 @@ public class Player : MonoBehaviour {
         depthText.text = "Depth: " + depth.ToString();
         collectedItemsText.text = collectedItemsCount.ToString();
 
-        if (health > 50)
-        {
-            //healthText.color = Color.green;
-        }
-        else
-        {
-            //healthText.color = Color.red;
-        }
-
         healthText.text = health.ToString();
 
-        if (breathingGasAmount > 100)
-        {
-            //breathingGasText.color = Color.green;
-        }
-        else
-        {
-            //breathingGasText.color = Color.red;
-        }
         breathingGasText.text = Mathf.RoundToInt(breathingGasAmount).ToString();
 
         float buoyancy = CalculateBuoyancy();
