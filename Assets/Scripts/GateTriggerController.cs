@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class GateTriggerController : MonoBehaviour {
 
-    public GameObject gate;
+    //public GameObject gate;
     public GameObject player;
 
     public TextMesh popUp;
 
     private bool hasKey;
 
+    private Animator gateAmimation;
+    private BoxCollider2D gateCollider;
+
     void Start()
     {
-
+        gateAmimation = GameObject.Find("Gate").GetComponent<Animator>();
+        gateCollider = GameObject.Find("Gate").GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -31,7 +35,9 @@ public class GateTriggerController : MonoBehaviour {
                 //gate.transform.position += new Vector3(0, 0, -2);
                 //gate.transform.localScale -= new Vector3(0.5F, 0, 0);
                 //gate.transform.Rotate(0, 0, 90);
-                gate.SetActive(false);
+                //gate.SetActive(false);
+                gateAmimation.SetBool("Open", true);
+                gateCollider.enabled = false;
             }
             else
             {
