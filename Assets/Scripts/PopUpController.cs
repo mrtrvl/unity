@@ -8,12 +8,17 @@ public class PopUpController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        bool vibrationOn = vibrationController.vibrationOn;
+        
+    }
+
+    private void Awake()
+    {
+        vibrationOn = vibrationController.vibrationOn;
         vibration();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         transform.position += new Vector3(0, Time.deltaTime, 0);
         if (transform.position.y >= 6)
         {
