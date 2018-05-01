@@ -145,12 +145,12 @@ namespace bananaDiver.chestController
 
         public static void RemoveItem(string itemToRemove)
         {
-            int itemCount;
-            items.TryGetValue(itemToRemove, out itemCount);
-            if (itemCount <= 0)
-                items.Remove(itemToRemove);
-            else
+            if (ItemCount(itemToRemove) >= 0)
                 items[itemToRemove] = items[itemToRemove] - 1;
+
+            if (ItemCount(itemToRemove) <= 0)
+                items.Remove(itemToRemove);
+
             listIsChanged = true;
         }
 
