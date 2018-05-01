@@ -10,6 +10,7 @@ using bananaDiver.vibrationController;
 using bananaDiver.chestController;
 using bananaDiver.JellyfishController;
 using bananaDiver.buoyancyController;
+using bananaDiver.scoreController;
 
 public class Player : MonoBehaviour {
 
@@ -205,6 +206,9 @@ public class Player : MonoBehaviour {
         if (hasBanana)
         {
             win.SetActive(true);
+            int finalScore = calculateFinalScore ();
+            ScoreController.score = finalScore;
+            ScoreController.levelCompleted = true;
             Time.timeScale = 0;
             //infoMessage = "Mission accomplished!";
             //// TODO Level completed...
@@ -447,6 +451,14 @@ public class Player : MonoBehaviour {
         int percentOfPickedPickUps = (int)((coins + diamonds) * 100 / pickUpsCount);
 
         score = (int)(breathingGasAmount + health) + percentOfPickedPickUps;
+    }
+
+    private int calculateFinalScore ()
+    {
+        int maxScore = 300;
+        int percentage = (int)100 * score / maxScore;
+
+        return (int)percentage / 30;
     }
 
     private int CalculatePickUpCount()
