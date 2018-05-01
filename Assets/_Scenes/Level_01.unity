@@ -7783,7 +7783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e81f3b719054c4ba49d6776e799088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MapImage: {fileID: 2800000, guid: 23c1a0ff2ed895743a41956873694f5f, type: 3}
+  MapImage: {fileID: 2800000, guid: 2c4899243b5dae845962c202dabc6312, type: 3}
 --- !u!1001 &1161496046
 Prefab:
   m_ObjectHideFlags: 0
@@ -11172,7 +11172,6 @@ MonoBehaviour:
   pickUpsPanel: {fileID: 1241115761}
   bubbles: {fileID: 1749040473017026, guid: 2c5c738bec3407d4d80ee83244ddfb8d, type: 2}
   hasKey: 0
-  hasMap: 0
   hasBanana: 0
   popUp: {fileID: 102075135682177224, guid: 22c2dd9a8ad8b0147bc5601e18f7d82e, type: 2}
   nextLevel: Level_02

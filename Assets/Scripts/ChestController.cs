@@ -147,7 +147,6 @@ namespace bananaDiver.chestController
             else if (name == ItemTag.Map)
             {
                 MapController.showMap();
-                Debug.Log("Show map");
                 RemoveItem(ItemTag.Map);
             }
         }
