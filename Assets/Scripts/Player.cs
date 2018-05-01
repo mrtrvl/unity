@@ -10,8 +10,11 @@ using bananaDiver.vibrationController;
 using bananaDiver.chestController;
 using bananaDiver.JellyfishController;
 using bananaDiver.buoyancyController;
+using bananaDiver.scoreController;
 
 public class Player : MonoBehaviour {
+
+    public bool levelCompletedTest = false;
 
     public Text timeText;
     // public Text damageText;
@@ -53,7 +56,10 @@ public class Player : MonoBehaviour {
 
     private GameObject diverSprite;
     private GameObject death;
+    private GameObject win;
     private Animator diversAnimation;
+
+    private bool endMessageShown = false;
 
     private float depth;
     private float airVolume = 0f;
@@ -101,8 +107,10 @@ public class Player : MonoBehaviour {
         ridgidbody = GetComponent<Rigidbody2D>();
 
         death = GameObject.Find("Death");
+        win = GameObject.Find("Win");
 
         death.SetActive(false);
+        win.SetActive(false);
 
         diversLight = GameObject.Find("DiveLamp");
         diversLight.GetComponent<Light>().range = defaultLightRange;
@@ -121,6 +129,11 @@ public class Player : MonoBehaviour {
 
 	void Update ()
 	{
+        // For testing...
+        if (levelCompletedTest)
+            end ();
+
+
         GasIconController.amountOfGas = breathingGasAmount;
         HealthIconController.amountOfHealth = health;
 
@@ -185,6 +198,31 @@ public class Player : MonoBehaviour {
     {
         death.SetActive(true);
         Time.timeScale = 0;
+    }
+
+    void end ()
+    {
+        string infoMessage = string.Empty;
+        if (hasBanana)
+        {
+            win.SetActive(true);
+            int finalScore = calculateFinalScore ();
+            ScoreController.score = finalScore;
+            ScoreController.levelCompleted = true;
+            Time.timeScale = 0;
+            //infoMessage = "Mission accomplished!";
+            //// TODO Level completed...
+            //LoadScene(nextLevel);
+        }
+        else
+        {
+            if (!endMessageShown)
+            {
+                infoMessage = "You need to find Jack Sparrow's compass to complete the mission!!!";
+                ShowPopUp(infoMessage);
+                endMessageShown = true;
+            }
+        } 
     }
 
     void ManageBubbles()
@@ -335,16 +373,7 @@ public class Player : MonoBehaviour {
                 ShowPopUp("You got a Holy Banana!!!");
                 break;
             case ItemTag.End:
-                string infoMessage = string.Empty;
-                if (hasBanana)
-                {
-                    infoMessage = "Mission accomplished!";
-                    // TODO Level completed...
-                    LoadScene(nextLevel);
-                }
-                else
-                    infoMessage = "You need to find a Holy Banana to complete the mission!!!";
-                ShowPopUp(infoMessage);
+                end ();
                 break;
             default:
                 break;
@@ -422,6 +451,14 @@ public class Player : MonoBehaviour {
         int percentOfPickedPickUps = (int)((coins + diamonds) * 100 / pickUpsCount);
 
         score = (int)(breathingGasAmount + health) + percentOfPickedPickUps;
+    }
+
+    private int calculateFinalScore ()
+    {
+        int maxScore = 300;
+        int percentage = (int)100 * score / maxScore;
+
+        return (int)percentage / 30;
     }
 
     private int CalculatePickUpCount()
