@@ -13,6 +13,8 @@ using bananaDiver.buoyancyController;
 
 public class Player : MonoBehaviour {
 
+    public bool levelCompletedTest = false;
+
     public Text timeText;
     // public Text damageText;
     public Text depthText;
@@ -53,6 +55,7 @@ public class Player : MonoBehaviour {
 
     private GameObject diverSprite;
     private GameObject death;
+    private GameObject win;
     private Animator diversAnimation;
 
     private float depth;
@@ -101,8 +104,10 @@ public class Player : MonoBehaviour {
         ridgidbody = GetComponent<Rigidbody2D>();
 
         death = GameObject.Find("Death");
+        win = GameObject.Find("Win");
 
         death.SetActive(false);
+        win.SetActive(false);
 
         diversLight = GameObject.Find("DiveLamp");
         diversLight.GetComponent<Light>().range = defaultLightRange;
@@ -121,6 +126,11 @@ public class Player : MonoBehaviour {
 
 	void Update ()
 	{
+        // For testing...
+        if (levelCompletedTest)
+            end();
+
+
         GasIconController.amountOfGas = breathingGasAmount;
         HealthIconController.amountOfHealth = health;
 
@@ -185,6 +195,23 @@ public class Player : MonoBehaviour {
     {
         death.SetActive(true);
         Time.timeScale = 0;
+    }
+
+    void end ()
+    {
+        string infoMessage = string.Empty;
+        if (hasBanana)
+        {
+            win.SetActive(true);
+            Time.timeScale = 0;
+            //infoMessage = "Mission accomplished!";
+            //// TODO Level completed...
+            //LoadScene(nextLevel);
+        }
+        else
+            infoMessage = "You need to find a Holy Banana to complete the mission!!!";
+
+        ShowPopUp(infoMessage);
     }
 
     void ManageBubbles()
@@ -335,16 +362,7 @@ public class Player : MonoBehaviour {
                 ShowPopUp("You got a Holy Banana!!!");
                 break;
             case ItemTag.End:
-                string infoMessage = string.Empty;
-                if (hasBanana)
-                {
-                    infoMessage = "Mission accomplished!";
-                    // TODO Level completed...
-                    LoadScene(nextLevel);
-                }
-                else
-                    infoMessage = "You need to find a Holy Banana to complete the mission!!!";
-                ShowPopUp(infoMessage);
+                end ();
                 break;
             default:
                 break;
