@@ -572,7 +572,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4022965513866368, guid: 4ecf6a5fbe872472387ccaad265777c6, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ecf6a5fbe872472387ccaad265777c6, type: 2}
@@ -2306,10 +2306,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8179d0fe0d5b9cf4b9f629718de04967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TNTSprite: {fileID: 21300000, guid: 457c2a4211af5f140aab0cce3fb9790e, type: 3}
+  MapSprite: {fileID: 21300000, guid: f1c4d53aea53e9d48b10a68a8d823291, type: 3}
+  CoinSprite: {fileID: 21300000, guid: f67161f0f6b5b6840919673db220c75c, type: 3}
+  DiamondSprite: {fileID: 21300000, guid: 243e4e49169194c408a5d5330144a99f, type: 3}
+  KeySprite: {fileID: 21300000, guid: f464857d6da90c04ab66716032274c89, type: 3}
   emptyChestImage: {fileID: 21300000, guid: 774e4f97e61c5644097e122125221899, type: 3}
   fullChestImage: {fileID: 21300000, guid: 7b521a78c87bd214598e1d7cd4e8dd89, type: 3}
   circleImage: {fileID: 21300000, guid: dee890de8abedd640996cab3d13f828b, type: 3}
-  itemPrefab: {fileID: 1213536659770212, guid: c8cd415a7599bda439f8700597a91342, type: 2}
+  itemPrefab: {fileID: 1769496530236420, guid: 3917b63b8a89b8942b3bb7e751a25411, type: 2}
 --- !u!114 &462075410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6223,7 +6228,7 @@ RectTransform:
   - {fileID: 824050049}
   - {fileID: 1401425184}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6746,7 +6751,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &796448579
 MonoBehaviour:
@@ -10263,7 +10268,7 @@ Transform:
   - {fileID: 95584372}
   - {fileID: 1044308852}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1650699334 stripped
 Transform:
@@ -11285,7 +11290,7 @@ Transform:
   m_Children:
   - {fileID: 1919187849}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1928957566
 Prefab:
