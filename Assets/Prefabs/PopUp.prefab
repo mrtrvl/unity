@@ -83,7 +83,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1011191196701282}
-  m_Text: Health 20
+  m_Text: You got something valuable!
   m_OffsetZ: 0
   m_CharacterSize: 0.09
   m_LineSpacing: 1
@@ -91,7 +91,7 @@ TextMesh:
   m_Alignment: 0
   m_TabSize: 4
   m_FontSize: 27
-  m_FontStyle: 1
+  m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: e355d47634bcc004483a436c9c1f326f, type: 3}
   m_Color:
