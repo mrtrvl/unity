@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using bananaDiver.vibrationController;
 
 public class PopUpController : MonoBehaviour {
+    bool vibrationOn;
 
 	// Use this for initialization
 	void Start () {
-
+        bool vibrationOn = vibrationController.vibrationOn;
+        vibration();
     }
 	
 	// Update is called once per frame
@@ -17,4 +20,15 @@ public class PopUpController : MonoBehaviour {
             Destroy(gameObject);
         }
 	}
+
+    void vibration()
+    {
+    #if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+
+            if (vibrationOn)
+            {
+                Handheld.Vibrate();
+            }
+    #endif
+    }
 }

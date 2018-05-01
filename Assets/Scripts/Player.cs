@@ -6,7 +6,7 @@ using UnityStandardAssets.CrossPlatformInput;
 using bananaDiver.gasImageController;
 using bananaDiver.healthImageController;
 using bananaDiver.optionsController;
-using bananaDiver.vibrationController;
+//using bananaDiver.vibrationController;
 using bananaDiver.chestController;
 using bananaDiver.JellyfishController;
 using bananaDiver.buoyancyController;
@@ -91,7 +91,7 @@ public class Player : MonoBehaviour {
 
     private bool adjustedAirVolume = false;
 
-    private bool vibration;
+    //private bool vibration;
 
     private void Awake()
     {
@@ -102,7 +102,7 @@ public class Player : MonoBehaviour {
 	{
         Time.timeScale = 1;
 
-        vibration = vibrationController.vibrationOn;
+        //vibration = vibrationController.vibrationOn;
 
         ridgidbody = GetComponent<Rigidbody2D>();
 
