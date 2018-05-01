@@ -53,9 +53,7 @@ public class RockTriggerController : MonoBehaviour {
                 SetParameters();
                 Explode();
             }
-        }
-
-        
+        } 
     }
 
     void SetParameters()
@@ -108,5 +106,6 @@ public class RockTriggerController : MonoBehaviour {
         Instantiate(shatteredRock, transform.position, transform.rotation);
         Destroy(wholeVersion.gameObject);
         Destroy(instantiatedTNT);
+        messageBroadcasted = true;
     }
 }
