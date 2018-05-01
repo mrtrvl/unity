@@ -9,6 +9,12 @@ namespace bananaDiver.chestController
 {
     public class ChestController : MonoBehaviour
     {
+        public Sprite TNTSprite;
+        public Sprite MapSprite;
+        public Sprite CoinSprite;
+        public Sprite DiamondSprite;
+        public Sprite KeySprite;
+
         public Sprite emptyChestImage;
         public Sprite fullChestImage;
         public Sprite circleImage;
@@ -98,7 +104,33 @@ namespace bananaDiver.chestController
             GO.transform.position = new Vector2(itemsDisplay.transform.position.x - (index * 110), itemsDisplay.transform.position.y);
 
             Text itemText = GO.GetComponentInChildren<Text>();
-            itemText.text = key + "\n" + value.ToString();
+            itemText.text = value.ToString();
+
+            Image contentImage = GO.GetComponentInChildren<Image>();
+
+            Sprite content;
+            switch (key)
+            {
+                case "TNT":
+                    content = TNTSprite;
+                    break;
+                case "Key":
+                    content = KeySprite;
+                    break;
+                case "Diamond":
+                    content = DiamondSprite;
+                    break;
+                case "Coin":
+                    content = CoinSprite;
+                    break;
+                case "Map":
+                    content = MapSprite;
+                    break;
+                default:
+                    content = CoinSprite;
+                    break;
+            }
+            contentImage.sprite = content;
 
             Button itemButton = GO.GetComponent<Button>();
             itemButton.onClick.AddListener(() => ClickOnItem(key));
