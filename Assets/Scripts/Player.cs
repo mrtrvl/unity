@@ -34,7 +34,7 @@ public class Player : MonoBehaviour {
     public GameObject bubbles;
 
     public bool hasKey = false;
-    public bool hasMap = false;
+    //public bool hasMap = false;
     //public bool hasExplosive = false;
     public bool hasBanana = false;
 
@@ -322,11 +322,11 @@ public class Player : MonoBehaviour {
                 other.gameObject.SetActive(false);
                 break;
             case ItemTag.Map:
-                hasMap = true;
+                //hasMap = true;
                 audioManager.PlaySound(ItemTag.Map);
                 ShowPopUp("You got a Map!");
                 ChestController.AddToItems(objectTag);
-                other.gameObject.SetActive(false);
+                //other.gameObject.SetActive(false);  Object should be remain active to run method inside
                 other.gameObject.transform.position = new Vector3(100, 100, 100);
                 break;
             case ItemTag.Banana:
