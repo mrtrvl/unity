@@ -58,6 +58,8 @@ public class Player : MonoBehaviour {
     private GameObject win;
     private Animator diversAnimation;
 
+    private bool endMessageShown = false;
+
     private float depth;
     private float airVolume = 0f;
 
@@ -128,7 +130,7 @@ public class Player : MonoBehaviour {
 	{
         // For testing...
         if (levelCompletedTest)
-            end();
+            end ();
 
 
         GasIconController.amountOfGas = breathingGasAmount;
@@ -209,9 +211,14 @@ public class Player : MonoBehaviour {
             //LoadScene(nextLevel);
         }
         else
-            infoMessage = "You need to find a Holy Banana to complete the mission!!!";
-
-        ShowPopUp(infoMessage);
+        {
+            if (!endMessageShown)
+            {
+                infoMessage = "You need to find Jack Sparrow's compass to complete the mission!!!";
+                ShowPopUp(infoMessage);
+                endMessageShown = true;
+            }
+        } 
     }
 
     void ManageBubbles()
