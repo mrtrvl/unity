@@ -105,6 +105,7 @@ public class RockTriggerController : MonoBehaviour {
 
     void Explode()
     {
+        messageBroadcasted = true;
         Instantiate(shatteredRock, transform.position, transform.rotation);
         Destroy(wholeVersion.gameObject);
         Destroy(instantiatedTNT);
