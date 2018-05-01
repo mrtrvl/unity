@@ -91,6 +91,8 @@ public class Player : MonoBehaviour {
 
     private bool adjustedAirVolume = false;
 
+    private Scene activeScene;
+
     //private bool vibration;
 
     private void Awake()
@@ -105,6 +107,8 @@ public class Player : MonoBehaviour {
         //vibration = vibrationController.vibrationOn;
 
         ridgidbody = GetComponent<Rigidbody2D>();
+
+        activeScene = SceneManager.GetActiveScene();
 
         death = GameObject.Find("Death");
         win = GameObject.Find("Win");
@@ -203,7 +207,7 @@ public class Player : MonoBehaviour {
     void end ()
     {
         string infoMessage = string.Empty;
-        if (hasBanana)
+        if (hasBanana || activeScene.name == "Training")
         {
             win.SetActive(true);
             int finalScore = calculateFinalScore ();
