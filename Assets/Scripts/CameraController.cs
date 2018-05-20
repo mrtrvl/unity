@@ -9,12 +9,15 @@ namespace bananaDiver.cameraController
 
         public GameObject player;
         public GameObject backround;
+        public float zoom;
+        public float timeToShowMap;
+
         private GameObject camera;
         private float defaultCameraZoom;
         private Vector3 centerPosition;
+        private float cameraChangeSpeed = 15;
 
         private Vector3 offset;
-        private float timer = 2;
         private static bool showingMap = false;
 
         void Start()
@@ -33,8 +36,8 @@ namespace bananaDiver.cameraController
             }
             else
             {
-                timer -= Time.deltaTime;
-                if (timer <= 0)
+                timeToShowMap -= Time.deltaTime;
+                if (timeToShowMap <= 0)
                 {
                     backround.SetActive(true);
                     camera.GetComponent<Camera>().orthographicSize = defaultCameraZoom;
@@ -45,8 +48,11 @@ namespace bananaDiver.cameraController
                     backround.SetActive(false);
                     centerPosition = backround.GetComponent<SpriteRenderer>().bounds.center;
                     Debug.Log("wut");
-                    transform.position = new Vector3(centerPosition.x, centerPosition.y, transform.position.z);
-                    camera.GetComponent<Camera>().orthographicSize = 40;
+                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(centerPosition.x, centerPosition.y, transform.position.z), Time.deltaTime * cameraChangeSpeed);
+                    if (camera.GetComponent<Camera>().orthographicSize < zoom)
+                    {
+                        camera.GetComponent<Camera>().orthographicSize += Time.deltaTime * cameraChangeSpeed;
+                    }
                 }
             }
         }

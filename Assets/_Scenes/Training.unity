@@ -4612,7 +4612,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1919187848}
-  backround: {fileID: 1813867648}
+  backround: {fileID: 1139393425}
+  zoom: 25
+  timeToShowMap: 3
 --- !u!1 &1868443040
 GameObject:
   m_ObjectHideFlags: 0
