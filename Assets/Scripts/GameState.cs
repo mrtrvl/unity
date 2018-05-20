@@ -10,17 +10,20 @@ public class GameState : MonoBehaviour
     public static GameState gameState;
     private const string pause = "Pause";
     private const string levelOne = "Level_01";
+    private const string levelTraining = "Training";
     private const string mainMenu = "Main";
     private const string options = "Options";
     private string previousScene = string.Empty;
     private string currentScene = string.Empty;
     private AudioManager audioManager;
+    private List<string> accessories;
 
     /// <summary>
     /// Singleton instance handling.
     /// </summary>
-    void Awake()
+    private void Awake()
     {
+        accessories = new List<string>();
         if (gameState == null)
         {
             DontDestroyOnLoad(gameObject);
@@ -51,6 +54,11 @@ public class GameState : MonoBehaviour
         }
     }
 
+    public void AddAccesory(string name)
+    {
+        accessories.Add(name);
+    }
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneFinishedLoading;
@@ -74,6 +82,14 @@ public class GameState : MonoBehaviour
         switch (scene.name)
         {
             case levelOne:
+                if (previousScene == pause)
+                    SetGameStateAfterPause();
+                audioManager.PlaySoundLoop("Game Theme");
+                previousScene = scene.name;
+                if (previousScene != mainMenu)
+                    audioManager.StopSound(mainMenu);
+                break;
+            case levelTraining:
                 if (previousScene == pause)
                     SetGameStateAfterPause();
                 audioManager.PlaySoundLoop("Game Theme");
@@ -130,7 +146,8 @@ public class GameState : MonoBehaviour
 
     public void ContinueGameFromPause()
     {
-        SceneManager.LoadScene(levelOne);
+        print(string.Format("Current: {0}, previous: {1}", currentScene, previousScene));
+        SceneManager.LoadScene(currentScene);
     }
 
     public void QuitGame()
@@ -149,23 +166,26 @@ public class GameState : MonoBehaviour
     /// <param name="sceneName">Scene name.</param>
     private void BackButtonPressed(string sceneName)
     {
+        currentScene = SceneManager.GetActiveScene().name;
         var playerGameObject = GetGameObject("Diver");
         var diveLampGameObject = GetGameObject("DiveLamp");
         //var jellyFishGameObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Jellyfish"));
         if (playerGameObject != null && diveLampGameObject != null)
         {
-            var gameStatus = CreateCurrentGameStatus(playerGameObject, diveLampGameObject);
+            var gameStatus = CreateCurrentGameStatus(playerGameObject, diveLampGameObject, currentScene, accessories);
             GameController.gameController.SavePausedLevelGameStatus(gameStatus);
             SceneManager.LoadScene(sceneName);
         }
     }
 
     // Save objects
-    private PausedGamedStatus CreateCurrentGameStatus(GameObject playerGameObject, GameObject diveLampObject)
+    private PausedGamedStatus CreateCurrentGameStatus(GameObject playerGameObject, GameObject diveLampObject, 
+                                                      string levelPausedFrom, List<string> collectibles)
     {
         var playerComponent = playerGameObject.GetComponent<Player>();
         var pausedGameStatus = new PausedGamedStatus
         {
+            LevelPausedFrom = levelPausedFrom,
             Health = playerComponent.health,
             BreathingGas = playerComponent.breathingGasAmount,
             PositionX = playerGameObject.transform.position.x,
@@ -175,8 +195,10 @@ public class GameState : MonoBehaviour
             ScaleY = playerGameObject.transform.localScale.y,
             ScaleZ = playerGameObject.transform.localScale.z
         };
+
         pausedGameStatus.Accessories = new Accessories()
         {
+            Collectibles = collectibles,
             DiveLamp = new DiveLamp()
             {
                 RotationX = diveLampObject.transform.rotation.eulerAngles.x,
@@ -204,6 +226,7 @@ public class GameState : MonoBehaviour
 [Serializable]
 public class PausedGamedStatus
 {
+    public string LevelPausedFrom { get; set; }
     public int Health { get; set; }
     public float BreathingGas { get; set; }
     public float PositionX { get; set; }
@@ -220,6 +243,7 @@ public class PausedGamedStatus
 public class Accessories
 {
     public DiveLamp DiveLamp { get; set; }
+    public List<string> Collectibles { get; set; }
     public bool HasMap { get; set; }
 }
 
@@ -240,7 +264,6 @@ public class DiveLamp
 [Serializable]
 public class GameSettings 
 {
-        
 }
 
 [Serializable]

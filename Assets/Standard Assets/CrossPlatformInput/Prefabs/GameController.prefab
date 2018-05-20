@@ -118,3 +118,15 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     playOnAwake: 0
+  - clipName: Coin
+    clip: {fileID: 8300000, guid: dfd45d9e714ee424699e405a22a5c410, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+  - clipName: Gate
+    clip: {fileID: 8300000, guid: 22f92075b16404b1e9cad2e611327bc5, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
