@@ -1241,7 +1241,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Key.
 
-    You need it to pass through gate.'
+    You need it for opening locks.'
 --- !u!222 &1336212376
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2341,7 +2341,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'TNT
 
-    You need it to blow up rock...'
+    You need it to blow up rocks.'
 --- !u!222 &2139687865
 CanvasRenderer:
   m_ObjectHideFlags: 0
