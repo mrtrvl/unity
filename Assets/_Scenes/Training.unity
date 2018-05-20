@@ -835,6 +835,23 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf8ca199bef09c445ba0dff46f703da6, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &420794200 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1078556178960222, guid: bf8ca199bef09c445ba0dff46f703da6,
+    type: 2}
+  m_PrefabInternal: {fileID: 420794199}
+--- !u!114 &420794201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 420794200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07dc4b66a73d141689e4cbffc6f992bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tankId: Tank1
 --- !u!1 &420915851
 GameObject:
   m_ObjectHideFlags: 0
@@ -2638,6 +2655,23 @@ Transform:
   m_PrefabParentObject: {fileID: 4879281432774016, guid: bf8ca199bef09c445ba0dff46f703da6,
     type: 2}
   m_PrefabInternal: {fileID: 924499960}
+--- !u!1 &924499962 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1078556178960222, guid: bf8ca199bef09c445ba0dff46f703da6,
+    type: 2}
+  m_PrefabInternal: {fileID: 924499960}
+--- !u!114 &924499963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 924499962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07dc4b66a73d141689e4cbffc6f992bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tankId: Tank2
 --- !u!1001 &933058646
 Prefab:
   m_ObjectHideFlags: 0
@@ -5144,7 +5178,7 @@ MonoBehaviour:
   nextLevel: Level_02
   pickUpsCount: 0
   health: 100
-  breathingGasAmount: 20
+  breathingGasAmount: 100
 --- !u!50 &1919187851
 Rigidbody2D:
   serializedVersion: 4

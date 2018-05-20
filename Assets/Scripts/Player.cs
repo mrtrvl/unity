@@ -58,7 +58,7 @@ public class Player : MonoBehaviour {
     private GameObject death;
     private GameObject win;
     private Animator diversAnimation;
-
+    private GameState gameState;
     private bool endMessageShown = false;
 
     private float depth;
@@ -70,7 +70,7 @@ public class Player : MonoBehaviour {
     private float horizontalMove;
     private float verticalMove;
 
-    public float breathingGasAmount = 20;
+    public float breathingGasAmount = 100;
 
     private Vector3 oldPosition;
     private Vector3 newPosition;
@@ -98,6 +98,7 @@ public class Player : MonoBehaviour {
     private void Awake()
     {
         audioManager = AudioManager.audioManager;
+        gameState = GameState.gameState;
     }
 
     void Start () 
@@ -330,7 +331,10 @@ public class Player : MonoBehaviour {
             case ItemTag.Coin:
             case ItemTag.Emerald:
             case ItemTag.Diamond:
-                audioManager.PlaySound(ItemTag.Other);
+                if (objectTag == ItemTag.Coin)
+                    audioManager.PlaySound(ItemTag.Coin);
+                else
+                    audioManager.PlaySound(ItemTag.Other);
                 collectedItemsCount += 1;
                 other.gameObject.SetActive(false);
                 ShowPopUp("You got something valuable!");
@@ -355,6 +359,7 @@ public class Player : MonoBehaviour {
                 breathingGasAmount += breathingGasIncreaseStep;
                 ShowPopUp(string.Format("Breathing gas {0}", breathingGasIncreaseStep.ToString()));
                 other.gameObject.SetActive(false);
+                //gameState.AddAccesory(other.GetComponent<Tank>().tankId);
                 GasIconController.gotTank = true;
                 break;
             case ItemTag.Tnt:
@@ -481,4 +486,5 @@ public static class ItemTag
     public const string Key = "Key";
     public const string Other = "Other";
     public const string End = "End";
+    public const string Gate = "Gate";
 }

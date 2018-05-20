@@ -12,9 +12,14 @@ public class GateTriggerController : MonoBehaviour {
     public TextMesh popUp;
 
     private bool hasKey;
-
+    private AudioManager audioManager;
     private Animator gateAmimation;
     private BoxCollider2D gateCollider;
+
+    private void Awake()
+    {
+        audioManager = AudioManager.audioManager;
+    }
 
     void Start()
     {
@@ -41,6 +46,7 @@ public class GateTriggerController : MonoBehaviour {
                 //gate.SetActive(false);
                 ChestController.RemoveItem("Key");
                 gateAmimation.SetBool("Open", true);
+                audioManager.PlaySound(ItemTag.Gate);
                 gateCollider.enabled = false;
             }
             else
