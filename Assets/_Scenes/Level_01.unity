@@ -11647,6 +11647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1919187848}
+  backround: {fileID: 1139393425}
 --- !u!1001 &1846420035
 Prefab:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using bananaDiver.mapController;
+using bananaDiver.cameraController;
 
 namespace bananaDiver.chestController
 {
@@ -146,7 +147,8 @@ namespace bananaDiver.chestController
             }
             else if (name == ItemTag.Map)
             {
-                MapController.showMap();
+                //MapController.showMap();
+                CameraController.ShowMap();
                 RemoveItem(ItemTag.Map);
             }
         }
