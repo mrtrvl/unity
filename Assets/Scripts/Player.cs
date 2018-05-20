@@ -426,14 +426,6 @@ public class Player : MonoBehaviour {
 
     void ShowPopUp(string message)
     {
-//#if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
-
-//                if (vibration)
-//                {
-//                    Handheld.Vibrate();
-//                }
-//#endif
-
         popUp.text = message;
         Instantiate(popUp, transform.position, transform.rotation);
     }
