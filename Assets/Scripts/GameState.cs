@@ -106,6 +106,9 @@ public class GameState : MonoBehaviour
                 audioManager.PlaySoundLoop(mainMenu);
                 previousScene = scene.name;
                 break;
+            case options:
+                previousScene = scene.name;
+                break;
             default:
                 break;
         }
@@ -130,16 +133,9 @@ public class GameState : MonoBehaviour
                 playerComponent.breathingGasAmount = lastGameStatus.BreathingGas;
                 playerComponent.transform.localScale = new Vector3(lastGameStatus.ScaleX, lastGameStatus.ScaleY,
                                                                    lastGameStatus.ScaleZ);
-                //var diveLampTemp = diveLampGameObject.transform.eulerAngles;
-                //diveLampTemp.x = lastGameStatus.Accessories.DiveLamp.RotationX;
-                //diveLampTemp.y = lastGameStatus.Accessories.DiveLamp.RotationY;
-                //diveLampTemp.z = lastGameStatus.Accessories.DiveLamp.RotationZ;
                 diveLampGameObject.transform.rotation = new Quaternion(lastGameStatus.Accessories.DiveLamp.RotationX,
                                                                        lastGameStatus.Accessories.DiveLamp.RotationY,
                                                                        lastGameStatus.Accessories.DiveLamp.RotationZ, 0.0f);
-                //diveLampGameObject.transform.eulerAngles = new Vector3(lastGameStatus.Accessories.DiveLamp.RotationX,
-                //lastGameStatus.Accessories.DiveLamp.RotationY,
-                //lastGameStatus.Accessories.DiveLamp.RotationZ);
             }
         }
     }
@@ -179,11 +175,11 @@ public class GameState : MonoBehaviour
     }
 
     // Save objects
-    private PausedGamedStatus CreateCurrentGameStatus(GameObject playerGameObject, GameObject diveLampObject, 
+    private PausedGameStatus CreateCurrentGameStatus(GameObject playerGameObject, GameObject diveLampObject, 
                                                       string levelPausedFrom, List<string> collectibles)
     {
         var playerComponent = playerGameObject.GetComponent<Player>();
-        var pausedGameStatus = new PausedGamedStatus
+        var pausedGameStatus = new PausedGameStatus
         {
             LevelPausedFrom = levelPausedFrom,
             Health = playerComponent.health,
@@ -210,6 +206,12 @@ public class GameState : MonoBehaviour
         return pausedGameStatus;
     }
 
+    private GameOptions CreateCurrentGameOptionsStatus()
+    {
+        
+        return null;
+    }
+
     /// <summary>
     /// Gets the game object.
     /// </summary>
@@ -224,7 +226,7 @@ public class GameState : MonoBehaviour
 #region Serializable classes
 
 [Serializable]
-public class PausedGamedStatus
+public class PausedGameStatus
 {
     public string LevelPausedFrom { get; set; }
     public int Health { get; set; }
@@ -262,8 +264,11 @@ public class DiveLamp
 }
 
 [Serializable]
-public class GameSettings 
+public class GameOptions 
 {
+    public float Sound { get; set; }
+    public float Music { get; set; }
+    public bool Vibration { get; set; }
 }
 
 [Serializable]
