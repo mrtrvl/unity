@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LoadOnClick : MonoBehaviour {
 
@@ -18,5 +19,12 @@ public class LoadOnClick : MonoBehaviour {
             audioManager = AudioManager.audioManager;
         audioManager.PlaySound("Button Click");
         SceneManager.LoadScene(level);
+    }
+
+    public void OptionsBackButtonClicked(string level)
+    {
+        var comp = GetComponent("SoundSlider");
+        print(comp.transform);
+        this.LoadScene(level);
     }
 }
