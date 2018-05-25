@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using bananaDiver.JellyfishController;
+using System.Reflection;
+using System.Linq;
 
 public class GameState : MonoBehaviour
 {
@@ -16,14 +18,13 @@ public class GameState : MonoBehaviour
     private string previousScene = string.Empty;
     private string currentScene = string.Empty;
     private AudioManager audioManager;
-    private List<string> accessories;
+    private List<float> accessories = new List<float>();
 
     /// <summary>
     /// Singleton instance handling.
     /// </summary>
     private void Awake()
     {
-        accessories = new List<string>();
         if (gameState == null)
         {
             DontDestroyOnLoad(gameObject);
@@ -40,6 +41,8 @@ public class GameState : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
+        if (accessories != null)
+            print("accessories exists");
         currentScene = sceneName;
         switch (sceneName)
         {
@@ -54,9 +57,10 @@ public class GameState : MonoBehaviour
         }
     }
 
-    public void AddAccesory(string name)
+    public void AddAccesory(float accessoryItemId)
     {
-        accessories.Add(name);
+        print(string.Format("Added accessory: {0}", accessoryItemId));
+        accessories.Add(accessoryItemId);
     }
 
     private void OnEnable()
@@ -124,6 +128,8 @@ public class GameState : MonoBehaviour
             var lastGameStatus = GameController.gameController.LoadPausedLevelGameStatus();
             var playerGameObject = GetGameObject("Diver");
             var diveLampGameObject = GetGameObject("DiveLamp");
+            var jellyFishGameObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Jellyfish")).ToArray();
+
             if (playerGameObject != null && lastGameStatus != null && diveLampGameObject != null)
             {
                 playerGameObject.transform.position = new Vector3(lastGameStatus.PositionX, lastGameStatus.PositionY,
@@ -136,13 +142,52 @@ public class GameState : MonoBehaviour
                 diveLampGameObject.transform.rotation = new Quaternion(lastGameStatus.Accessories.DiveLamp.RotationX,
                                                                        lastGameStatus.Accessories.DiveLamp.RotationY,
                                                                        lastGameStatus.Accessories.DiveLamp.RotationZ, 0.0f);
+
+                var jellyFishObjects = lastGameStatus.Hazards.JellyFishObjects.ToArray();
+                if (jellyFishGameObjects.Length == lastGameStatus.Hazards.JellyFishObjects.Count)
+                    for (var i = 0; i < jellyFishObjects.Length; i++)
+                        jellyFishGameObjects[i].transform.position = new Vector3(jellyFishObjects[i].PositionX, 
+                                                                                 jellyFishObjects[i].PositionY,
+                                                                                 jellyFishObjects[i].PositionZ);
+            }
+
+            if (accessories != null)
+            {
+                List<string> tags = new List<string>()
+                {
+                    ItemTag.Tank,
+                    ItemTag.Map,
+                    ItemTag.Coin,
+                    ItemTag.Medkit,
+                    ItemTag.Diamond,
+                    ItemTag.Emerald,
+                    ItemTag.Key,
+                    ItemTag.Tnt
+                };
+
+                var accessoryObjects = new List<GameObject>();
+                foreach (var tag in tags)
+                {
+                    accessoryObjects.AddRange(GameObject.FindGameObjectsWithTag(tag).ToList());   
+                }
+
+                foreach (var accessoryItem in accessories)
+                {
+                    foreach (var accessoryGameObject in accessoryObjects)
+                    {
+                        if (accessoryGameObject.transform.position.sqrMagnitude == accessoryItem)
+                        {
+                            Destroy(accessoryGameObject);
+                        }
+                    }
+                }
             }
         }
     }
 
     public void ContinueGameFromPause()
     {
-        print(string.Format("Current: {0}, previous: {1}", currentScene, previousScene));
+        //print(string.Format("Current: {0}, previous: {1}", currentScene, previousScene));
         SceneManager.LoadScene(currentScene);
     }
 
@@ -165,10 +210,10 @@ public class GameState : MonoBehaviour
         currentScene = SceneManager.GetActiveScene().name;
         var playerGameObject = GetGameObject("Diver");
         var diveLampGameObject = GetGameObject("DiveLamp");
-        //var jellyFishGameObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Jellyfish"));
+        var jellyFishGameObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Jellyfish"));
         if (playerGameObject != null && diveLampGameObject != null)
         {
-            var gameStatus = CreateCurrentGameStatus(playerGameObject, diveLampGameObject, currentScene, accessories);
+            var gameStatus = CreateCurrentGameStatus(playerGameObject, diveLampGameObject, currentScene, accessories, jellyFishGameObjects);
             GameController.gameController.SavePausedLevelGameStatus(gameStatus);
             SceneManager.LoadScene(sceneName);
         }
@@ -176,7 +221,8 @@ public class GameState : MonoBehaviour
 
     // Save objects
     private PausedGameStatus CreateCurrentGameStatus(GameObject playerGameObject, GameObject diveLampObject, 
-                                                      string levelPausedFrom, List<string> collectibles)
+                                                     string levelPausedFrom, List<float> collectibles, 
+                                                     List<GameObject> jellyFishGameObjects)
     {
         var playerComponent = playerGameObject.GetComponent<Player>();
         var pausedGameStatus = new PausedGameStatus
@@ -203,7 +249,42 @@ public class GameState : MonoBehaviour
             }
         };
 
+        pausedGameStatus.Hazards = new Hazards()
+        {
+            JellyFishObjects = ConvertJellyFishGameObjects(jellyFishGameObjects)
+        };
+
         return pausedGameStatus;
+    }
+
+    //private List<Collectible> GetCollectibles()
+    //{
+    //    var coins = GameObject.FindGameObjectsWithTag(ItemTag.Coin);
+    //    var tanks = GameObject.FindGameObjectsWithTag(ItemTag.Tank);
+    //    var emeralds = GameObject.FindGameObjectsWithTag(ItemTag.Emerald);
+    //    var diamonds = GameObject.FindGameObjectsWithTag(ItemTag.Diamond);
+
+    //}
+
+    private List<JellyFishHazard> ConvertJellyFishGameObjects(List<GameObject> jellyFishGameObjects)
+    {
+        List<JellyFishHazard> serializableJellyFishObjects = new List<JellyFishHazard>();
+        foreach (var go in jellyFishGameObjects)
+        {
+            var jellyFishComponent = go.GetComponent<JellyfishController>();
+            if (jellyFishComponent != null)
+            {
+                var jellyFishHazard = new JellyFishHazard()
+                {
+                    PositionX = jellyFishComponent.transform.position.x,
+                    PositionY = jellyFishComponent.transform.position.y,
+                    PositionZ = 0.0f
+                };
+                serializableJellyFishObjects.Add(jellyFishHazard);
+            }
+        }
+
+        return serializableJellyFishObjects;
     }
 
     private GameOptions CreateCurrentGameOptionsStatus()
@@ -245,14 +326,14 @@ public class PausedGameStatus
 public class Accessories
 {
     public DiveLamp DiveLamp { get; set; }
-    public List<string> Collectibles { get; set; }
+    public List<float> Collectibles { get; set; }
     public bool HasMap { get; set; }
 }
 
 [Serializable]
 public class Hazards
 {
-    public List<GameObject> JellyFishGameObjects { get; set; }
+    public List<JellyFishHazard> JellyFishObjects { get; set; }
 }
 
 [Serializable]
@@ -269,6 +350,21 @@ public class GameOptions
     public float Sound { get; set; }
     public float Music { get; set; }
     public bool Vibration { get; set; }
+}
+
+[Serializable]
+public class Collectible
+{
+    public string Name { get; set; }
+    public bool? IsCollected { get; set; }
+}
+
+[Serializable]
+public class JellyFishHazard 
+{
+    public float PositionX { get; set; }
+    public float PositionY { get; set; }
+    public float PositionZ { get; set; }
 }
 
 [Serializable]

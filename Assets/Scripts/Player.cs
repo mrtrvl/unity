@@ -11,6 +11,7 @@ using bananaDiver.chestController;
 using bananaDiver.JellyfishController;
 using bananaDiver.buoyancyController;
 using bananaDiver.scoreController;
+using System.Runtime.CompilerServices;
 
 public class Player : MonoBehaviour {
 
@@ -331,13 +332,11 @@ public class Player : MonoBehaviour {
             case ItemTag.Coin:
             case ItemTag.Emerald:
             case ItemTag.Diamond:
-                if (objectTag == ItemTag.Coin)
-                    audioManager.PlaySound(ItemTag.Coin);
-                else
-                    audioManager.PlaySound(ItemTag.Other);
+                audioManager.PlaySound(ItemTag.Coin);
                 collectedItemsCount += 1;
                 other.gameObject.SetActive(false);
                 ShowPopUp("You got something valuable!");
+                gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
                 ChestController.AddToItems(objectTag);
                 break;
             case ItemTag.Key:
@@ -345,12 +344,14 @@ public class Player : MonoBehaviour {
                 audioManager.PlaySound(ItemTag.Key);
                 ShowPopUp("You got a key!");
                 ChestController.AddToItems(objectTag);
+                gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
                 other.gameObject.SetActive(false);
                 break;
             case ItemTag.Medkit:
                 audioManager.PlaySound(ItemTag.Other);
                 health += healthIncreaseStep;
                 other.gameObject.SetActive(false);
+                gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
                 ShowPopUp(string.Format("Health {0}", healthIncreaseStep.ToString()));
                 HealthIconController.gotHealth = true;
                 break;
@@ -359,13 +360,14 @@ public class Player : MonoBehaviour {
                 breathingGasAmount += breathingGasIncreaseStep;
                 ShowPopUp(string.Format("Breathing gas {0}", breathingGasIncreaseStep.ToString()));
                 other.gameObject.SetActive(false);
-                //gameState.AddAccesory(other.GetComponent<Tank>().tankId);
+                gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
                 GasIconController.gotTank = true;
                 break;
             case ItemTag.Tnt:
                 audioManager.PlaySound(ItemTag.Other);
                 ShowPopUp("You got a TNT!");
                 ChestController.AddToItems(objectTag);
+                gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
                 other.gameObject.SetActive(false);
                 break;
             case ItemTag.Map:
@@ -373,7 +375,7 @@ public class Player : MonoBehaviour {
                 audioManager.PlaySound(ItemTag.Map);
                 ShowPopUp("You got a Map!");
                 ChestController.AddToItems(objectTag);
-                //other.gameObject.SetActive(false);  Object should be remain active to run method inside
+                gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
                 other.gameObject.transform.position = new Vector3(100, 100, 100);
                 break;
             case ItemTag.Banana:
