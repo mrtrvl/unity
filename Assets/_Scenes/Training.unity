@@ -5001,6 +5001,7 @@ MonoBehaviour:
   backround: {fileID: 1139393425}
   zoom: 25
   timeToShowMap: 3
+  background: {fileID: 1139393427}
 --- !u!1 &1868443040
 GameObject:
   m_ObjectHideFlags: 0

@@ -11559,6 +11559,7 @@ MonoBehaviour:
   backround: {fileID: 1139393425}
   zoom: 33
   timeToShowMap: 6
+  background: {fileID: 1139393427}
 --- !u!1001 &1846420035
 Prefab:
   m_ObjectHideFlags: 0
