@@ -381,7 +381,7 @@ public class Player : MonoBehaviour {
             case ItemTag.Banana:
                 hasBanana = true;
                 other.gameObject.SetActive(false);
-                ShowPopUp("You got a Holy Banana!!!");
+                ShowPopUp("You got a Jack Sparrows's compass!!!");
                 break;
             case ItemTag.End:
                 end ();

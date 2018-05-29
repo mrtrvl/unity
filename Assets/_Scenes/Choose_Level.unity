@@ -267,8 +267,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 583.80005, y: -6}
-  m_SizeDelta: {x: 431.8, y: 35.8}
+  m_AnchoredPosition: {x: 718.2, y: -5.45}
+  m_SizeDelta: {x: 566.2, y: 95.05}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &24109504
 MonoBehaviour:
@@ -291,10 +291,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: e355d47634bcc004483a436c9c1f326f, type: 3}
-    m_FontSize: 25
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -302,7 +302,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Get a life!!!
+  m_Text: "Wow, you were chosen as one of the Triwizard Tournament champion! The next
+    challenge is to find your best friend hidden in the caves of the Great Lake -
+    you have only 20 minutes! Don\u2019t forget to watch out for mermaids and the
+    giant squid - and try to be the first one to get there, it gives you extra points.
+    Good luck!"
 --- !u!222 &24109505
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -597,8 +601,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 641.8, y: -9}
-  m_SizeDelta: {x: 494.8, y: 35.8}
+  m_AnchoredPosition: {x: 715.9, y: -6}
+  m_SizeDelta: {x: 568.9, y: 81.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &378557987
 MonoBehaviour:
@@ -621,10 +625,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: e355d47634bcc004483a436c9c1f326f, type: 3}
-    m_FontSize: 25
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -632,7 +636,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Find Jack Sparrow's compass and survive
+  m_Text: "It is rumoured that the legendary Black Pearl went missing just around
+    here - in the Bermuda Triangle. Many treasures are still floating around, including
+    the famous compass of Jack Sparrow.\r\nYou\u2019re in a cave and can\u2019t get
+    out before finding it!  Good luck!\r"
 --- !u!222 &378557988
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -986,8 +993,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 499.6, y: -7}
-  m_SizeDelta: {x: 350.6, y: 37}
+  m_AnchoredPosition: {x: 715.8, y: -7}
+  m_SizeDelta: {x: 566.8, y: 82.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1629117574
 MonoBehaviour:
@@ -1010,10 +1017,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: e355d47634bcc004483a436c9c1f326f, type: 3}
-    m_FontSize: 25
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -1021,7 +1028,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Trainig level
+  m_Text: "Don\u2019t worry! This is just a tutorial level - your mission is to get
+    used to swimming underwater, find the key and get to the end. Don\u2019t forget
+    to keep an eye on your stats and try to avoid touching dangerous sea creatures.
+    Good luck!"
 --- !u!222 &1629117575
 CanvasRenderer:
   m_ObjectHideFlags: 0
