@@ -2114,7 +2114,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Medkit - heals Your wounds.
 
-    +15 to health'
+    +20 to health'
 --- !u!222 &1949121434
 CanvasRenderer:
   m_ObjectHideFlags: 0
