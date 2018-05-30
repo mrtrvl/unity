@@ -65,7 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - clipName: Game Theme
-    clip: {fileID: 8300000, guid: 03c0337450c414065adb3e8f200795c7, type: 3}
+    clip: {fileID: 8300000, guid: 2c348fe168cd84860bfa4b6aa4cf5bcc, type: 3}
     volume: 1
     pitch: 1
     loop: 0
