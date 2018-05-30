@@ -17,6 +17,7 @@ TagManager:
   - Banana
   - End
   - PickUp
+  - Bottom
   layers:
   - Default
   - TransparentFX

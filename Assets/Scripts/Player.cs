@@ -434,7 +434,7 @@ public class Player : MonoBehaviour {
     void ShowPopUp(string message)
     {
         popUp.text = message;
-        Instantiate(popUp, transform.position, transform.rotation);
+        Instantiate(popUp, new Vector3(transform.position.x, transform.position.y, -2), transform.rotation);
     }
 
     void ManageBreathingGas()

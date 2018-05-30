@@ -37,7 +37,8 @@ public class GateTriggerController : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (hasKey)
+            //if (hasKey)
+            if(ChestController.DoesHaveItem("Key"))
             {
                 //gate.GetComponent<Rigidbody2D>().constraints = Rigidbody2DConstraints.None;
                 //gate.transform.position += new Vector3(0, 0, -2);
