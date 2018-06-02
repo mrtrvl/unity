@@ -31,7 +31,6 @@ namespace bananaDiver.cameraController
         {
             if(!showingMap)
             {
-
                 transform.position = player.transform.position + new Vector3(0, 0, offset.z);
             }
             else

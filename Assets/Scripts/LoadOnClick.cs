@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using bananaDiver.optionsController;
+using bananaDiver.vibrationController;
 
 public class LoadOnClick : MonoBehaviour {
 
@@ -18,13 +20,34 @@ public class LoadOnClick : MonoBehaviour {
         if (audioManager == null)
             audioManager = AudioManager.audioManager;
         audioManager.PlaySound("Button Click");
+
         SceneManager.LoadScene(level);
     }
 
-    public void OptionsBackButtonClicked(string level)
+    public void TryAgainButtonClicked()
     {
-        var comp = GetComponent("SoundSlider");
-        print(comp.transform);
-        this.LoadScene(level);
+        GameState.gameState.ResetGameplayStatus();
+        SceneManager.LoadScene(GameState.previousScene);
+    }
+
+    public void OptionsBackButtonClicked()
+    {
+        var musicVolume = OptionsController.musicSliderValue;
+        var soundVolume = OptionsController.soundSliderValue;
+        var vibrationOn = vibrationController.vibrationOn;
+        var gameOptions = new GameOptions()
+        {
+            Music = musicVolume,
+            Sound = soundVolume,
+            VibrationOn = vibrationOn
+        };
+
+        GameController.gameController.SaveOptions(gameOptions);
+
+        if (GameState.isGameplayPaused)
+            SceneManager.LoadScene(LevelTag.Pause);
+        else
+            SceneManager.LoadScene(LevelTag.Main);
     }
 }
+

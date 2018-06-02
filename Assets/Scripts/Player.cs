@@ -195,7 +195,7 @@ public class Player : MonoBehaviour {
     {
         if (breathingGasAmount <= 0 || health <= 0)
         {
-            audioManager.StopSound("Game Theme");
+            audioManager.StopSound(AudioFile.GameTheme);
             dead();
         }
     }
@@ -203,15 +203,17 @@ public class Player : MonoBehaviour {
     void dead ()
     {
         death.SetActive(true);
+        GameState.gameState.HandleWinDeathInformationDialog();
         Time.timeScale = 0;
     }
 
     void end ()
     {
         string infoMessage = string.Empty;
-        if (hasBanana || activeScene.name == "Training")
+        if (hasBanana || activeScene.name == LevelTag.Training)
         {
             win.SetActive(true);
+            GameState.gameState.HandleWinDeathInformationDialog();
             int finalScore = calculateFinalScore ();
             ScoreController.score = finalScore;
             ScoreController.levelCompleted = true;
@@ -239,7 +241,7 @@ public class Player : MonoBehaviour {
             {
                 Destroy(bubblesObject);
             }
-            audioManager.PlaySound("BreathingWithBubbles");
+            audioManager.PlaySound(AudioFile.BreathingWithBubbles);
             timeToNextBreath = Time.time + breathInterval;
             bubblesObject = Instantiate(bubbles, gameObject.transform);
         }
@@ -290,7 +292,7 @@ public class Player : MonoBehaviour {
             if (jelly.GetComponent<JellyfishController>().isDangerous)
             {
                 health -= healthDecreaseStep;
-                audioManager.PlaySound("Scream");
+                audioManager.PlaySound(AudioFile.Scream);
                 string message = "Health -" + healthDecreaseStep.ToString();
                 ShowPopUp(message);
 
@@ -332,7 +334,7 @@ public class Player : MonoBehaviour {
             case ItemTag.Coin:
             case ItemTag.Emerald:
             case ItemTag.Diamond:
-                audioManager.PlaySound(ItemTag.Coin);
+                audioManager.PlaySound(AudioFile.Coin);
                 collectedItemsCount += 1;
                 other.gameObject.SetActive(false);
                 ShowPopUp("You got something valuable!");
@@ -341,14 +343,14 @@ public class Player : MonoBehaviour {
                 break;
             case ItemTag.Key:
                 hasKey = true;
-                audioManager.PlaySound(ItemTag.Key);
+                audioManager.PlaySound(AudioFile.Key);
                 ShowPopUp("You got a key!");
                 ChestController.AddToItems(objectTag);
                 gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
                 other.gameObject.SetActive(false);
                 break;
             case ItemTag.Medkit:
-                audioManager.PlaySound(ItemTag.Other);
+                audioManager.PlaySound(AudioFile.Other);
                 health += healthIncreaseStep;
                 other.gameObject.SetActive(false);
                 gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
@@ -356,7 +358,7 @@ public class Player : MonoBehaviour {
                 HealthIconController.gotHealth = true;
                 break;
             case ItemTag.Tank:
-                audioManager.PlaySound(ItemTag.Gas);
+                audioManager.PlaySound(AudioFile.Gas);
                 breathingGasAmount += breathingGasIncreaseStep;
                 ShowPopUp(string.Format("Breathing gas {0}", breathingGasIncreaseStep.ToString()));
                 other.gameObject.SetActive(false);
@@ -364,7 +366,7 @@ public class Player : MonoBehaviour {
                 GasIconController.gotTank = true;
                 break;
             case ItemTag.Tnt:
-                audioManager.PlaySound(ItemTag.Other);
+                audioManager.PlaySound(AudioFile.Other);
                 ShowPopUp("You got a TNT!");
                 ChestController.AddToItems(objectTag);
                 gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
@@ -372,7 +374,7 @@ public class Player : MonoBehaviour {
                 break;
             case ItemTag.Map:
                 //hasMap = true;
-                audioManager.PlaySound(ItemTag.Map);
+                audioManager.PlaySound(AudioFile.Map);
                 ShowPopUp("You got a Map!");
                 ChestController.AddToItems(objectTag);
                 gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
@@ -384,7 +386,7 @@ public class Player : MonoBehaviour {
                 ShowPopUp("You got a Jack Sparrows's compass!!!");
                 break;
             case ItemTag.End:
-                end ();
+                end();
                 break;
             default:
                 break;
@@ -419,7 +421,6 @@ public class Player : MonoBehaviour {
     void ShowText ()
     {
         timeText.text = "Time: " + Time.time.ToString();
-        //damageText.text = "Damage: " + damage.ToString();
         depthText.text = "Depth: " + depth.ToString();
         collectedItemsText.text = collectedItemsCount.ToString();
 

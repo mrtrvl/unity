@@ -19,20 +19,21 @@ namespace bananaDiver.vibrationController
         public Sprite activeOffImage;
         public Sprite inactiveOffImage;
 
-        void Start()
+        private void Start()
         {
             onButton = GameObject.Find("VibrationOn").GetComponent<Button>();
             offButton = GameObject.Find("VibrationOff").GetComponent<Button>();
             onButton.onClick.AddListener(toggle);
             offButton.onClick.AddListener(toggle);
+            vibrationOn = GameController.gameController.LoadOptions().VibrationOn;;
+            setButtonImage();
         }
 
-        void Update()
+        private void Update()
         {
-
         }
 
-        void toggle()
+        private void toggle()
         {
             switchOn = !switchOn;
             switchOff = !switchOff;
@@ -40,9 +41,9 @@ namespace bananaDiver.vibrationController
             setButtonImage();
         }
 
-        void setButtonImage()
+        private void setButtonImage()
         {
-            if (switchOn)
+            if (vibrationOn)
             {
                 onButton.image.sprite = activeOnImage;
                 offButton.image.sprite = inactiveOffImage;
