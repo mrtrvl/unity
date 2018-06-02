@@ -147,3 +147,17 @@ public static class AudioLevelFader {
         source.volume = startVolume;
     }
 }
+
+public static class AudioFile
+{
+    public const string GameTheme = "Game Theme";
+    public const string ButtonClick = "Button Click";
+    public const string BreathingWithBubbles = "BreathingWithBubbles";
+    public const string Scream = "Scream";
+    public const string Coin = "Coin";
+    public const string Main = "Main";
+    public const string Map = "Map";
+    public const string Other = "Other";
+    public const string Gas = "Gas";
+    public const string Key = "Key";
+};

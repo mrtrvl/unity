@@ -6,16 +6,17 @@ using System;
 using bananaDiver.JellyfishController;
 using System.Reflection;
 using System.Linq;
+using bananaDiver.optionsController;
+using UnityEngine.UI;
+using bananaDiver.vibrationController;
+using System.Runtime.CompilerServices;
+using bananaDiver.chestController;
 
 public class GameState : MonoBehaviour
 {
     public static GameState gameState;
-    private const string pause = "Pause";
-    private const string levelOne = "Level_01";
-    private const string levelTraining = "Training";
-    private const string mainMenu = "Main";
-    private const string options = "Options";
-    private string previousScene = string.Empty;
+    public static string previousScene = string.Empty;
+    public static bool isGameplayPaused = false;
     private string currentScene = string.Empty;
     private AudioManager audioManager;
     private List<float> accessories = new List<float>();
@@ -41,25 +42,21 @@ public class GameState : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
-        if (accessories != null)
-            print("accessories exists");
         currentScene = sceneName;
         switch (sceneName)
         {
-            case pause:
+            case LevelTag.Pause:
                 BackButtonPressed(sceneName);
                 break;
-            case levelOne:
+            case LevelTag.LevelOne:
                 break;
             default:
-                print("Default");
                 break;
         }
     }
 
     public void AddAccesory(float accessoryItemId)
     {
-        print(string.Format("Added accessory: {0}", accessoryItemId));
         accessories.Add(accessoryItemId);
     }
 
@@ -80,42 +77,62 @@ public class GameState : MonoBehaviour
     /// <param name="mode">Load scene object.</param>
     private void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        print(string.Format("Scene loaded {0}", scene.name));
         if (audioManager == null)
             audioManager = AudioManager.audioManager;
+        
         switch (scene.name)
         {
-            case levelOne:
-                if (previousScene == pause)
+            case LevelTag.LevelOne:
+                if (isGameplayPaused)
                     SetGameStateAfterPause();
-                audioManager.PlaySoundLoop("Game Theme");
+                audioManager.PlaySoundLoop(AudioFile.GameTheme);
+                if (previousScene != LevelTag.Main)
+                    audioManager.StopSound(AudioFile.Main);
+                isGameplayPaused = false;
                 previousScene = scene.name;
-                if (previousScene != mainMenu)
-                    audioManager.StopSound(mainMenu);
                 break;
-            case levelTraining:
-                if (previousScene == pause)
+            case LevelTag.Training:
+                if (isGameplayPaused)
                     SetGameStateAfterPause();
-                audioManager.PlaySoundLoop("Game Theme");
+                audioManager.PlaySoundLoop(AudioFile.GameTheme);
+                if (previousScene != LevelTag.Main)
+                    audioManager.StopSound(AudioFile.Main);
+                isGameplayPaused = false;
                 previousScene = scene.name;
-                if (previousScene != mainMenu)
-                    audioManager.StopSound(mainMenu);
                 break;
-            case pause:
+            case LevelTag.Pause:
                 audioManager.StopAllAudio();
-                audioManager.PlaySoundLoop(mainMenu);
-                previousScene = scene.name;
+                audioManager.PlaySoundLoop(LevelTag.Main);
+                isGameplayPaused = true;
                 break;
-            case mainMenu:
-                audioManager.PlaySoundLoop(mainMenu);
-                previousScene = scene.name;
+            case LevelTag.Main:
+                ResetGameplayStatus();
+                audioManager.PlaySoundLoop(AudioFile.Main);
+                isGameplayPaused = false;
                 break;
-            case options:
-                previousScene = scene.name;
+            case LevelTag.Choose_Level:
+                break;
+            case LevelTag.Options:
                 break;
             default:
                 break;
         }
+    }
+
+    public void HandleWinDeathInformationDialog()
+    {
+        audioManager.StopAllAudio();
+        audioManager.PlaySound(AudioFile.Main);
+        ResetGameplayStatus();
+    }
+
+    public void ResetGameplayStatus()
+    {
+        if (accessories != null)
+            accessories.Clear();
+        if (ChestController.items != null)
+            ChestController.items.Clear();
+        GameController.gameController.DeleteCurrentGameplayState();
     }
 
     /// <summary>
@@ -123,62 +140,61 @@ public class GameState : MonoBehaviour
     /// </summary>
     private void SetGameStateAfterPause()
     {
-        if (previousScene == pause)
+        var lastGameStatus = GameController.gameController.LoadPausedLevelGameStatus();
+        if (lastGameStatus == null)
+            return;
+        var playerGameObject = GetGameObject("Diver");
+        var diveLampGameObject = GetGameObject("DiveLamp");
+        var jellyFishGameObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Jellyfish")).ToArray();
+
+        if (playerGameObject != null && lastGameStatus != null && diveLampGameObject != null)
         {
-            var lastGameStatus = GameController.gameController.LoadPausedLevelGameStatus();
-            var playerGameObject = GetGameObject("Diver");
-            var diveLampGameObject = GetGameObject("DiveLamp");
-            var jellyFishGameObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Jellyfish")).ToArray();
+            playerGameObject.transform.position = new Vector3(lastGameStatus.PositionX, lastGameStatus.PositionY,
+                                                              lastGameStatus.PositionZ);
+            var playerComponent = playerGameObject.GetComponent<Player>();
+            playerComponent.health = lastGameStatus.Health;
+            playerComponent.breathingGasAmount = lastGameStatus.BreathingGas;
+            playerComponent.transform.localScale = new Vector3(lastGameStatus.ScaleX, lastGameStatus.ScaleY,
+                                                               lastGameStatus.ScaleZ);
+            diveLampGameObject.transform.rotation = new Quaternion(lastGameStatus.Accessories.DiveLamp.RotationX,
+                                                                   lastGameStatus.Accessories.DiveLamp.RotationY,
+                                                                   lastGameStatus.Accessories.DiveLamp.RotationZ, 0.0f);
 
-            if (playerGameObject != null && lastGameStatus != null && diveLampGameObject != null)
+            var jellyFishObjects = lastGameStatus.Hazards.JellyFishObjects.ToArray();
+            if (jellyFishGameObjects.Length == lastGameStatus.Hazards.JellyFishObjects.Count)
+                for (var i = 0; i < jellyFishObjects.Length; i++)
+                    jellyFishGameObjects[i].transform.position = new Vector3(jellyFishObjects[i].PositionX, 
+                                                                             jellyFishObjects[i].PositionY,
+                                                                             jellyFishObjects[i].PositionZ);
+        }
+
+        if (accessories != null)
+        {
+            List<string> tags = new List<string>()
             {
-                playerGameObject.transform.position = new Vector3(lastGameStatus.PositionX, lastGameStatus.PositionY,
-                                                                  lastGameStatus.PositionZ);
-                var playerComponent = playerGameObject.GetComponent<Player>();
-                playerComponent.health = lastGameStatus.Health;
-                playerComponent.breathingGasAmount = lastGameStatus.BreathingGas;
-                playerComponent.transform.localScale = new Vector3(lastGameStatus.ScaleX, lastGameStatus.ScaleY,
-                                                                   lastGameStatus.ScaleZ);
-                diveLampGameObject.transform.rotation = new Quaternion(lastGameStatus.Accessories.DiveLamp.RotationX,
-                                                                       lastGameStatus.Accessories.DiveLamp.RotationY,
-                                                                       lastGameStatus.Accessories.DiveLamp.RotationZ, 0.0f);
+                ItemTag.Tank,
+                ItemTag.Map,
+                ItemTag.Coin,
+                ItemTag.Medkit,
+                ItemTag.Diamond,
+                ItemTag.Emerald,
+                ItemTag.Key,
+                ItemTag.Tnt
+            };
 
-                var jellyFishObjects = lastGameStatus.Hazards.JellyFishObjects.ToArray();
-                if (jellyFishGameObjects.Length == lastGameStatus.Hazards.JellyFishObjects.Count)
-                    for (var i = 0; i < jellyFishObjects.Length; i++)
-                        jellyFishGameObjects[i].transform.position = new Vector3(jellyFishObjects[i].PositionX, 
-                                                                                 jellyFishObjects[i].PositionY,
-                                                                                 jellyFishObjects[i].PositionZ);
+            var accessoryObjects = new List<GameObject>();
+            foreach (var tagItem in tags)
+            {
+                accessoryObjects.AddRange(GameObject.FindGameObjectsWithTag(tagItem).ToList());
             }
 
-            if (accessories != null)
+            foreach (var accessoryItem in accessories)
             {
-                List<string> tags = new List<string>()
+                foreach (var accessoryGameObject in accessoryObjects)
                 {
-                    ItemTag.Tank,
-                    ItemTag.Map,
-                    ItemTag.Coin,
-                    ItemTag.Medkit,
-                    ItemTag.Diamond,
-                    ItemTag.Emerald,
-                    ItemTag.Key,
-                    ItemTag.Tnt
-                };
-
-                var accessoryObjects = new List<GameObject>();
-                foreach (var tag in tags)
-                {
-                    accessoryObjects.AddRange(GameObject.FindGameObjectsWithTag(tag).ToList());   
-                }
-
-                foreach (var accessoryItem in accessories)
-                {
-                    foreach (var accessoryGameObject in accessoryObjects)
+                    if (accessoryGameObject.transform.position.sqrMagnitude == accessoryItem)
                     {
-                        if (accessoryGameObject.transform.position.sqrMagnitude == accessoryItem)
-                        {
-                            Destroy(accessoryGameObject);
-                        }
+                        Destroy(accessoryGameObject);
                     }
                 }
             }
@@ -187,18 +203,12 @@ public class GameState : MonoBehaviour
 
     public void ContinueGameFromPause()
     {
-        //print(string.Format("Current: {0}, previous: {1}", currentScene, previousScene));
-        SceneManager.LoadScene(currentScene);
+        SceneManager.LoadScene(previousScene);
     }
 
     public void QuitGame()
     {
         Application.Quit();
-    }
-
-    private void SetGameStateDefaultProperties()
-    {
-
     }
 
     /// <summary>
@@ -287,12 +297,6 @@ public class GameState : MonoBehaviour
         return serializableJellyFishObjects;
     }
 
-    private GameOptions CreateCurrentGameOptionsStatus()
-    {
-        
-        return null;
-    }
-
     /// <summary>
     /// Gets the game object.
     /// </summary>
@@ -349,7 +353,7 @@ public class GameOptions
 {
     public float Sound { get; set; }
     public float Music { get; set; }
-    public bool Vibration { get; set; }
+    public bool VibrationOn { get; set; }
 }
 
 [Serializable]

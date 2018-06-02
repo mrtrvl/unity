@@ -7,20 +7,24 @@ namespace bananaDiver.optionsController
 {
     public class OptionsController : MonoBehaviour
     {
-
         private Slider soundSlider;
         private Slider musicSlider;
-
         public static float soundSliderValue;
         public static float musicSliderValue;
 
-        void Start()
+        private void Start()
         {
             soundSlider = GameObject.Find("SoundSlider").GetComponent<Slider>();
             musicSlider = GameObject.Find("BGMusic").GetComponent<Slider>();
+            var gameOptions = GameController.gameController.LoadOptions();
+            if (gameOptions != null)
+            {
+                soundSlider.value = gameOptions.Sound;
+                musicSlider.value = gameOptions.Music;
+            }
         }
 
-        void Update()
+        private void Update()
         {
             soundSliderValue = soundSlider.value;
             musicSliderValue = musicSlider.value;

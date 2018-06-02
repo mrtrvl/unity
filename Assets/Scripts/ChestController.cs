@@ -19,16 +19,14 @@ namespace bananaDiver.chestController
         public Sprite emptyChestImage;
         public Sprite fullChestImage;
         public Sprite circleImage;
-        //public Sprite yellowChestImage;
         public GameObject itemPrefab;
+        public static Dictionary<string, int> items = new Dictionary<string, int>();
 
         private Button chestButton;
-        private static Dictionary<string, int> items = new Dictionary<string, int>();
         private GameObject itemsDisplay;
         private bool showItems = false;
         private static bool listIsChanged = false;
         private bool changeColor = false;
-
         private Color yellow = new Color(1, 1, 0);
         private Color white = new Color(1, 1, 1);
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Reflection.Emit;
 
 public class GameController : MonoBehaviour
 {
@@ -94,9 +95,34 @@ public class GameController : MonoBehaviour
     {
         FileStream file = null;
 
-        if (File.Exists((Application.persistentDataPath + fileName)))
+        if (File.Exists(Application.persistentDataPath + fileName))
             file = File.Open(Application.persistentDataPath + fileName, FileMode.Open);
 
         return file;
     }
+
+    public void DeleteCurrentGameplayState()
+    {
+        DeleteFile(playerDataFileName);
+    }
+
+    private void DeleteFile(string fileName)
+    {
+        if (File.Exists(Application.persistentDataPath + fileName))
+        {
+            File.Delete(Application.persistentDataPath + fileName);
+            UnityEditor.AssetDatabase.Refresh();
+        }
+            
+    }
+}
+
+public static class LevelTag
+{
+    public const string Options = "Options";
+    public const string Training = "Training";
+    public const string Main = "Main";
+    public const string Pause = "Pause";
+    public const string LevelOne = "Level_01";
+    public const string Choose_Level = "Choose_Level";
 }
