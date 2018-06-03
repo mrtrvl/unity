@@ -49,5 +49,13 @@ public class LoadOnClick : MonoBehaviour {
         else
             SceneManager.LoadScene(LevelTag.Main);
     }
+
+    public void HelpBackButtonClicked()
+    {
+        if (GameState.isGameplayPaused)
+            SceneManager.LoadScene(LevelTag.Pause);
+        else
+            SceneManager.LoadScene(LevelTag.Main);
+    }
 }
 

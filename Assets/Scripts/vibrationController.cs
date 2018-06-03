@@ -25,7 +25,9 @@ namespace bananaDiver.vibrationController
             offButton = GameObject.Find("VibrationOff").GetComponent<Button>();
             onButton.onClick.AddListener(toggle);
             offButton.onClick.AddListener(toggle);
-            vibrationOn = GameController.gameController.LoadOptions().VibrationOn;;
+            var options = GameController.gameController.LoadOptions();
+            if (options != null)
+                vibrationOn = options.VibrationOn;
             setButtonImage();
         }
 

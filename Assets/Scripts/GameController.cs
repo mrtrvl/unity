@@ -106,12 +106,16 @@ public class GameController : MonoBehaviour
         DeleteFile(playerDataFileName);
     }
 
+    public void DeleteFileByFileName()
+    {
+        DeleteFile(playerOptionsFileName);
+    }
+
     private void DeleteFile(string fileName)
     {
         if (File.Exists(Application.persistentDataPath + fileName))
         {
             File.Delete(Application.persistentDataPath + fileName);
-            UnityEditor.AssetDatabase.Refresh();
         }
             
     }
