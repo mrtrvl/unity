@@ -97,33 +97,36 @@ public class GameController : MonoBehaviour
     public void SaveFinalScore(LevelResult levelScore)
     {
         var gameResults = LoadFinalScore();
-        List<LevelResult> results = new List<LevelResult>();
 
         var binaryFormatter = new BinaryFormatter();
         var file = File.Create(Application.persistentDataPath + playerFinalScoreFileName);
         if (gameResults != null)
         {
-            gameResults.Add(levelScore);
+            gameResults.LevelResultsList.Add(levelScore);
             binaryFormatter.Serialize(file, gameResults);
         }
         else
         {
-            results.Add(levelScore);
+            var results = new LevelResults()
+            {
+                LevelResultsList = new List<LevelResult>()
+            };
+            results.LevelResultsList.Add(levelScore);
             binaryFormatter.Serialize(file, results);
         }
 
         file.Close();
     }
 
-    public List<LevelResult> LoadFinalScore()
+    public LevelResults LoadFinalScore()
     {
         var file = LoadFile(playerFinalScoreFileName);
-        List<LevelResult> levelResult = null;
+        LevelResults levelResult = null;
 
         if (file != null)
         {
             var binaryFormatter = new BinaryFormatter();
-            levelResult = (List<LevelResult>)binaryFormatter.Deserialize(file);
+            levelResult = (LevelResults)binaryFormatter.Deserialize(file);
             file.Close();
         }
 
@@ -150,7 +153,12 @@ public class GameController : MonoBehaviour
         DeleteFile(playerDataFileName);
     }
 
-    public void DeleteFileByFileName()
+    public void DeleteLevelStatus()
+    {
+        DeleteFile(playerFinalScoreFileName);
+    }
+
+    public void DeleteOptions()
     {
         DeleteFile(playerOptionsFileName);
     }
