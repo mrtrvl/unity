@@ -1,6 +1,6 @@
 using System;
 #if UNITY_EDITOR
-using UnityEditor;
+//using UnityEditor;
 #endif
 using UnityEngine;
 
@@ -10,7 +10,7 @@ namespace UnityStandardAssets.CrossPlatformInput
     [ExecuteInEditMode]
     public class MobileControlRig : MonoBehaviour
 #if UNITY_STANDALONE || UNITY_WEBPLAYER
-        , UnityEditor.Build.IActiveBuildTargetChanged
+//        , UnityEditor.Build.IActiveBuildTargetChanged
 #endif
     {
         // this script enables or disables the child objects of a control rig
@@ -57,13 +57,13 @@ namespace UnityStandardAssets.CrossPlatformInput
 
         private void OnEnable()
         {
-            EditorApplication.update += Update;
+            //EditorApplication.update += Update;
         }
 
 
         private void OnDisable()
         {
-            EditorApplication.update -= Update;
+            //EditorApplication.update -= Update;
         }
 
 
@@ -93,10 +93,10 @@ namespace UnityStandardAssets.CrossPlatformInput
         }
 
 #if UNITY_STANDALONE || UNITY_WEBPLAYER
-        public void OnActiveBuildTargetChanged(BuildTarget previousTarget, BuildTarget newTarget)
-        {
-            CheckEnableControlRig();
-        }
+        //public void OnActiveBuildTargetChanged(BuildTarget previousTarget, BuildTarget newTarget)
+        //{
+         //   CheckEnableControlRig();
+        //}
 #endif
     }
 }
