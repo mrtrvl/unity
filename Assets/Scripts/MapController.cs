@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using bananaDiver.chestController;
 
 namespace bananaDiver.mapController
 {
@@ -9,7 +10,7 @@ namespace bananaDiver.mapController
 
         public Texture2D MapImage;
 
-        private static bool shown = false;
+        //private static bool shown = false;
         private static bool isAppearing = false;
         private float timer = 2f;
 
@@ -25,7 +26,7 @@ namespace bananaDiver.mapController
                 if (timer <= 0)
                 {
                     isAppearing = false;
-                    shown = true;
+                    //shown = true;
                     gameObject.SetActive(false);
                 }
             }
@@ -33,7 +34,7 @@ namespace bananaDiver.mapController
 
         public static void showMap ()
         {
-            if (!shown)
+            if (ChestController.DoesHaveItem(ItemTag.Map))
             {
                 isAppearing = true;
             }
