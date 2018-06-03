@@ -22,12 +22,18 @@ namespace bananaDiver.optionsController
                 soundSlider.value = gameOptions.Sound;
                 musicSlider.value = gameOptions.Music;
             }
+            musicSlider.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
         }
 
         private void Update()
         {
             soundSliderValue = soundSlider.value;
             musicSliderValue = musicSlider.value;
+        }
+
+        private void ValueChangeCheck()
+        {
+            AudioManager.audioManager.ChangeCurrentlyPlayingSoundVolume(AudioFile.Main, musicSlider.value, true);
         }
     }
 }
