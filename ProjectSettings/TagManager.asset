@@ -18,6 +18,7 @@ TagManager:
   - End
   - PickUp
   - Bottom
+  - TrainingButton
   layers:
   - Default
   - TransparentFX

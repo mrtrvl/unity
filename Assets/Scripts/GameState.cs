@@ -111,6 +111,7 @@ public class GameState : MonoBehaviour
                 isGameplayPaused = false;
                 break;
             case LevelTag.Choose_Level:
+                HandleLevelButtons();
                 break;
             case LevelTag.Options:
                 break;
@@ -192,6 +193,7 @@ public class GameState : MonoBehaviour
             {
                 foreach (var accessoryGameObject in accessoryObjects)
                 {
+                    // Rewrite for Mathf.Approximately
                     if (accessoryGameObject.transform.position.sqrMagnitude == accessoryItem)
                     {
                         Destroy(accessoryGameObject);
@@ -267,14 +269,25 @@ public class GameState : MonoBehaviour
         return pausedGameStatus;
     }
 
-    //private List<Collectible> GetCollectibles()
-    //{
-    //    var coins = GameObject.FindGameObjectsWithTag(ItemTag.Coin);
-    //    var tanks = GameObject.FindGameObjectsWithTag(ItemTag.Tank);
-    //    var emeralds = GameObject.FindGameObjectsWithTag(ItemTag.Emerald);
-    //    var diamonds = GameObject.FindGameObjectsWithTag(ItemTag.Diamond);
+    public void SaveGameResult(int score)
+    {
+        var result = new LevelResult()
+        {
+            LevelName = previousScene,
+            LevelFinalScore = score
+        };
+        GameController.gameController.SaveFinalScore(result);
+    }
 
-    //}
+    private void HandleLevelButtons()
+    {
+        var result = 5;
+        if (result != null)
+        {
+            var trainingButton = GameObject.Find("TrainingButton").GetComponent<Button>();
+            trainingButton.image.mainTexture = "level1_2";
+        }
+    }
 
     private List<JellyFishHazard> ConvertJellyFishGameObjects(List<GameObject> jellyFishGameObjects)
     {
@@ -372,9 +385,10 @@ public class JellyFishHazard
 }
 
 [Serializable]
-public class LevelStatus
+public class LevelResult
 {
-    
+    public string LevelName { get; set; }
+    public int LevelFinalScore { get; set; }
 }
 
 #endregion
