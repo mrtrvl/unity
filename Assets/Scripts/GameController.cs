@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public static GameController gameController;
     private const string playerDataFileName = "/playerData.dat";
     private const string playerOptionsFileName = "/playerOptions.dat";
+    private const string playerFinalScoreFileName = "/playerFinalScore.dat";
 
     public static float soundVolume = 1.0f;
     public static float musicVolume = 1.0f;
@@ -89,6 +90,29 @@ public class GameController : MonoBehaviour
         }
 
         return gameOptions;
+    }
+
+    public void SaveFinalScore(LevelResult levelScore)
+    {
+        var binaryFormatter = new BinaryFormatter();
+        var file = File.Create(Application.persistentDataPath + playerFinalScoreFileName);
+        binaryFormatter.Serialize(file, levelScore);
+        file.Close();
+    }
+
+    public LevelResult LoadFinalScore()
+    {
+        var file = LoadFile(playerFinalScoreFileName);
+        LevelResult levelResult = null;
+
+        if (file != null)
+        {
+            var binaryFormatter = new BinaryFormatter();
+            levelResult = (LevelResult)binaryFormatter.Deserialize(file);
+            file.Close();
+        }
+
+        return levelResult;
     }
 
     /// <summary>
