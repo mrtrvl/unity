@@ -50,7 +50,8 @@ namespace bananaDiver.cameraController
                         camera.GetComponent<Camera>().orthographicSize = defaultCameraZoom;
 
                         showingMap = false;
-                    } else
+                    }
+                    else
                     {
                         transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, player.transform.position.y, offset.z),  Time.deltaTime * cameraChangeSpeed);
                         background.GetComponent<SpriteRenderer>().color += new Color32(0, 0, 0, 1);
@@ -59,6 +60,10 @@ namespace bananaDiver.cameraController
                             if (camera.GetComponent<Camera>().orthographicSize > defaultCameraZoom)
                             {
                                 camera.GetComponent<Camera>().orthographicSize -= Time.deltaTime * cameraChangeSpeed;
+                            }
+                            else
+                            {
+                                showingMap = false;
                             }
                         }
                     }
