@@ -1131,6 +1131,7 @@ GameObject:
   - component: {fileID: 1809719075}
   - component: {fileID: 1809719074}
   - component: {fileID: 1809719078}
+  - component: {fileID: 1809719079}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1225,6 +1226,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74cb1c6b8184abb409670ba6617b261e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1809719079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1809719073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 668841aa857a44473ba1653ebb5cb84f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelTrainingZeroStars: {fileID: 21300000, guid: 039e2cad108134850ba63186167105b7,
+    type: 3}
+  levelTrainingOneStar: {fileID: 21300000, guid: 3c8ae3f36242e49319b0993247957f48,
+    type: 3}
+  levelTrainingTwoStars: {fileID: 21300000, guid: 38d4e120b729e49718efd208f59d44c2,
+    type: 3}
+  levelTrainingThreeStars: {fileID: 21300000, guid: 7a8e5370d9b6e42f7aabe5e031ff5936,
+    type: 3}
+  levelOneZeroStars: {fileID: 21300000, guid: b3632dd450f988344aca26147bef0dee, type: 3}
+  levelTwoZeroStars: {fileID: 21300000, guid: 7c80963309248f44e9bc551419bbc8ef, type: 3}
+  levelLocked: {fileID: 21300000, guid: d3dab77752f0c3e4b97865cf4910ccf3, type: 3}
 --- !u!1001 &1975611642
 Prefab:
   m_ObjectHideFlags: 0

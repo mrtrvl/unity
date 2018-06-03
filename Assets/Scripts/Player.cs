@@ -214,7 +214,7 @@ public class Player : MonoBehaviour {
         {
             win.SetActive(true);
             GameState.gameState.HandleWinDeathInformationDialog();
-            int finalScore = calculateFinalScore ();
+            int finalScore = calculateFinalScore();
             // Save final score
             GameState.gameState.SaveGameResult(finalScore);
             ScoreController.score = finalScore;
