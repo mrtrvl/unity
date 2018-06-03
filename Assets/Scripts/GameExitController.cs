@@ -6,6 +6,8 @@ public class GameExitController : MonoBehaviour {
 
     public void GameExit()
     {
-        Application.Quit();
+        GameController.gameController.DeleteLevelStatus();
+        GameController.gameController.DeleteCurrentGameplayState();
+        GameController.gameController.DeleteOptions();
     }
 }

@@ -393,6 +393,12 @@ public class JellyFishHazard
 }
 
 [Serializable]
+public class LevelResults
+{
+    public List<LevelResult> LevelResultsList { get; set; }
+}
+
+[Serializable]
 public class LevelResult
 {
     public string LevelName { get; set; }

@@ -45,7 +45,7 @@ public class ChooseLevelController : MonoBehaviour
 
         if (results != null)
         {
-            foreach (var result in results)
+            foreach (var result in results.LevelResultsList)
             {
                 levelScores.Add(result.LevelName, result);
             }
@@ -58,7 +58,7 @@ public class ChooseLevelController : MonoBehaviour
 
         if (trainingLevelResult != null && trainingLevelResult.Completed)
         {
-            level_02Button.interactable = false;
+            level_02Button.interactable = true;
             level_02Button.image.sprite = levelOneZeroStars;
         }
         else
