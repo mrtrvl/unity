@@ -139,13 +139,18 @@ public class AudioManager : MonoBehaviour
             
     }
 
-    public void ChangeCurrentlyPlayingSoundVolume(string clipName)
+    public void ChangeCurrentlyPlayingSoundVolume(string clipName, float? soundVolume, bool inOptions = false)
     {
         var currentlyPlayingAudio = (from s in sounds
                                      where s.clipName == clipName
                                      select s).FirstOrDefault();
         if (currentlyPlayingAudio != null)
-            currentlyPlayingAudio.source.volume = GameController.musicVolume;
+        {
+            if (inOptions)
+                currentlyPlayingAudio.source.volume = soundVolume ?? GameController.musicVolume;
+            else
+                currentlyPlayingAudio.source.volume = GameController.musicVolume;
+        }
     }
 
     public void StopAllAudio()
