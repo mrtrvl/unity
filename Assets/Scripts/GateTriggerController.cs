@@ -7,11 +7,10 @@ public class GateTriggerController : MonoBehaviour {
 
     //public GameObject gate;
     //public GameObject player;
-    private GameObject player;
+    //private GameObject player;
 
     public TextMesh popUp;
 
-    private bool hasKey;
     private AudioManager audioManager;
     private Animator gateAmimation;
     private BoxCollider2D gateCollider;
@@ -23,14 +22,14 @@ public class GateTriggerController : MonoBehaviour {
 
     void Start()
     {
-        player = GameObject.Find("Diver");
+        //player = GameObject.Find("Diver");
         gateAmimation = GameObject.Find("Gate").GetComponent<Animator>();
         gateCollider = GameObject.Find("Gate").GetComponent<BoxCollider2D>();
     }
 
     void Update()
     {
-        hasKey = player.GetComponent<Player>().hasKey;
+
     }
 
     void OnTriggerEnter2D(Collider2D other)

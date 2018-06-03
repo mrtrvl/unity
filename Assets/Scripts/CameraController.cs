@@ -16,10 +16,9 @@ namespace bananaDiver.cameraController
         private new GameObject camera;
         private float defaultCameraZoom;
         private Vector3 centerPosition;
-        private Vector3 defaultPosition;
+        //private Vector3 defaultPosition;
         private float cameraChangeSpeed = 15;
         private float backToStart;
-        private Color32 backgroundColor;
 
         private Vector3 offset;
         private static bool showingMap = false;
@@ -29,7 +28,6 @@ namespace bananaDiver.cameraController
             camera = GameObject.Find("Main Camera");
             defaultCameraZoom = camera.GetComponent<Camera>().orthographicSize;
             offset = transform.position - player.transform.position;
-            backgroundColor = background.GetComponent<SpriteRenderer>().color;
             backToStart = timeToShowMap + 2;
         }
 
@@ -38,7 +36,7 @@ namespace bananaDiver.cameraController
             if(!showingMap)
             {
                 transform.position = player.transform.position + new Vector3(0, 0, offset.z);
-                defaultPosition = transform.position;
+                //defaultPosition = transform.position;
             }
             else
             {
