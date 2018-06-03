@@ -12,6 +12,9 @@ public class GameController : MonoBehaviour
     private const string playerOptionsFileName = "/playerOptions.dat";
     private const string playerFinalScoreFileName = "/playerFinalScore.dat";
 
+    public static float soundVolume = 1.0f;
+    public static float musicVolume = 1.0f;
+
     /// <summary>
     /// Singleton instance handling.
     /// </summary>
@@ -81,6 +84,8 @@ public class GameController : MonoBehaviour
         {
             var binaryFormatter = new BinaryFormatter();
             gameOptions = (GameOptions)binaryFormatter.Deserialize(file);
+            soundVolume = gameOptions.Sound;
+            musicVolume = gameOptions.Music;
             file.Close();
         }
 
@@ -130,12 +135,16 @@ public class GameController : MonoBehaviour
         DeleteFile(playerDataFileName);
     }
 
+    public void DeleteFileByFileName()
+    {
+        DeleteFile(playerOptionsFileName);
+    }
+
     private void DeleteFile(string fileName)
     {
         if (File.Exists(Application.persistentDataPath + fileName))
         {
             File.Delete(Application.persistentDataPath + fileName);
-            UnityEditor.AssetDatabase.Refresh();
         }
             
     }

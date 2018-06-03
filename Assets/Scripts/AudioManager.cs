@@ -1,12 +1,13 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System;
 
 [Serializable]
 public class Sound
 {
-    private AudioSource source;
+    public AudioSource source;
     public string clipName;
     public AudioClip clip;
     [Range(0f, 1f)]
@@ -90,7 +91,12 @@ public class AudioManager : MonoBehaviour
         Sound playableSound;
         soundClips.TryGetValue(clipName, out playableSound);
         if (playableSound != null)
+        {
+            playableSound.source.loop = false;
+            playableSound.source.volume = GameController.soundVolume;
             playableSound.Play();
+        }
+            
     }
 
     public void StopSound(string clipName)
@@ -106,7 +112,8 @@ public class AudioManager : MonoBehaviour
         Sound loopableSound;
         soundClips.TryGetValue(clipName, out loopableSound);
         if (loopableSound != null && !loopableSound.IsPlaying()) {
-            loopableSound.loop = true;
+            loopableSound.source.loop = true;
+            loopableSound.source.volume = GameController.musicVolume;
             loopableSound.Play();
         }
     }
@@ -124,7 +131,26 @@ public class AudioManager : MonoBehaviour
         Sound continueableSound;
         soundClips.TryGetValue(clipName, out continueableSound);
         if (continueableSound != null)
+        {
+            continueableSound.source.loop = true;
+            continueableSound.source.volume = GameController.soundVolume;
             continueableSound.UnPause();
+        }
+            
+    }
+
+    public void ChangeCurrentlyPlayingSoundVolume(string clipName, float? soundVolume, bool inOptions = false)
+    {
+        var currentlyPlayingAudio = (from s in sounds
+                                     where s.clipName == clipName
+                                     select s).FirstOrDefault();
+        if (currentlyPlayingAudio != null)
+        {
+            if (inOptions)
+                currentlyPlayingAudio.source.volume = soundVolume ?? GameController.musicVolume;
+            else
+                currentlyPlayingAudio.source.volume = GameController.musicVolume;
+        }
     }
 
     public void StopAllAudio()
