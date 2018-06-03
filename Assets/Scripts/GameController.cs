@@ -4,6 +4,8 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Reflection.Emit;
+using System.Collections.Generic;
+using NUnit.Framework;
 
 public class GameController : MonoBehaviour
 {
@@ -94,21 +96,34 @@ public class GameController : MonoBehaviour
 
     public void SaveFinalScore(LevelResult levelScore)
     {
+        var gameResults = LoadFinalScore();
+        List<LevelResult> results = new List<LevelResult>();
+
         var binaryFormatter = new BinaryFormatter();
         var file = File.Create(Application.persistentDataPath + playerFinalScoreFileName);
-        binaryFormatter.Serialize(file, levelScore);
+        if (gameResults != null)
+        {
+            gameResults.Add(levelScore);
+            binaryFormatter.Serialize(file, gameResults);
+        }
+        else
+        {
+            results.Add(levelScore);
+            binaryFormatter.Serialize(file, results);
+        }
+
         file.Close();
     }
 
-    public LevelResult LoadFinalScore()
+    public List<LevelResult> LoadFinalScore()
     {
         var file = LoadFile(playerFinalScoreFileName);
-        LevelResult levelResult = null;
+        List<LevelResult> levelResult = null;
 
         if (file != null)
         {
             var binaryFormatter = new BinaryFormatter();
-            levelResult = (LevelResult)binaryFormatter.Deserialize(file);
+            levelResult = (List<LevelResult>)binaryFormatter.Deserialize(file);
             file.Close();
         }
 
@@ -157,5 +172,6 @@ public static class LevelTag
     public const string Main = "Main";
     public const string Pause = "Pause";
     public const string LevelOne = "Level_01";
+    public const string LevelTwo = "Level_02";
     public const string Choose_Level = "Choose_Level";
 }

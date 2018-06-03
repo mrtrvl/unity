@@ -118,7 +118,6 @@ public class GameState : MonoBehaviour
                 isGameplayPaused = false;
                 break;
             case LevelTag.Choose_Level:
-                HandleLevelButtons();
                 audioManager.ChangeCurrentlyPlayingSoundVolume(AudioFile.Main, null);
                 break;
             case LevelTag.Options:
@@ -292,19 +291,10 @@ public class GameState : MonoBehaviour
         var result = new LevelResult()
         {
             LevelName = previousScene,
-            LevelFinalScore = score
+            LevelFinalScore = score,
+            Completed = true
         };
         GameController.gameController.SaveFinalScore(result);
-    }
-
-    private void HandleLevelButtons()
-    {
-        var result = 5;
-        if (result != null)
-        {
-            var trainingButton = GameObject.Find("TrainingButton").GetComponent<Button>();
-            trainingButton.image.mainTexture = "level1_2";
-        }
     }
 
     private List<JellyFishHazard> ConvertJellyFishGameObjects(List<GameObject> jellyFishGameObjects)
@@ -407,6 +397,7 @@ public class LevelResult
 {
     public string LevelName { get; set; }
     public int LevelFinalScore { get; set; }
+    public bool Completed { get; set; }
 }
 
 #endregion
