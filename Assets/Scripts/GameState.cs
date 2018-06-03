@@ -79,7 +79,9 @@ public class GameState : MonoBehaviour
     {
         if (audioManager == null)
             audioManager = AudioManager.audioManager;
-        
+
+        LoadOptionsForAudio();
+
         switch (scene.name)
         {
             case LevelTag.LevelOne:
@@ -101,21 +103,37 @@ public class GameState : MonoBehaviour
                 previousScene = scene.name;
                 break;
             case LevelTag.Pause:
-                audioManager.StopAllAudio();
-                audioManager.PlaySoundLoop(LevelTag.Main);
+                if (!isGameplayPaused)
+                {
+                    audioManager.StopAllAudio();
+                    audioManager.PlaySoundLoop(LevelTag.Main);   
+                }
+                audioManager.ChangeCurrentlyPlayingSoundVolume(AudioFile.Main);
                 isGameplayPaused = true;
                 break;
             case LevelTag.Main:
+                audioManager.ChangeCurrentlyPlayingSoundVolume(AudioFile.Main);
                 ResetGameplayStatus();
                 audioManager.PlaySoundLoop(AudioFile.Main);
                 isGameplayPaused = false;
                 break;
             case LevelTag.Choose_Level:
+                audioManager.ChangeCurrentlyPlayingSoundVolume(AudioFile.Main);
                 break;
             case LevelTag.Options:
                 break;
             default:
                 break;
+        }
+    }
+
+    private void LoadOptionsForAudio()
+    {
+        var options = GameController.gameController.LoadOptions();
+        if (options != null)
+        {
+            GameController.soundVolume = options.Sound;
+            GameController.musicVolume = options.Music;
         }
     }
 
