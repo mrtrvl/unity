@@ -84,7 +84,8 @@ public class RockTriggerController : MonoBehaviour {
                 //showPopUp("Explosion in " + explosionTimer.ToString() + " seconds...");
                 ChestController.RemoveItem(ItemTag.Tnt);
             }
-            else if(!messageBroadcasted)
+            else if(!messageBroadcasted && !(GameState.gameState.HazardWasDestroyed(ItemTag.Rock1) || 
+                                             GameState.gameState.HazardWasDestroyed(ItemTag.Rock2)))
             {
                 string message = "You need a TNT to destroy this rock!";
                 messageBroadcasted = true;
@@ -103,6 +104,8 @@ public class RockTriggerController : MonoBehaviour {
     {
         messageBroadcasted = true;
         Instantiate(shatteredRock, transform.position, transform.rotation);
+        GameState.gameState.AddHazard(wholeVersion.gameObject.tag);
+        AudioManager.audioManager.PlaySound(AudioFile.Explosion);
         Destroy(wholeVersion.gameObject);
         Destroy(instantiatedTNT);
     }

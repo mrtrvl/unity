@@ -186,4 +186,5 @@ public static class AudioFile
     public const string Other = "Other";
     public const string Gas = "Gas";
     public const string Key = "Key";
+    public const string Explosion = "Explosion";
 };

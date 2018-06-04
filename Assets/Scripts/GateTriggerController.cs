@@ -46,7 +46,7 @@ public class GateTriggerController : MonoBehaviour {
                 //gate.SetActive(false);
                 ChestController.RemoveItem("Key");
                 gateAmimation.SetBool("Open", true);
-                audioManager.PlaySound(ItemTag.Gate);
+                AudioManager.audioManager.PlaySound(ItemTag.Gate);
                 gateCollider.enabled = false;
             }
             else

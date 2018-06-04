@@ -46,7 +46,10 @@ public class ChooseLevelController : MonoBehaviour
         {
             foreach (var result in results.LevelResultsList)
             {
-                levelScores.Add(result.LevelName, result);
+                LevelResult levelResultExists;
+                levelScores.TryGetValue(result.LevelName, out levelResultExists);
+                if (levelResultExists == null)
+                    levelScores.Add(result.LevelName, result);
             }
         }
 

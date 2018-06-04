@@ -17,10 +17,7 @@ public class LoadOnClick : MonoBehaviour {
 
     public void LoadScene(string level)
     {
-        if (audioManager == null)
-            audioManager = AudioManager.audioManager;
-        audioManager.PlaySound("Button Click");
-
+        AudioManager.audioManager.PlaySound("Button Click");
         SceneManager.LoadScene(level);
     }
 

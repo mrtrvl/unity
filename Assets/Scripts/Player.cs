@@ -195,7 +195,7 @@ public class Player : MonoBehaviour {
     {
         if (breathingGasAmount <= 0 || health <= 0)
         {
-            audioManager.StopSound(AudioFile.GameTheme);
+            AudioManager.audioManager.StopSound(AudioFile.GameTheme);
             dead();
         }
     }
@@ -243,7 +243,7 @@ public class Player : MonoBehaviour {
             {
                 Destroy(bubblesObject);
             }
-            audioManager.PlaySound(AudioFile.BreathingWithBubbles);
+            AudioManager.audioManager.PlaySound(AudioFile.BreathingWithBubbles);
             timeToNextBreath = Time.time + breathInterval;
             bubblesObject = Instantiate(bubbles, gameObject.transform);
         }
@@ -294,7 +294,7 @@ public class Player : MonoBehaviour {
             if (jelly.GetComponent<JellyfishController>().isDangerous)
             {
                 health -= healthDecreaseStep;
-                audioManager.PlaySound(AudioFile.Scream);
+                AudioManager.audioManager.PlaySound(AudioFile.Scream);
                 string message = "Health -" + healthDecreaseStep.ToString();
                 ShowPopUp(message);
 
@@ -336,56 +336,57 @@ public class Player : MonoBehaviour {
             case ItemTag.Coin:
             case ItemTag.Emerald:
             case ItemTag.Diamond:
-                audioManager.PlaySound(AudioFile.Coin);
+                AudioManager.audioManager.PlaySound(AudioFile.Coin);
                 collectedItemsCount += 1;
                 other.gameObject.SetActive(false);
                 ShowPopUp("You got something valuable!");
-                gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
+                GameState.gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
                 ChestController.AddToItems(objectTag);
                 break;
             case ItemTag.Key:
                 hasKey = true;
-                audioManager.PlaySound(AudioFile.Key);
+                AudioManager.audioManager.PlaySound(AudioFile.Key);
                 ShowPopUp("You got a key!");
                 ChestController.AddToItems(objectTag);
-                gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
+                GameState.gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
                 other.gameObject.SetActive(false);
                 break;
             case ItemTag.Medkit:
-                audioManager.PlaySound(AudioFile.Other);
+                AudioManager.audioManager.PlaySound(AudioFile.Other);
                 health += healthIncreaseStep;
                 other.gameObject.SetActive(false);
-                gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
+                GameState.gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
                 ShowPopUp(string.Format("Health {0}", healthIncreaseStep.ToString()));
                 HealthIconController.gotHealth = true;
                 break;
             case ItemTag.Tank:
-                audioManager.PlaySound(AudioFile.Gas);
+                AudioManager.audioManager.PlaySound(AudioFile.Gas);
                 breathingGasAmount += breathingGasIncreaseStep;
                 ShowPopUp(string.Format("Breathing gas {0}", breathingGasIncreaseStep.ToString()));
                 other.gameObject.SetActive(false);
-                gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
+                GameState.gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
                 GasIconController.gotTank = true;
                 break;
             case ItemTag.Tnt:
-                audioManager.PlaySound(AudioFile.Other);
+                AudioManager.audioManager.PlaySound(AudioFile.Other);
                 ShowPopUp("You got a TNT!");
                 ChestController.AddToItems(objectTag);
-                gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
+                GameState.gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
                 other.gameObject.SetActive(false);
                 break;
             case ItemTag.Map:
                 //hasMap = true;
-                audioManager.PlaySound(AudioFile.Map);
+                AudioManager.audioManager.PlaySound(AudioFile.Map);
                 ShowPopUp("You got a Map!");
                 ChestController.AddToItems(objectTag);
-                gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
+                GameState.gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
                 other.gameObject.transform.position = new Vector3(100, 100, 100);
                 break;
             case ItemTag.Banana:
                 hasBanana = true;
                 other.gameObject.SetActive(false);
-                gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
+                AudioManager.audioManager.PlaySound(AudioFile.Coin);
+                GameState.gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
                 ShowPopUp("You got a Jack Sparrows's compass!!!");
                 break;
             case ItemTag.End:
@@ -494,4 +495,6 @@ public static class ItemTag
     public const string End = "End";
     public const string Gate = "Gate";
     public const string Compass = "Compass";
+    public const string Rock1 = "Rock1";
+    public const string Rock2 = "Rock2";
 }
