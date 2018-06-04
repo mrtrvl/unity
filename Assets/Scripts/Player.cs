@@ -385,6 +385,7 @@ public class Player : MonoBehaviour {
             case ItemTag.Banana:
                 hasBanana = true;
                 other.gameObject.SetActive(false);
+                gameState.AddAccesory(other.gameObject.transform.position.sqrMagnitude);
                 ShowPopUp("You got a Jack Sparrows's compass!!!");
                 break;
             case ItemTag.End:
@@ -492,4 +493,5 @@ public static class ItemTag
     public const string Other = "Other";
     public const string End = "End";
     public const string Gate = "Gate";
+    public const string Compass = "Compass";
 }
