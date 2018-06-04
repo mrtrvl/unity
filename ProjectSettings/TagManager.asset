@@ -19,6 +19,7 @@ TagManager:
   - PickUp
   - Bottom
   - TrainingButton
+  - Compass
   layers:
   - Default
   - TransparentFX

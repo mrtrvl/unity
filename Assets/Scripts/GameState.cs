@@ -197,7 +197,8 @@ public class GameState : MonoBehaviour
                 ItemTag.Diamond,
                 ItemTag.Emerald,
                 ItemTag.Key,
-                ItemTag.Tnt
+                ItemTag.Tnt,
+                ItemTag.Compass
             };
 
             var accessoryObjects = new List<GameObject>();
@@ -210,8 +211,8 @@ public class GameState : MonoBehaviour
             {
                 foreach (var accessoryGameObject in accessoryObjects)
                 {
-                    // Rewrite for Mathf.Approximately
-                    if (accessoryGameObject.transform.position.sqrMagnitude == accessoryItem)
+                    // Rewrite for Mathf.Approximately accessoryGameObject.transform.position.sqrMagnitude == accessoryItem
+                    if (Mathf.Approximately(accessoryGameObject.transform.position.sqrMagnitude, accessoryItem))
                     {
                         Destroy(accessoryGameObject);
                     }

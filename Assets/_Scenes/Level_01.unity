@@ -6620,7 +6620,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 9529ecc3d479da5499993355e6c2cb4f, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22400002, guid: 9529ecc3d479da5499993355e6c2cb4f, type: 2}
       propertyPath: m_AnchorMin.x
@@ -11288,6 +11288,10 @@ Prefab:
     - target: {fileID: 4414648308437604, guid: f3da754cfd36e1f43b7abe9906805444, type: 2}
       propertyPath: m_LocalScale.z
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1435730861431642, guid: f3da754cfd36e1f43b7abe9906805444, type: 2}
+      propertyPath: m_TagString
+      value: Compass
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f3da754cfd36e1f43b7abe9906805444, type: 2}
