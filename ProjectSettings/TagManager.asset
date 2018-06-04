@@ -20,6 +20,9 @@ TagManager:
   - Bottom
   - TrainingButton
   - Compass
+  - Rock1
+  - Rock2
+  - Rock
   layers:
   - Default
   - TransparentFX

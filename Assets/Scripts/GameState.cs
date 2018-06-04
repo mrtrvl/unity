@@ -20,6 +20,7 @@ public class GameState : MonoBehaviour
     private string currentScene = string.Empty;
     private AudioManager audioManager;
     private List<float> accessories = new List<float>();
+    private List<string> hazards = new List<string>();
 
     /// <summary>
     /// Singleton instance handling.
@@ -60,6 +61,11 @@ public class GameState : MonoBehaviour
         accessories.Add(accessoryItemId);
     }
 
+    public void AddHazard(string hazardTag)
+    {
+        hazards.Add(hazardTag);
+    }
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneFinishedLoading;
@@ -70,6 +76,11 @@ public class GameState : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneFinishedLoading;
     }
 
+    public bool HazardWasDestroyed(string hazardTag)
+    {
+        return hazards.Contains(hazardTag);
+    }
+
     /// <summary>
     /// Event handler for scene loading. Used as delegate.
     /// </summary>
@@ -77,9 +88,6 @@ public class GameState : MonoBehaviour
     /// <param name="mode">Load scene object.</param>
     private void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        if (audioManager == null)
-            audioManager = AudioManager.audioManager;
-
         LoadOptionsForAudio();
 
         switch (scene.name)
@@ -87,38 +95,38 @@ public class GameState : MonoBehaviour
             case LevelTag.LevelOne:
                 if (isGameplayPaused)
                     SetGameStateAfterPause();
-                audioManager.PlaySoundLoop(AudioFile.GameTheme);
+                AudioManager.audioManager.PlaySoundLoop(AudioFile.GameTheme);
                 if (previousScene != LevelTag.Main)
-                    audioManager.StopSound(AudioFile.Main);
+                    AudioManager.audioManager.StopSound(AudioFile.Main);
                 isGameplayPaused = false;
                 previousScene = scene.name;
                 break;
             case LevelTag.Training:
                 if (isGameplayPaused)
                     SetGameStateAfterPause();
-                audioManager.PlaySoundLoop(AudioFile.GameTheme);
+                AudioManager.audioManager.PlaySoundLoop(AudioFile.GameTheme);
                 if (previousScene != LevelTag.Main)
-                    audioManager.StopSound(AudioFile.Main);
+                    AudioManager.audioManager.StopSound(AudioFile.Main);
                 isGameplayPaused = false;
                 previousScene = scene.name;
                 break;
             case LevelTag.Pause:
                 if (!isGameplayPaused)
                 {
-                    audioManager.StopAllAudio();
-                    audioManager.PlaySoundLoop(LevelTag.Main);   
+                    AudioManager.audioManager.StopAllAudio();
+                    AudioManager.audioManager.PlaySoundLoop(LevelTag.Main);   
                 }
-                audioManager.ChangeCurrentlyPlayingSoundVolume(AudioFile.Main, null);
+                AudioManager.audioManager.ChangeCurrentlyPlayingSoundVolume(AudioFile.Main, null);
                 isGameplayPaused = true;
                 break;
             case LevelTag.Main:
-                audioManager.ChangeCurrentlyPlayingSoundVolume(AudioFile.Main, null);
+                AudioManager.audioManager.ChangeCurrentlyPlayingSoundVolume(AudioFile.Main, null);
                 ResetGameplayStatus();
-                audioManager.PlaySoundLoop(AudioFile.Main);
+                AudioManager.audioManager.PlaySoundLoop(AudioFile.Main);
                 isGameplayPaused = false;
                 break;
             case LevelTag.Choose_Level:
-                audioManager.ChangeCurrentlyPlayingSoundVolume(AudioFile.Main, null);
+                AudioManager.audioManager.ChangeCurrentlyPlayingSoundVolume(AudioFile.Main, null);
                 break;
             case LevelTag.Options:
                 break;
@@ -139,8 +147,8 @@ public class GameState : MonoBehaviour
 
     public void HandleWinDeathInformationDialog()
     {
-        audioManager.StopAllAudio();
-        audioManager.PlaySound(AudioFile.Main);
+        AudioManager.audioManager.StopAllAudio();
+        AudioManager.audioManager.PlaySound(AudioFile.Main);
         ResetGameplayStatus();
     }
 
@@ -198,7 +206,9 @@ public class GameState : MonoBehaviour
                 ItemTag.Emerald,
                 ItemTag.Key,
                 ItemTag.Tnt,
-                ItemTag.Compass
+                ItemTag.Compass,
+                ItemTag.Rock1,
+                ItemTag.Rock2
             };
 
             var accessoryObjects = new List<GameObject>();
@@ -211,8 +221,11 @@ public class GameState : MonoBehaviour
             {
                 foreach (var accessoryGameObject in accessoryObjects)
                 {
-                    // Rewrite for Mathf.Approximately accessoryGameObject.transform.position.sqrMagnitude == accessoryItem
                     if (Mathf.Approximately(accessoryGameObject.transform.position.sqrMagnitude, accessoryItem))
+                    {
+                        Destroy(accessoryGameObject);
+                    }
+                    if (hazards.Contains(accessoryGameObject.tag))
                     {
                         Destroy(accessoryGameObject);
                     }

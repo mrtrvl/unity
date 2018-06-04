@@ -64,68 +64,86 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - clipName: Game Theme
+  - source: {fileID: 0}
+    clipName: Game Theme
     clip: {fileID: 8300000, guid: 2c348fe168cd84860bfa4b6aa4cf5bcc, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     playOnAwake: 0
-  - clipName: Scream
+  - source: {fileID: 0}
+    clipName: Scream
     clip: {fileID: 8300000, guid: 0868dbc1071e94a45aa42c7eead8b570, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     playOnAwake: 0
-  - clipName: Map
+  - source: {fileID: 0}
+    clipName: Map
     clip: {fileID: 8300000, guid: 6512d9eb8d2ce4189b994259d2ea84a3, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     playOnAwake: 0
-  - clipName: Gas
+  - source: {fileID: 0}
+    clipName: Gas
     clip: {fileID: 8300000, guid: 2fca3d0707e9d498b8207e6f1f0ba551, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     playOnAwake: 0
-  - clipName: Main
+  - source: {fileID: 0}
+    clipName: Main
     clip: {fileID: 8300000, guid: 7dd0f0f4d6d82468ea89f85b9a2f5c30, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     playOnAwake: 0
-  - clipName: Button Click
+  - source: {fileID: 0}
+    clipName: Button Click
     clip: {fileID: 8300000, guid: f3b6f1c4376ee4123ad8a423780efe0d, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     playOnAwake: 0
-  - clipName: Key
+  - source: {fileID: 0}
+    clipName: Key
     clip: {fileID: 8300000, guid: 634e490def373418090aaa44000bde39, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     playOnAwake: 0
-  - clipName: Other
+  - source: {fileID: 0}
+    clipName: Other
     clip: {fileID: 8300000, guid: 9b574a82aad6842b0a6d6cb3d68c846b, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     playOnAwake: 0
-  - clipName: BreathingWithBubbles
+  - source: {fileID: 0}
+    clipName: BreathingWithBubbles
     clip: {fileID: 8300000, guid: 9633ff65fa61b4a4d84da42d7128a4f6, type: 3}
     volume: 0.7
     pitch: 1
     loop: 0
     playOnAwake: 0
-  - clipName: Coin
+  - source: {fileID: 0}
+    clipName: Coin
     clip: {fileID: 8300000, guid: dfd45d9e714ee424699e405a22a5c410, type: 3}
     volume: 0.7
     pitch: 1
     loop: 0
     playOnAwake: 0
-  - clipName: Gate
+  - source: {fileID: 0}
+    clipName: Gate
     clip: {fileID: 8300000, guid: 22f92075b16404b1e9cad2e611327bc5, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+  - source: {fileID: 0}
+    clipName: Explosion
+    clip: {fileID: 8300000, guid: 9fee4d0539dc04aecb33e0ef0327694c, type: 3}
     volume: 0.7
     pitch: 1
     loop: 0

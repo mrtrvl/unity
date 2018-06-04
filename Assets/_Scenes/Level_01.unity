@@ -1163,6 +1163,14 @@ Prefab:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1702959651347556, guid: a212c4de29c36a54abb55da1ffad851b, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258437450243344, guid: a212c4de29c36a54abb55da1ffad851b, type: 2}
+      propertyPath: m_TagString
+      value: Rock1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a212c4de29c36a54abb55da1ffad851b, type: 2}
   m_IsPrefabParent: 0
@@ -7999,6 +8007,14 @@ Prefab:
     - target: {fileID: 1258437450243344, guid: a212c4de29c36a54abb55da1ffad851b, type: 2}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1702959651347556, guid: a212c4de29c36a54abb55da1ffad851b, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258437450243344, guid: a212c4de29c36a54abb55da1ffad851b, type: 2}
+      propertyPath: m_TagString
+      value: Rock2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a212c4de29c36a54abb55da1ffad851b, type: 2}
