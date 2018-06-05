@@ -35,3 +35,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Training.unity
     guid: 0f9d32a678d353046916661c88fcb93b
+  - enabled: 1
+    path: Assets/_Scenes/Credits.unity
+    guid: 8308fbf9c85e2274986d7f12d82d8422
