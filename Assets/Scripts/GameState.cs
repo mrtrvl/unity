@@ -21,6 +21,7 @@ public class GameState : MonoBehaviour
     private AudioManager audioManager;
     private List<float> accessories = new List<float>();
     private List<string> hazards = new List<string>();
+    private List<string> messageTriggers = new List<string>();
 
     /// <summary>
     /// Singleton instance handling.
@@ -79,6 +80,16 @@ public class GameState : MonoBehaviour
     public bool HazardWasDestroyed(string hazardTag)
     {
         return hazards.Contains(hazardTag);
+    }
+
+    public bool MessageTriggerWasAlreadyShown(string messageTriggerName)
+    {
+        return messageTriggers.Contains(messageTriggerName);
+    }
+
+    public void AddMessageTrigger(string messageTriggerName)
+    {
+        messageTriggers.Add(messageTriggerName);
     }
 
     /// <summary>
@@ -158,6 +169,10 @@ public class GameState : MonoBehaviour
             accessories.Clear();
         if (ChestController.items != null)
             ChestController.items.Clear();
+        if (hazards != null)
+            hazards.Clear();
+        if (messageTriggers != null)
+            messageTriggers.Clear();
         GameController.gameController.DeleteCurrentGameplayState();
     }
 

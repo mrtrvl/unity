@@ -21,15 +21,16 @@ public class MessagesController : MonoBehaviour {
     {
         if (collision.CompareTag("Player"))
         {
-            showPopUp(message);
-
+            if (!GameState.gameState.MessageTriggerWasAlreadyShown(gameObject.name))
+                ShowPopUp(message);
             gameObject.SetActive(false);
         }
     }
 
-    void showPopUp(string message)
+    private void ShowPopUp(string messageText)
     {
-        popUp.text = message;
+        popUp.text = messageText;
         Instantiate(popUp, transform.position, transform.rotation);
+        GameState.gameState.AddMessageTrigger(gameObject.name);
     }
 }
