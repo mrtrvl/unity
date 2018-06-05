@@ -12,6 +12,7 @@ using bananaDiver.JellyfishController;
 using bananaDiver.buoyancyController;
 using bananaDiver.scoreController;
 using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
 
@@ -80,7 +81,6 @@ public class Player : MonoBehaviour {
     private Quaternion rotation;
 
     private int healthIncreaseStep = 20;
-    private int healthDecreaseStep = 5;
     private int breathingGasIncreaseStep = 200;
 
     private float timeToNextBreath = 0;
@@ -93,6 +93,7 @@ public class Player : MonoBehaviour {
     private bool adjustedAirVolume = false;
 
     private Scene activeScene;
+    private List<int> healthDecreaseStep = new List<int>() { 5, 10, 15 };
 
     //private bool vibration;
 
@@ -286,6 +287,14 @@ public class Player : MonoBehaviour {
         return buoyancy;
     }
 
+    private int getRandomDamage()
+    {
+        System.Random r = new System.Random();
+        int damage = healthDecreaseStep[r.Next(healthDecreaseStep.Count)];
+
+        return damage;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Jellyfish"))
@@ -293,9 +302,10 @@ public class Player : MonoBehaviour {
             jelly = collision.gameObject;
             if (jelly.GetComponent<JellyfishController>().isDangerous)
             {
-                health -= healthDecreaseStep;
+                int damage = getRandomDamage();
+                health -= damage;
                 AudioManager.audioManager.PlaySound(AudioFile.Scream);
-                string message = "Health -" + healthDecreaseStep.ToString();
+                string message = "Health -" + damage.ToString();
                 ShowPopUp(message);
 
                 jelly.GetComponent<JellyfishController>().cannotHurtForAWhile();
