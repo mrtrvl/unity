@@ -1459,7 +1459,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Jellyfish - very dangerous, to not touch!
 
-    -5 to health!'
+    Decreases health by 5, 10 or 15!'
 --- !u!222 &1137592866
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2531,7 +2531,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Medkit - heals Your wounds.
 
-    +20 to health'
+    Increases health by 20.'
 --- !u!222 &1949121434
 CanvasRenderer:
   m_ObjectHideFlags: 0
