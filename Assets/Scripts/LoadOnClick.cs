@@ -17,18 +17,20 @@ public class LoadOnClick : MonoBehaviour {
 
     public void LoadScene(string level)
     {
-        AudioManager.audioManager.PlaySound("Button Click");
+        AudioManager.audioManager.PlaySound(AudioFile.ButtonClick);
         SceneManager.LoadScene(level);
     }
 
     public void TryAgainButtonClicked()
     {
+        AudioManager.audioManager.PlaySound(AudioFile.ButtonClick);
         GameState.gameState.ResetGameplayStatus();
         SceneManager.LoadScene(GameState.previousScene);
     }
 
     public void OptionsBackButtonClicked()
     {
+        AudioManager.audioManager.PlaySound(AudioFile.ButtonClick);
         var musicVolume = OptionsController.musicSliderValue;
         var soundVolume = OptionsController.soundSliderValue;
         var vibrationOn = vibrationController.vibrationOn;
