@@ -16,12 +16,12 @@ namespace bananaDiver.cameraController
         private new GameObject camera;
         private float defaultCameraZoom;
         private Vector3 centerPosition;
-        //private Vector3 defaultPosition;
         private float cameraChangeSpeed = 15;
         private float backToStart;
 
         private Vector3 offset;
         private static bool showingMap = false;
+        private Color32 defaultBackgroundColor;
 
         void Start()
         {
@@ -29,6 +29,7 @@ namespace bananaDiver.cameraController
             defaultCameraZoom = camera.GetComponent<Camera>().orthographicSize;
             offset = transform.position - player.transform.position;
             backToStart = timeToShowMap + 2;
+            defaultBackgroundColor = background.GetComponent<SpriteRenderer>().color;
         }
 
         void LateUpdate()
@@ -36,7 +37,6 @@ namespace bananaDiver.cameraController
             if(!showingMap)
             {
                 transform.position = player.transform.position + new Vector3(0, 0, offset.z);
-                //defaultPosition = transform.position;
             }
             else
             {
@@ -46,9 +46,7 @@ namespace bananaDiver.cameraController
                     backToStart -= Time.deltaTime;
                     if (backToStart <= 0)
                     {
-                        backround.SetActive(true);
                         camera.GetComponent<Camera>().orthographicSize = defaultCameraZoom;
-
                         showingMap = false;
                     }
                     else
@@ -63,6 +61,7 @@ namespace bananaDiver.cameraController
                             }
                             else
                             {
+                                background.GetComponent<SpriteRenderer>().color = defaultBackgroundColor;
                                 showingMap = false;
                             }
                         }
@@ -71,7 +70,6 @@ namespace bananaDiver.cameraController
                 }
                 else
                 {
-                    //backround.SetActive(false);
                     centerPosition = backround.GetComponent<SpriteRenderer>().bounds.center;
                     background.GetComponent<SpriteRenderer>().color -= new Color32(0, 0, 0, 1);
                     transform.position = Vector3.MoveTowards(transform.position, new Vector3(centerPosition.x, centerPosition.y, transform.position.z), Time.deltaTime * cameraChangeSpeed);
