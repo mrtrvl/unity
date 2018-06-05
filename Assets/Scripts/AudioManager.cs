@@ -144,12 +144,27 @@ public class AudioManager : MonoBehaviour
         var currentlyPlayingAudio = (from s in sounds
                                      where s.clipName == clipName
                                      select s).FirstOrDefault();
+        
         if (currentlyPlayingAudio != null)
         {
             if (inOptions)
                 currentlyPlayingAudio.source.volume = soundVolume ?? GameController.musicVolume;
             else
                 currentlyPlayingAudio.source.volume = GameController.musicVolume;
+        }
+    }
+
+    public void ChangeSoundVolumeInOptionsByPlayingSound(string clipName, float? soundVolume)
+    {
+        var bubblesSound = (from s in sounds
+                            where s.clipName == clipName
+                            select s).FirstOrDefault();
+        
+        if (bubblesSound != null)
+        {
+            bubblesSound.source.volume = soundVolume ?? GameController.soundVolume;
+            if (!bubblesSound.IsPlaying())
+                bubblesSound.Play();
         }
     }
 
