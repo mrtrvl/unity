@@ -267,6 +267,7 @@ public class GameState : MonoBehaviour
     /// <param name="sceneName">Scene name.</param>
     private void BackButtonPressed(string sceneName)
     {
+        AudioManager.audioManager.PlaySound(AudioFile.ButtonClick);
         currentScene = SceneManager.GetActiveScene().name;
         var playerGameObject = GetGameObject("Diver");
         var diveLampGameObject = GetGameObject("DiveLamp");
