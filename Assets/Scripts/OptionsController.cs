@@ -23,6 +23,7 @@ namespace bananaDiver.optionsController
                 musicSlider.value = gameOptions.Music;
             }
             musicSlider.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
+            soundSlider.onValueChanged.AddListener(delegate { ValueChangeCheckForSound(); });
         }
 
         private void Update()
@@ -34,6 +35,11 @@ namespace bananaDiver.optionsController
         private void ValueChangeCheck()
         {
             AudioManager.audioManager.ChangeCurrentlyPlayingSoundVolume(AudioFile.Main, musicSlider.value, true);
+        }
+
+        private void ValueChangeCheckForSound()
+        {
+            AudioManager.audioManager.ChangeSoundVolumeInOptionsByPlayingSound(AudioFile.BreathingWithBubbles, soundSlider.value);
         }
     }
 }

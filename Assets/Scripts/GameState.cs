@@ -127,11 +127,13 @@ public class GameState : MonoBehaviour
                     AudioManager.audioManager.StopAllAudio();
                     AudioManager.audioManager.PlaySoundLoop(LevelTag.Main);   
                 }
+                AudioManager.audioManager.StopSound(AudioFile.BreathingWithBubbles);
                 AudioManager.audioManager.ChangeCurrentlyPlayingSoundVolume(AudioFile.Main, null);
                 isGameplayPaused = true;
                 break;
             case LevelTag.Main:
                 AudioManager.audioManager.ChangeCurrentlyPlayingSoundVolume(AudioFile.Main, null);
+                AudioManager.audioManager.StopSound(AudioFile.BreathingWithBubbles);
                 ResetGameplayStatus();
                 AudioManager.audioManager.PlaySoundLoop(AudioFile.Main);
                 isGameplayPaused = false;
