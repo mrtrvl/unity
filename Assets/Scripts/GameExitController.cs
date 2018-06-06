@@ -13,7 +13,7 @@ public class GameExitController : MonoBehaviour {
     }
 
     /// <summary>
-    /// Reset game state, options, levels etc.
+    /// Reset game state, options, levels, save files.
     /// </summary>
     public void GameReset()
     {
